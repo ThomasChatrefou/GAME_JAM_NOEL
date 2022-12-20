@@ -77,20 +77,45 @@ public class RoundManager : NetworkBehaviour
 
     public IEnumerator Activate(Spawn spawn)
     {
-
+        while (enemyInvoke < nbEnemiesInWave)
         {
-            while (enemyInvoke < enemyInWave)
-            {
-                int indexEnemy = Random.Range(0, 3);
-                int indexSpawn = Random.Range(0, 5);
+            int indexEnemy = Random.Range(minEnemy, maxEnemy);
+            int indexSpawn = Random.Range(0, 5);
 
-                // Change "TypeOfEnemy" by a table where the different type of ennemies are stocked ; Change "PositionOfSpawner" by a table where the position of spawner are stocked
-                //Instantiate(TypeOfEnemy[indexEnemy], PositionOfSpawner[spawn], new Quaternion()); 
-
+            if(indexEnemy == 0 && nbTrashMob > 0){
+                //Instantiate(TypeOfEnemy[0], PositionOfSpawner[spawn], new Quaternion());
+                nbTrashMob--;
                 enemyInvoke++;
-
-                yield return new WaitForSeconds(0.2f); // Change value for spawning ennemies more and low fast
+                yield return new WaitForSeconds(timeBetweenEnemy); // Change value for spawning ennemies more and low fast
             }
+            else if(indexEnemy == 1 && nbSaplin > 0){
+                //Instantiate(TypeOfEnemy[1], PositionOfSpawner[spawn], new Quaternion());
+                nbSaplin--;
+                enemyInvoke++;
+                yield return new WaitForSeconds(timeBetweenEnemy); // Change value for spawning ennemies more and low fast
+            }
+            else if(indexEnemy == 2 && nbSnowman > 0){
+                //Instantiate(TypeOfEnemy[2], PositionOfSpawner[spawn], new Quaternion());
+                nbSnowman--;
+                enemyInvoke++;
+                yield return new WaitForSeconds(timeBetweenEnemy); // Change value for spawning ennemies more and low fast
+            }
+
+            // Change "TypeOfEnemy" by a table where the different type of ennemies are stocked ; Change "PositionOfSpawner" by a table where the position of spawner are stocked
+            //Instantiate(TypeOfEnemy[indexEnemy], PositionOfSpawner[spawn], new Quaternion()); 
         }
     }
+
+    //Temporaire, à supprimer à la fin !
+
+    public int nbEnemiesInWave = 150;   // La Wave dure 60sec
+    public int nbTrashMob = 100;        // 30sec => 50 Enemies ; 45sec => 75 Enemies ; 60sec => 100 Enemies
+    public int nbSaplin = 50;           // 30sec => 00 Enemies ; 45sec => 25 Enemies ; 60sec => 050 Enemies
+    public int nbSnowman = 50;          // 30sec => 00 Enemies ; 45sec => 00 Enemies ; 60sec => 050 Enemies
+
+    public int minEnemy = 0;
+    public int maxEnemy = 1;
+
+    public int enemyInvoke = 0;
+    public float timeBetweenEnemy = 0.2f;
 }
