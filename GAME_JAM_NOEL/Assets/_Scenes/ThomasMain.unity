@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -367,6 +367,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NetworkManagerUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 40287319140095204, guid: 71d57fb16cd742b4394a637df830326c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 40287319140095205, guid: 71d57fb16cd742b4394a637df830326c,
         type: 3}
@@ -699,6 +704,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1738077685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1738077687}
+  - component: {fileID: 1738077686}
+  m_Layer: 0
+  m_Name: TestRelay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1738077686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738077685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191d087a6869ea04fa5ae4f1a3f40298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPlayers: 4
+--- !u!4 &1738077687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738077685}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.199765, y: 1.8239503, z: 5.8072834}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1766674394
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +926,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NetworkManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959703930408436094, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
+        type: 3}
+      propertyPath: m_ProtocolType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
