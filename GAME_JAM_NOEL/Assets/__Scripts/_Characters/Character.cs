@@ -12,6 +12,7 @@ public abstract class Character : NetworkBehaviour
     protected float speedValue;
 
     protected bool isDead;
+    protected Projectile lastProjectileTaken;
 
 
     public void Tic()
@@ -23,7 +24,20 @@ public abstract class Character : NetworkBehaviour
     }
     public virtual void Attack()
     {
-        return;
+
+    }
+
+    public virtual void TakeDamage(Projectile projectile)
+    {
+        if (lastProjectileTaken != projectile)
+        {
+            lastProjectileTaken = projectile;
+            health -= projectile.DamageProjectile;
+            if(health <= 0){
+                Die();
+            }
+        }
+      
     }
 
     protected virtual void Die()

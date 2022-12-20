@@ -66,7 +66,7 @@ public class PlayerController : Character
     {
         base.Attack();
         Vector2 fireDir = crossPosition - new Vector2(transform.position.x,transform.position.y);
-        playerWeapon.LaunchBaseProjectile(fireDir.normalized);
+        playerWeapon.LaunchBaseProjectileServerRpc(fireDir.normalized);
     }
 
     private void SkillAttack()

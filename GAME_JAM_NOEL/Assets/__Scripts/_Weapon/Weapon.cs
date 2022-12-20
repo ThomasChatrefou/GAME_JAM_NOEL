@@ -14,6 +14,8 @@ public class Weapon : NetworkBehaviour
     private GameObject baseProjectilePrefab;
     [SerializeField]
     private GameObject skillProjectilePrefab;
+    [SerializeField] 
+    private Transform firePos;
 
     private bool hasShoot;
     
@@ -40,22 +42,31 @@ public class Weapon : NetworkBehaviour
         }
     }
 
-    public void LaunchBaseProjectile(Vector2 direction)
+    //TODO RPC
+    [ServerRpc]
+    public void LaunchBaseProjectileServerRpc(Vector2 direction, bool isFromEnemy = false)
     {
         if (!hasShoot)
         {
-            Projectile proj = Instantiate(baseProjectilePrefab,transform.position,Quaternion.identity).GetComponent<Projectile>();
+            Projectile proj = Instantiate(baseProjectilePrefab,firePos.position,Quaternion.identity).GetComponent<Projectile>();
             proj.DirProjectile = direction;
+            proj.isFromEnemy = isFromEnemy;
+            proj.transform.LookAt(direction);
+            proj.GetComponent<NetworkObject>().Spawn(true);
         }
         hasShoot = true;
     }
 
-    public void LaunchSkillProjectile(Vector2 direction)
+    //TODO RPC
+    [ServerRpc]
+    public void LaunchSkillProjectileServerRpc(Vector2 direction)
     {
         Projectile weapon = Instantiate(skillProjectilePrefab,transform.position,Quaternion.identity).GetComponent<Projectile>();
     }
 
-    public void PickedUp()
+    //TODO RPC
+    [ServerRpc]
+    public void PickedUpServerRpc()
     {
         //Make the item disapears from the map and be equiped by the player
     }
