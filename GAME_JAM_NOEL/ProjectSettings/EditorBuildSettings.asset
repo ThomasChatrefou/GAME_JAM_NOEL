@@ -8,4 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/ThomasMain.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 92d84eadc443f24458cad32da3635dcd,
+      type: 2}
