@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
+        Debug.Log("test");
     }
 
     private void OnEnable()
