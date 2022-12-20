@@ -863,11 +863,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: 5f45923b-1e39-40e1-b171-c8d9145ce72a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: GAME_JAM_NOEL
+  organizationId: lenynicolas532
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

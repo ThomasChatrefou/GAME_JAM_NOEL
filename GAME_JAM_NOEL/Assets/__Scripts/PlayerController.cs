@@ -1,8 +1,10 @@
-using UnityEngine;
 using Unity.Netcode;
+using UnityEngine;
 
 public class PlayerController : NetworkBehaviour
 {
+    Rigidbody2D rb;
+
     public float speedValue = 1.0f;
     private Vector2 speedDirection;
 
@@ -10,6 +12,9 @@ public class PlayerController : NetworkBehaviour
 
     private void Awake()
     {
+        
+
+        rb = GetComponent<Rigidbody2D>();
         inputs = new PlayerInputs();
         inputs.Player.Shoot.performed += shootContext => Shoot();
         inputs.Player.Movement.performed += moveContext => Move(moveContext.ReadValue<Vector2>());
@@ -19,6 +24,7 @@ public class PlayerController : NetworkBehaviour
     private void FixedUpdate()
     {
         if (!IsOwner) return;
+
         transform.position += Time.fixedDeltaTime * speedValue * new Vector3(speedDirection.x, speedDirection.y, 0.0f);
     }
 
