@@ -12,15 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ce206d34400b845adce11c97e00905, type: 3}
   m_Name: Round2
   m_EditorClassIdentifier: 
-  MinEnemySpawn: 0
-  MaxEnemySpawn: 0
-  SpawnCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  Duration: 0
-  SpawnZone:
-    topLeft: {x: 0, y: 0}
-    bottomRight: {x: 0, y: 0}
+  Duration: 5
+  Spawn: []

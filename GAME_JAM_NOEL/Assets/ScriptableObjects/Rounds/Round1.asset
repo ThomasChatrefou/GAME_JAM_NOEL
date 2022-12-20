@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ce206d34400b845adce11c97e00905, type: 3}
   m_Name: Round1
   m_EditorClassIdentifier: 
+  Duration: 3
   Spawn:
+  - EnemySpawn: {fileID: 11400000, guid: ba4543b64ad772049af9c4146f1642ea, type: 2}
+    timeBeforeActivate: 0
   - EnemySpawn: {fileID: 11400000, guid: ba4543b64ad772049af9c4146f1642ea, type: 2}
     timeBeforeActivate: 0

@@ -11,11 +11,10 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameRound currentRound;
 
     //[Header("Synchronized Variables")]
-    //[SerializeField] private NetworkVariable<int> currentRoundIndex = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-    
+    //[SerializeField] private NetworkVariable<bool> isRunning = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
     [Header("Local Test Variables")]
     [SerializeField] private bool isRunning;
-    [SerializeField] private UnityEvent isRunningupdate;
 
     [Header("Current Game")]
     [SerializeField] private float timeSinceRoundStart;
@@ -30,10 +29,10 @@ public class GameManager : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
-        //isRunningupdate.AddListener(GameOnUpdate);
+        //isRunning.OnValueChanged += GameOnUpdate;
+        isRunningupdate.AddListener(GameOnUpdate);
     }
     
-
     #region ServerRpc
     //[ServerRpc]
     //public void LaunchGameServerRpc()
@@ -41,33 +40,22 @@ public class GameManager : NetworkBehaviour
     {
         /* Preparation */
         currentRoundIndex = 0;
-        TriggerOnNewRoundStart();
+        currentRound = gameMode.rounds[0];
 
-        
+        //lacks smth but can't remember what
 
-        foreach (PlayerController playerController in players)
-            playerController.OnPlayerDeath.AddListener(CheckGameState);
+        //foreach (PlayerController playerController in players)
+        //    playerController.OnPlayerDeath.AddListener(CheckGameState);
 
         /* Actual Launching */
         isRunning = true;
         isRunningupdate.Invoke();
-        //OnLaunchGame.Invoke();
+        TriggerOnNewRoundStart();
     }
-
-
-
+    
     #endregion
 
     #region EventRpcTriggers
-    //[ClientRpc]
-    //private void TriggerOnGameOnUpdateClientRpc()
-    private void TriggerOnGameOnUpdate()
-    {
-        if (isRunning)
-            OnLaunchGame.Invoke();
-        else
-            OnEndGame.Invoke();
-    }
 
     //[ClientRpc]
     //private void TriggerOnNewRoundStartClientRpc()
@@ -78,21 +66,39 @@ public class GameManager : NetworkBehaviour
 
     #endregion
 
-    #region ServerOnly
-    private void GameRoundUpdate()
+    #region Simulation of sync var changes events
+    [Header("A SUPPRIMER DES LA MISE EN SERVEUR")]
+    public UnityEvent isRunningupdate;
+    //private void GameOnUpdate(bool prev, bool newval)
+    private void GameOnUpdate()
     {
-        currentRound = gameMode.rounds[currentRoundIndex];
-
-        timeSinceRoundStart = 0f;
-        OnNewRoundStart.Invoke();
+        if (isRunning)
+            OnLaunchGame.Invoke();
+        else
+            OnEndGame.Invoke();
     }
+
+    #endregion
+
+    #region ServerOnly
 
     private void Update()
     {
         //if (!IsServer)
         //    return;
 
+        if(!isRunning)
+            return;
+
         timeSinceRoundStart += Time.deltaTime;
+
+        if (!currentRound)
+        {
+            if(currentRoundIndex==0)
+                currentRound = gameMode.rounds[0];
+            else
+                CheckGameState();
+        }
 
         if (timeSinceRoundStart >= currentRound.Duration)
         {
@@ -100,15 +106,17 @@ public class GameManager : NetworkBehaviour
         }
         else
         {
-            
+            Debug.Log("still in the round");
         }
     }
 
     private void NextRound()
     {
-        if (gameMode.rounds.Length > currentRoundIndex+1)
+        if (currentRoundIndex + 1 != gameMode.rounds.Length)
         {
             currentRoundIndex++;
+            currentRound = gameMode.rounds[currentRoundIndex];
+            timeSinceRoundStart = 0f;
             TriggerOnNewRoundStart();
         }
         else
@@ -118,7 +126,7 @@ public class GameManager : NetworkBehaviour
     private void EndGame()
     {
         isRunning = false;
-        //TriggerOnGameEnd();
+        isRunningupdate.Invoke();
     }
     
     private void CheckGameState()
