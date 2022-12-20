@@ -19,8 +19,8 @@ public class EnemySpawn : ScriptableObject
 [Serializable]
 public struct SpawnZone
 {
-    [SerializeField] private Vector2 topLeft;
-    [SerializeField] private Vector2 bottomRight;
+    [SerializeField] private Transform topLeft;
+    [SerializeField] private Transform bottomRight;
 }
 
 
@@ -36,19 +36,5 @@ public class SpawnEnemyInRound : EnemySpawn
     }
 
     // Spawn the requested number of enemies
-    private IEnumerator SpawnEnemy()
-    {
-       while(enemyInvoke<enemyInWave)
-        {
-            int indexEnemy = Random.Range(0, 3);
-            int indexSpawn = Random.Range(0, 5);
-
-            // Change "TypeOfEnemy" by a table where the different type of ennemies are stocked ; Change "PositionOfSpawner" by a table where the position of spawner are stocked
-            //Instantiate(TypeOfEnemy[indexEnemy], PositionOfSpawner[spawn], new Quaternion()); 
-
-            enemyInvoke++;
-
-            yield return new WaitForSeconds(0.2f); // Change value for spawning ennemies more and low fast
-        }
-    }
+    
 }

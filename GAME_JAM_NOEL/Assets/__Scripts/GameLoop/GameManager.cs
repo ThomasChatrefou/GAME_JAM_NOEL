@@ -5,10 +5,24 @@ using UnityEngine.Events;
 [RequireComponent(typeof(NetworkObject))]
 public class GameManager : NetworkBehaviour
 {
+
+    #region Singleton
+    private static GameManager instance;
+    public static GameManager Instance => instance;
+
+    private void Start()
+    {
+        if (instance)
+            Destroy(instance);
+
+        instance = this;
+    }
+    #endregion
+
     [Header("Refs")]
     [SerializeField] private PlayerController[] players;
     [SerializeField] private GameMode gameMode;
-    [SerializeField] private GameRound currentRound;
+    [SerializeField] private RoundManager roundManager;
 
     //[Header("Synchronized Variables")]
     //[SerializeField] private NetworkVariable<bool> isRunning = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -16,13 +30,8 @@ public class GameManager : NetworkBehaviour
     [Header("Local Test Variables")]
     [SerializeField] private bool isRunning;
 
-    [Header("Current Game")]
-    [SerializeField] private float timeSinceRoundStart;
-    [SerializeField] private int currentRoundIndex;
-
     [Header("Client Events")]
     public UnityEvent OnLaunchGame;
-    public UnityEvent OnNewRoundStart;
     public UnityEvent OnEndGame;
 
     public override void OnNetworkSpawn()
@@ -39,8 +48,8 @@ public class GameManager : NetworkBehaviour
     public void LaunchGame()
     {
         /* Preparation */
-        currentRoundIndex = 0;
-        currentRound = gameMode.rounds[0];
+        roundManager.Init(gameMode);
+        roundManager.OnRoundStart.AddListener(TriggerOnNewRoundStart);
 
         //lacks smth but can't remember what
 
@@ -51,6 +60,7 @@ public class GameManager : NetworkBehaviour
         isRunning = true;
         isRunningupdate.Invoke();
         TriggerOnNewRoundStart();
+        roundManager.LaunchRound(gameMode.rounds[0]);
     }
     
     #endregion
@@ -81,49 +91,7 @@ public class GameManager : NetworkBehaviour
     #endregion
 
     #region ServerOnly
-
-    private void Update()
-    {
-        //if (!IsServer)
-        //    return;
-
-        if(!isRunning)
-            return;
-
-        timeSinceRoundStart += Time.deltaTime;
-
-        if (!currentRound)
-        {
-            if(currentRoundIndex==0)
-                currentRound = gameMode.rounds[0];
-            else
-                CheckGameState();
-        }
-
-        if (timeSinceRoundStart >= currentRound.Duration)
-        {
-            Invoke("NextRound", gameMode.timeBetweenRounds);
-        }
-        else
-        {
-            Debug.Log("still in the round");
-        }
-    }
-
-    private void NextRound()
-    {
-        if (currentRoundIndex + 1 != gameMode.rounds.Length)
-        {
-            currentRoundIndex++;
-            currentRound = gameMode.rounds[currentRoundIndex];
-            timeSinceRoundStart = 0f;
-            TriggerOnNewRoundStart();
-        }
-        else
-            EndGame();
-    }
-
-    private void EndGame()
+    public void EndGame()
     {
         isRunning = false;
         isRunningupdate.Invoke();

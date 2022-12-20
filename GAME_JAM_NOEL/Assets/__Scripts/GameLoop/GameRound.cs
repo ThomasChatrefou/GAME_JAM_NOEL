@@ -13,6 +13,9 @@ public class GameRound : ScriptableObject
 [Serializable]
 public struct Spawn
 {
-    public EnemySpawn EnemySpawn;
+    //public Spawner ; => emplacement
+    //public Enemy prefab; => type d'ennemi
     public float timeBeforeActivate;
+    public float timeToStop;
+    // => n mob sur t temps 
 }
