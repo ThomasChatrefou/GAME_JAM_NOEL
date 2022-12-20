@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 speedDirection;
 
     public PlayerInputs inputs;
+
+    public UnityEvent OnPlayerDeath;
+
 
     private void Awake()
     {
