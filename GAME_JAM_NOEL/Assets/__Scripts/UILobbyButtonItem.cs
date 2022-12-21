@@ -17,7 +17,7 @@ public class UILobbyButtonItem : MonoBehaviour
     private int lobbySize;
     private int playerCount;
 
-    private string lobbyCode;
+    private string lobbyId;
 
     [HideInInspector] public ButtonClickedEvent onClick;
 
@@ -30,17 +30,19 @@ public class UILobbyButtonItem : MonoBehaviour
 
     private void OnJoinLobby()
     {
-        if (lobbyCode == null) return;
-        LobbyManager.Instance.JoinLobbyByCode(lobbyCode);
+        print("button join lobby callback");
+        if (lobbyId == null) return;
+        print(lobbyId);
+        LobbyManager.Instance.JoinLobbyById(lobbyId);
     }
 
-    public void SetLobby(string inName, int inMaxPLayers, int inPlayerCount, string inLobbyCode)
+    public void SetLobby(string inName, int inMaxPLayers, int inPlayerCount, string inLobbyId)
     {
         lobbyName = inName; ;
         lobbySize = inMaxPLayers;
         playerCount = inPlayerCount;
         nameText.text = inName;
         sizeText.text = inPlayerCount + "/" + inMaxPLayers;
-        lobbyCode = inLobbyCode;
+        lobbyId = inLobbyId;
     }
 }

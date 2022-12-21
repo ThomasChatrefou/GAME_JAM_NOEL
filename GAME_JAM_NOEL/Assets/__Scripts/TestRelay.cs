@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
@@ -11,21 +10,24 @@ using UnityEngine;
 
 public class TestRelay : MonoBehaviour
 {
-    [SerializeField] private int maxPlayers = 4;
+    public static TestRelay Instance;
 
-    private async void Start()
+    private int maxPlayers;
+
+    private void Awake()
     {
-        await UnityServices.InitializeAsync();
-
-        AuthenticationService.Instance.SignedIn += () =>
+        if (Instance != null)
         {
-            print("signed in " + AuthenticationService.Instance.PlayerId);
-        };
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            Destroy(Instance);
+        }
+        Instance = this;
+
+        maxPlayers = LobbyManager.MaxPlayers;
     }
 
-    public async void CreateRelay()
+    public async Task<string> CreateRelay()
     {
+        print("CREATE RELAY");
         try
         {
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(maxPlayers);
@@ -37,12 +39,13 @@ public class TestRelay : MonoBehaviour
 
             NetworkManager.Singleton.StartHost();
 
+            return joinCode;
         } 
         catch (RelayServiceException e)
         {
             print(e);
         }
-            
+        return "0";
     }
 
     public async void JoinRelay(string joinCode)

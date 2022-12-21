@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 733585135}
   - component: {fileID: 733585134}
   m_Layer: 5
-  m_Name: RefreshPlayerListButton
+  m_Name: RefreshMemberListButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,6 +842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 867874378}
   - component: {fileID: 867874377}
+  - component: {fileID: 867874379}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -861,6 +862,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b81439f848a2543bbc563af89f364f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  relayCodeKey: RELAY
+  lobbyPollingFrequency: 1
 --- !u!4 &867874378
 Transform:
   m_ObjectHideFlags: 0
@@ -876,6 +879,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &867874379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867874376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191d087a6869ea04fa5ae4f1a3f40298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPlayers: 4
 --- !u!1 &966302192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,7 +1077,7 @@ MonoBehaviour:
   lobbyNameDisplay: {fileID: 2674732136447624115}
   membersCountDisplay: {fileID: 2674732136322310076}
   membersContainer: {fileID: 2674732136295628475}
-  refreshPlayerListButton: {fileID: 733585134}
+  refreshMemberListButton: {fileID: 733585134}
   startGameButton: {fileID: 2674732136098163809}
   backToLobbySelectionButton: {fileID: 2674732134847265661}
   lobbyItemPrefab: {fileID: 4893454349009875124, guid: d590aec9f76857343ac16dba68e565b9,

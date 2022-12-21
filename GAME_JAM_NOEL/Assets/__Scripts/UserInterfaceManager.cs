@@ -35,7 +35,7 @@ public class UserInterfaceManager : MonoBehaviour
     [SerializeField] private TMP_Text lobbyNameDisplay;
     [SerializeField] private TMP_Text membersCountDisplay;
     [SerializeField] private Transform membersContainer;
-    [SerializeField] private Button refreshPlayerListButton;
+    [SerializeField] private Button refreshMemberListButton;
     [SerializeField] private Button startGameButton;
     [SerializeField] private Button backToLobbySelectionButton;
 
@@ -68,7 +68,7 @@ public class UserInterfaceManager : MonoBehaviour
         startGameButton.onClick.AddListener(OnStartGame);
         backToLobbySelectionButton.onClick.AddListener(OnBackToLobbySelection);
         refreshLobbyListButton.onClick.AddListener(OnRefreshLobbyList);
-        refreshPlayerListButton.onClick.AddListener(OnRefreshPlayerList);
+        refreshMemberListButton.onClick.AddListener(OnRefreshMemberList);
 
         AutofillLastPickedNameForInputField(playerNameInput, "NickName");
         AutofillLastPickedNameForInputField(createLobbyNameInput, "LobbyName");
@@ -107,7 +107,7 @@ public class UserInterfaceManager : MonoBehaviour
         LobbyManager.Instance.SignIn();
     }
 
-    public void AddLobbyItemButton(string lobbyName, int maxPlayers, int availableSlots, string inLobbyCode)
+    public void AddLobbyItemButton(string lobbyName, int maxPlayers, int availableSlots, string inLobbyId)
     {
         GameObject newLobby = Instantiate(lobbyItemPrefab, lobbiesContainer);
         LobbyList.Add(newLobby);
@@ -115,7 +115,7 @@ public class UserInterfaceManager : MonoBehaviour
         if (newLobbyButton != null)
         {
             newLobbyButton.onClick.AddListener(OnJoinLobby);
-            newLobbyButton.SetLobby(lobbyName, maxPlayers, maxPlayers - availableSlots, inLobbyCode);
+            newLobbyButton.SetLobby(lobbyName, maxPlayers, maxPlayers - availableSlots, inLobbyId);
         }
     }
 
@@ -175,7 +175,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     public void OnJoinLobby()
     {
-        print("join lobby");
+        print("join lobby UIManager callback");
         lobbySelectionCanvas.SetActive(false);
         lobbyMenuCanvas.SetActive(true);
         ClearMemberList();
@@ -195,7 +195,7 @@ public class UserInterfaceManager : MonoBehaviour
         {
             Destroy(member);
         }
-        LobbyList.Clear();
+        MemberList.Clear();
     }
 
     public void UpdateLobbyInfos(string name, int maxPlayers, int playersCount)
@@ -209,6 +209,7 @@ public class UserInterfaceManager : MonoBehaviour
         startGameButton.interactable = false;
         lobbyMenuCanvas.SetActive(false);
 
+        LobbyManager.Instance.StartGame();
         // add some code to start game => unity relay
     }
 
@@ -218,19 +219,23 @@ public class UserInterfaceManager : MonoBehaviour
         lobbyMenuCanvas.SetActive(false);
         lobbySelectionCanvas.SetActive(true);
         ClearLobbyList();
-
         LobbyManager.Instance.LeaveLobby();
     }
 
     private void OnRefreshLobbyList()
     {
-        LobbyList.Clear();
+        ClearLobbyList();
         LobbyManager.Instance.ListLobbies();
     }
 
-    private void OnRefreshPlayerList()
+    private void OnRefreshMemberList()
     {
-        MemberList.Clear();
+        ClearMemberList();
         LobbyManager.Instance.ListPlayers();
+    }
+
+    public void OnHostJoiningGame()
+    {
+        lobbyMenuCanvas.SetActive(false);
     }
 }
