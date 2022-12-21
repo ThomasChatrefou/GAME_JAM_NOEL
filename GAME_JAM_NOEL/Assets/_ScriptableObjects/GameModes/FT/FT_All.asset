@@ -10,16 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12ce206d34400b845adce11c97e00905, type: 3}
-  m_Name: FT_1
+  m_Name: FT_All
   m_EditorClassIdentifier: 
-  Duration: 1
+  Duration: 10
   Spawn:
   - EnemyPrefab: {fileID: 8290258027390627626, guid: 71bcd79b46b092c44bbe82d6ecf2d5ec,
       type: 3}
     Zones:
     - {fileID: 11400000, guid: 2458ff0875a824f47ba27f742bf70723, type: 2}
     - {fileID: 11400000, guid: 0281ee5d3eafa7945b741881654783f2, type: 2}
-    Amount: 10
+    Amount: 100
     Period: 1
     ActivationTiming: 0
-    StopTiming: 1
+    StopTiming: 0.6
+  - EnemyPrefab: {fileID: 3947166682823751886, guid: e8b5b1ff56cd0bf4c9fab30058fb31d3,
+      type: 3}
+    Zones:
+    - {fileID: 11400000, guid: e66dbd294e6b437428c1f4ebc1808307, type: 2}
+    - {fileID: 11400000, guid: 30d3792cdb41ce445826183335d3fb93, type: 2}
+    Amount: 100
+    Period: 2
+    ActivationTiming: 0.2
+    StopTiming: 0.8
+  - EnemyPrefab: {fileID: 6784999993366175641, guid: 17ff09bfe7eb511448fac8a57ad0fa74,
+      type: 3}
+    Zones:
+    - {fileID: 11400000, guid: fdb49c82bc9b63249a3c18b2a64811cd, type: 2}
+    Amount: 100
+    Period: 4
+    ActivationTiming: 0.5
+    StopTiming: 0.8

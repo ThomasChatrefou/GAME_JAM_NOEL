@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af4357701d1bd4c438ca754c70a3949a, type: 3}
-  m_Name: FT_2
+  m_Name: V_14_4_L
   m_EditorClassIdentifier: 
   minMapPercentageX: 0
-  maxMapPercentageX: 1
-  minMapPercentageY: 0.4
-  maxMapPercentageY: 0.6
+  maxMapPercentageX: 0.3
+  minMapPercentageY: 0.58
+  maxMapPercentageY: 0.72

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 using UnityEngine.WSA;
 using Random = UnityEngine.Random;
@@ -19,9 +20,10 @@ public class RoundManager : NetworkBehaviour
     [SerializeField] private int currentRoundIndex;
     [SerializeField] private GameRound currentRound;
     [SerializeField] private List<SpawnParams> spawns;
-    //[SerializeField] private List<TestStruct> tests;
+    [SerializeField] private List<CompilatedSpawnParams> tests;
 
     [Space]
+    [SerializeField] private bool canSpawn;
     [SerializeField] private float timeSinceRoundStart;
     [SerializeField] private Vector2 topLeft, bottomRight;
 
@@ -41,7 +43,7 @@ public class RoundManager : NetworkBehaviour
 
     public void Launch()
     {
-        //tests = new List<TestStruct>();
+        tests = new List<CompilatedSpawnParams>();
         StartCoroutine(LaunchRound(gameMode.rounds[0]));
     }
 
@@ -52,27 +54,27 @@ public class RoundManager : NetworkBehaviour
         
         spawns = currentRound.Spawn;
 
-        foreach (SpawnParams param in spawns)
-            tests.Add(new TestStruct(currentRound.Duration, param));
+        foreach (SpawnParams _param in spawns)
+            tests.Add(new TestStruct(currentRound.Duration, _param));
 
         timeSinceRoundStart = 0f;
     }
 
     public struct TestStruct
     {
-        private SpawnParams param;
+        private SpawnParams _param;
 
         private float start;
         private float stop;
         private float totalDurationInSec;
-        private int amountEachPeriod;
+        private int AmountOverTime;
 
         private bool hasStarted;
         private float currentTime;
         private float currentPeriodTime;
 
-        public GameObject prefab => param.EnemyPrefab;
-        public Vector3 Pos(Vector2 topLeft, Vector2 bottomRight) => param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight);
+        public GameObject prefab => _param.EnemyPrefab;
+        public Vector3 Pos(Vector2 topLeft, Vector2 bottomRight) => _param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight);
 
         public TestStruct(float _totalDurationInSec, SpawnParams _param)
         {
@@ -81,13 +83,13 @@ public class RoundManager : NetworkBehaviour
             currentPeriodTime = 0f;
             totalDurationInSec = _totalDurationInSec;
 
-            param = _param;
-            start = param.ActivationTiming * totalDurationInSec;
-            stop  = param.StopTiming       * totalDurationInSec;
+            _param = _param;
+            start = _param.ActivationTiming * totalDurationInSec;
+            stop  = _param.StopTiming       * totalDurationInSec;
             
-            amountEachPeriod = (int)(param.Amount / ((stop - start) * totalDurationInSec / param.Period));
+            AmountOverTime = (int)(_param.Amount / ((stop - start) * totalDurationInSec / _param.Period));
 
-            Debug.Log($"amount for each period : {amountEachPeriod}");
+            Debug.Log($"amount for each period : {AmountOverTime}");
         }
 
         public int AddTime(float time)
@@ -105,11 +107,11 @@ public class RoundManager : NetworkBehaviour
             else
                 currentPeriodTime += time;
 
-            if (currentPeriodTime < param.Period)
+            if (currentPeriodTime < _param.Period)
                 return 0;
 
-            currentPeriodTime -= param.Period;
-            return amountEachPeriod;
+            currentPeriodTime -= _param.Period;
+            return AmountOverTime;
 
         }
     }
@@ -143,22 +145,28 @@ public class RoundManager : NetworkBehaviour
     private IEnumerator LaunchRound(GameRound round)
     {
         OnRoundStart.Invoke();
+        timeSinceRoundStart = 0f;
         currentRound = round;
         spawns = currentRound.Spawn;
 
-        Coroutine c;
+        GameObject roundGO = new GameObject()
+        {
+            name = round.name,
+            transform = { parent = enemiesParentTransform }
+        };
 
         foreach (SpawnParams param in spawns)
-            StartCoroutine(LaunchEnemiesSpawning(currentRound.Duration, param));
+            StartCoroutine
+            (
+                LaunchEnemiesSpawning
+                (
+                    currentRound.Duration,
+                    param,
+                    roundGO.transform
+                )
+            );
 
-        while (timeSinceRoundStart < currentRound.Duration)
-        {
-            timeSinceRoundStart += Time.deltaTime;
-            enemiesParentTransform.name = $"Enemies {timeSinceRoundStart}";
-            yield return null;
-        }
-
-        yield return RoundEnd(gameMode.timeBetweenRounds);
+        yield return RoundEnd(currentRound.Duration+gameMode.timeBetweenRounds);
     }
 
     private void NextRound()
@@ -166,7 +174,10 @@ public class RoundManager : NetworkBehaviour
         if (currentRoundIndex + 1 < gameMode.rounds.Length)
             StartCoroutine(LaunchRound(gameMode.rounds[++currentRoundIndex]));
         else
+        {
+            currentRound = null;
             GameManager.Instance.EndGame();
+        }
     }
 
     private IEnumerator RoundEnd(float waitTime)
@@ -177,77 +188,121 @@ public class RoundManager : NetworkBehaviour
             OnRoundEnd.Invoke();
     }
 
-    private IEnumerator LaunchEnemiesSpawning(float totalDurationInSec, SpawnParams param)
+    private IEnumerator LaunchEnemiesSpawning(float totalDurationInSec, SpawnParams _param, Transform roundTransform)
     {
-        float start = param.ActivationTiming * totalDurationInSec;
-        yield return new WaitForSeconds(start);
-        Debug.Log($"{param.EnemyPrefab.name} {totalDurationInSec}");
-        
-        float stop  = param.StopTiming       * totalDurationInSec;
-
-        float timeInPercentage = stop - start;
+        float timeInPercentage = _param.StopTiming - _param.ActivationTiming;
         float timeInSec = timeInPercentage * totalDurationInSec;
-        float numberOfPeriods = timeInSec / param.Period;
-        float amountEachPeriod = param.Amount * 1f / numberOfPeriods;
+        float amountOverTime = _param.Amount * 1f / timeInSec;
+        Debug.Log($"{_param.EnemyPrefab.name} : timeInPercentage={timeInPercentage}, timeInSec={timeInSec}");
+        
+        yield return new WaitForSeconds(_param.ActivationTiming * totalDurationInSec - timeSinceRoundStart);
 
-        float total = param.Amount;
-        float nbSec = timeInSec;
-        float attente = (nbSec/60f) / total;
-        Debug.Log(attente);
-        yield return null;
+        canSpawn = true;
 
-        float amount = 0f;
-
-        GameObject round = new GameObject
-        {
-            name = currentRound.name,
-            transform =
+        tests.Add(new CompilatedSpawnParams()
             {
-                parent = enemiesParentTransform
+                param = _param,
+                parentTransform = new GameObject
+                {
+                    name = _param.EnemyPrefab.name,
+                    transform = { parent = roundTransform }
+                }.transform,
+                AmountOverTime = amountOverTime,
+                AmountToSpawn = 0f,
+                currentTime = 0f,
+                spawnTimeLeft = timeInSec
             }
-        };
+        );
 
-        yield return null;
+        /*yield return null;                                                                                    
 
         int index = 0;
         float timeSinceSpawnStart = 0f;
         
         do
         {
-            amount += amountEachPeriod;
-
+            amount += AmountOverTime;
             while(amount>=1)
             {
                 amount--;
-                Instantiate(param.EnemyPrefab,
-                     param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight),
+                Instantiate(_param.EnemyPrefab,
+                     _param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight),
                             Quaternion.identity,
                             round.transform).name += $" {++index}";
             }
 
             float time = Time.deltaTime;
-            yield return null;
+            yield return new WaitForSeconds(_param.Period-time);
             timeSinceSpawnStart += time;
             round.name = $"{currentRound.name} {stop-timeSinceSpawnStart}";
-        } while (timeSinceSpawnStart <= stop);
+        } while (timeSinceSpawnStart <= stop);*/
     }
 
-    /*private void Update()
+    private void Update()
     {
         //if(!IsServer)
         //    return;
-        
-        //timeSinceRoundStart += Time.deltaTime;
 
-        foreach (var spawn in spawns)
+        float time = Time.deltaTime;
+        timeSinceRoundStart += time;
+
+        if(tests==null || tests.Count == 0)
+            return;
+
+        for(int i=0; i<tests.Count; i++)
         {
-            if (timeSinceRoundStart >= spawn.ActivationTiming * )
+            CompilatedSpawnParams paramSet = tests[i];;
+
+            if (paramSet.spawnTimeLeft < 0f)
+                continue;
+
+            paramSet.currentTime += time;
+            paramSet.spawnTimeLeft -= time;
+
+            paramSet.AmountToSpawn+=time*paramSet.AmountOverTime;
+
+            if (paramSet.currentTime <= paramSet.period)
             {
-                StartCoroutine(Activate(spawn));
-                spawns.Remove(spawn);
+                tests[i] = paramSet;
+                continue;
             }
+
+            Debug.Log($"Should spawn {tests[i].prefab.name} x {(int)paramSet.AmountToSpawn}");
+            StartCoroutine(Spawn((int)paramSet.AmountToSpawn, tests[i]));
+            paramSet.AmountToSpawn -= 1f*(int)paramSet.AmountToSpawn;
+            paramSet.currentTime -= paramSet.period;
+
+            tests[i] = paramSet;
+            /*while (paramSet.AmountToSpawn >= 1)
+            {
+                Instantiate(paramSet.prefab,
+                    paramSet.Pos,
+                    Quaternion.identity,
+                    paramSet.parentTransform);
+                paramSet.AmountToSpawn--;
+            }*/
         }
-    }*/
+
+        foreach (var paramSet in tests)
+            if (paramSet.spawnTimeLeft > 0)
+                return;
+
+        foreach (var paramSet in tests)
+            if (paramSet.AmountToSpawn >= 0)
+                StartCoroutine(Spawn((int)paramSet.AmountToSpawn, paramSet));
+
+        tests.Clear();
+    }
+
+    private IEnumerator Spawn(int amount, CompilatedSpawnParams param)
+    {
+        while (amount>0)
+        {
+            Instantiate(param.prefab, param.param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight), Quaternion.identity, param.parentTransform);
+            amount--;
+            yield return null;
+        }
+    }
 
     public IEnumerator Activate(SpawnParams spawnParams)
     {
@@ -294,5 +349,19 @@ public class RoundManager : NetworkBehaviour
 
     public int enemyInvoke = 0;
     public float timeBetweenEnemy = 0.2f;
+}
+
+[Serializable]
+public struct CompilatedSpawnParams
+{
+    public SpawnParams param;
+    public GameObject prefab => param.EnemyPrefab;
+    public float period => param.Period;
+
+    public Transform parentTransform;
+    public float spawnTimeLeft;
+    public float AmountOverTime;
+    public float AmountToSpawn;
+    public float currentTime;
 }
 

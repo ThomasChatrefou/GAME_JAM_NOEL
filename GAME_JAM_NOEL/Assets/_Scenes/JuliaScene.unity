@@ -760,6 +760,8 @@ MonoBehaviour:
   currentRoundIndex: 0
   currentRound: {fileID: 0}
   spawns: []
+  tests: []
+  canSpawn: 0
   timeSinceRoundStart: 0
   topLeft: {x: 0, y: 0}
   bottomRight: {x: 0, y: 0}
@@ -839,7 +841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
-  gameMode: {fileID: 11400000, guid: fd13c0cf2ce58f446931beff3f630213, type: 2}
+  gameMode: {fileID: 11400000, guid: 1561e3c316b1d80499e6fad9c50586eb, type: 2}
   roundManager: {fileID: 1921603598}
   topLeft: {fileID: 1260218502}
   bottomRight: {fileID: 814686845}
