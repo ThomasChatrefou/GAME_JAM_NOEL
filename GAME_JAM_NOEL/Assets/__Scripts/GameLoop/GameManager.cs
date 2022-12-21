@@ -71,6 +71,8 @@ public class GameManager : NetworkBehaviour
         //foreach (PlayerController playerController in players)
         //    playerController.OnPlayerDeath.AddListener(CheckGameState);
 
+        Debug.LogWarning("On passe par LaunchGame de GameManager");
+
         /* Actual Launching */
         isRunning = true;
         isRunningupdate.Invoke();
@@ -118,6 +120,6 @@ public class GameManager : NetworkBehaviour
 
     public void SaySmtg(string message)
     {
-        Debug.Log(message);
+        Debug.Log($"{message}");
     }
 }
