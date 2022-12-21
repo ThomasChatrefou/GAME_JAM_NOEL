@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ce206d34400b845adce11c97e00905, type: 3}
+  m_Name: Round1
+  m_EditorClassIdentifier: 
+  Duration: 5
+  Spawn:
+  - EnemyPrefab: {fileID: 8290258027390627626, guid: 71bcd79b46b092c44bbe82d6ecf2d5ec,
+      type: 3}
+    Zones:
+    - {fileID: 11400000, guid: 89bde91092c42f841b12c8e3e22c4a0b, type: 2}
+    - {fileID: 11400000, guid: 4fe972ab0cb69ff46b3e8876921cd75f, type: 2}
+    Amount: 20
+    Period: 0.1
+    ActivationTiming: 0
+    StopTiming: 0.2
+  - EnemyPrefab: {fileID: 511481345659969604, guid: fca6568e89eb5424080fc527086292b3,
+      type: 3}
+    Zones:
+    - {fileID: 11400000, guid: c4d7faf191fc86e4099dedcf2d7d0a93, type: 2}
+    - {fileID: 11400000, guid: ed4aef778d7e60c4cb620904d307ae2a, type: 2}
+    Amount: 20
+    Period: 0.4
+    ActivationTiming: 0
+    StopTiming: 0.2
