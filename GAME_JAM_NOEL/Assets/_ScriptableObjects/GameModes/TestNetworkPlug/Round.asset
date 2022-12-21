@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Duration: 10
   Spawn:
-  - EnemyPrefab: {fileID: 4919846689501487945, guid: 31c79b0492479f9488645087dbca8172,
+  - EnemyPrefab: {fileID: 3005033762924187302, guid: d0bf58b8383845142a1819954cc4f4c4,
       type: 3}
     Zones:
     - {fileID: 11400000, guid: 5e70fc2e058b8c44c88211d482f67359, type: 2}
