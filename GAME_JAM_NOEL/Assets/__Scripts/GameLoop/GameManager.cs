@@ -23,12 +23,17 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private PlayerController[] players;
     [SerializeField] private GameMode gameMode;
     [SerializeField] private RoundManager roundManager;
+    public Transform topLeft, bottomRight;
 
     //[Header("Synchronized Variables")]
     //[SerializeField] private NetworkVariable<bool> isRunning = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     [Header("Local Test Variables")]
     [SerializeField] private bool isRunning;
+    public bool IsRunning => isRunning;
+
+    [Tooltip("do delete when checked as goog")]
+    public bool hasbeenlaunched;
 
     [Header("Client Events")]
     public UnityEvent OnLaunchGame;
@@ -40,6 +45,17 @@ public class GameManager : NetworkBehaviour
 
         //isRunning.OnValueChanged += GameOnUpdate;
         isRunningupdate.AddListener(GameOnUpdate);
+        hasbeenlaunched = false;
+    }
+
+    private void Update()
+    {
+        if (isRunning && !hasbeenlaunched)
+        {
+            roundManager.Init(gameMode, this);
+            roundManager.Launch();
+            hasbeenlaunched = true;
+        }
     }
     
     #region ServerRpc
@@ -48,8 +64,7 @@ public class GameManager : NetworkBehaviour
     public void LaunchGame()
     {
         /* Preparation */
-        roundManager.Init(gameMode);
-        roundManager.OnRoundStart.AddListener(TriggerOnNewRoundStart);
+        roundManager.Init(gameMode, this);
 
         //lacks smth but can't remember what
 
@@ -59,21 +74,9 @@ public class GameManager : NetworkBehaviour
         /* Actual Launching */
         isRunning = true;
         isRunningupdate.Invoke();
-        TriggerOnNewRoundStart();
-        roundManager.LaunchRound(gameMode.rounds[0]);
+        roundManager.Launch();
     }
     
-    #endregion
-
-    #region EventRpcTriggers
-
-    //[ClientRpc]
-    //private void TriggerOnNewRoundStartClientRpc()
-    private void TriggerOnNewRoundStart()
-    {
-        OnNewRoundStart.Invoke();
-    }
-
     #endregion
 
     #region Simulation of sync var changes events
@@ -112,4 +115,9 @@ public class GameManager : NetworkBehaviour
     }
 
     #endregion
+
+    public void SaySmtg(string message)
+    {
+        Debug.Log(message);
+    }
 }
