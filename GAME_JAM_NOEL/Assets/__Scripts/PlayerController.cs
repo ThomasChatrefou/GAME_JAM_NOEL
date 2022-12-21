@@ -1,7 +1,8 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     Rigidbody2D rb;
 
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        
+
         rb = GetComponent<Rigidbody2D>();
         inputs = new PlayerInputs();
         inputs.Player.Shoot.performed += shootContext => Shoot();
@@ -24,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!IsOwner) return;
+
         transform.position += Time.fixedDeltaTime * speedValue * new Vector3(speedDirection.x, speedDirection.y, 0.0f);
     }
 
