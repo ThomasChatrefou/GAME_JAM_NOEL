@@ -9,23 +9,23 @@ using Random = UnityEngine.Random;
 public class RoundManager : NetworkBehaviour
 {
     [Header("Refs")]
-    [SerializeField] private GameManager gameManager;
+    private GameManager gameManager;
     [SerializeField] private GameMode gameMode;
     [SerializeField] private Transform enemiesParentTransform;
 
     [Header("Round Settings")]
-    [SerializeField] private int currentRoundIndex;
     [SerializeField] private GameRound currentRound;
-    [SerializeField] private List<SpawnParams> spawns;
-    [SerializeField] private List<CompilatedSpawnParams> tests;
-
-    [Space]
-    [SerializeField] private float timeSinceRoundStart;
-    [SerializeField] private Vector2 topLeft, bottomRight;
 
     [Header("Round Lifetime Events")]
     public UnityEvent OnRoundStart;
     public UnityEvent OnRoundEnd;
+
+    //RoundLife needs
+    private int currentRoundIndex;
+    private List<SpawnParams> spawns;
+    private List<CompilatedSpawnParams> tests;
+    private float timeSinceRoundStart;
+    private Vector2 topLeft, bottomRight;
     
     public void Init(GameMode _gameMode, GameManager _gameManager)
     {
