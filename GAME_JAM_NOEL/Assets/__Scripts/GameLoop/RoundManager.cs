@@ -2,11 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Events;
-using UnityEngine.WSA;
 using Random = UnityEngine.Random;
 
 public class RoundManager : NetworkBehaviour
@@ -23,7 +20,6 @@ public class RoundManager : NetworkBehaviour
     [SerializeField] private List<CompilatedSpawnParams> tests;
 
     [Space]
-    [SerializeField] private bool canSpawn;
     [SerializeField] private float timeSinceRoundStart;
     [SerializeField] private Vector2 topLeft, bottomRight;
 
@@ -46,101 +42,6 @@ public class RoundManager : NetworkBehaviour
         tests = new List<CompilatedSpawnParams>();
         StartCoroutine(LaunchRound(gameMode.rounds[0]));
     }
-
-    /*private void LaunchRound(GameRound round)
-    {
-        OnRoundStart.Invoke();
-        currentRound = round;
-        
-        spawns = currentRound.Spawn;
-
-        foreach (SpawnParams _param in spawns)
-            tests.Add(new TestStruct(currentRound.Duration, _param));
-
-        timeSinceRoundStart = 0f;
-    }
-
-    public struct TestStruct
-    {
-        private SpawnParams _param;
-
-        private float start;
-        private float stop;
-        private float totalDurationInSec;
-        private int AmountOverTime;
-
-        private bool hasStarted;
-        private float currentTime;
-        private float currentPeriodTime;
-
-        public GameObject prefab => _param.EnemyPrefab;
-        public Vector3 Pos(Vector2 topLeft, Vector2 bottomRight) => _param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight);
-
-        public TestStruct(float _totalDurationInSec, SpawnParams _param)
-        {
-            hasStarted = false;
-            currentTime = 0f;
-            currentPeriodTime = 0f;
-            totalDurationInSec = _totalDurationInSec;
-
-            _param = _param;
-            start = _param.ActivationTiming * totalDurationInSec;
-            stop  = _param.StopTiming       * totalDurationInSec;
-            
-            AmountOverTime = (int)(_param.Amount / ((stop - start) * totalDurationInSec / _param.Period));
-
-            Debug.Log($"amount for each period : {AmountOverTime}");
-        }
-
-        public int AddTime(float time)
-        {
-            currentTime += time;
-
-            if (currentTime < start || currentTime > stop)
-                return 0;
-
-            if (!hasStarted)
-            {
-                currentPeriodTime = currentTime - start * totalDurationInSec;
-                hasStarted = true;
-            }
-            else
-                currentPeriodTime += time;
-
-            if (currentPeriodTime < _param.Period)
-                return 0;
-
-            currentPeriodTime -= _param.Period;
-            return AmountOverTime;
-
-        }
-    }
-
-    private void Update()
-    {
-        if (!gameManager.IsRunning || tests==null || tests.Count==0)
-            return;
-
-        float time = Time.deltaTime;
-        timeSinceRoundStart += time;
-        
-        if(timeSinceRoundStart >= currentRound.Duration)
-            NextRound();
-
-        foreach (TestStruct test in tests)
-        {
-            int number = test.AddTime(time);
-            Debug.Log(number);
-            for (int i = 0; i < number; i++)
-            {
-                GameObject go = Instantiate(test.prefab, enemiesParentTransform);
-                Vector3 pos = test.Pos(topLeft, bottomRight);
-                Debug.Log(go.name);
-                go.name += $" ({pos.x},{pos.y})";
-                go.transform.position = pos;
-            }
-        }
-    }*/
 
     private IEnumerator LaunchRound(GameRound round)
     {
@@ -197,8 +98,6 @@ public class RoundManager : NetworkBehaviour
         
         yield return new WaitForSeconds(_param.ActivationTiming * totalDurationInSec - timeSinceRoundStart);
 
-        canSpawn = true;
-
         tests.Add(new CompilatedSpawnParams()
             {
                 param = _param,
@@ -213,29 +112,6 @@ public class RoundManager : NetworkBehaviour
                 spawnTimeLeft = timeInSec
             }
         );
-
-        /*yield return null;                                                                                    
-
-        int index = 0;
-        float timeSinceSpawnStart = 0f;
-        
-        do
-        {
-            amount += AmountOverTime;
-            while(amount>=1)
-            {
-                amount--;
-                Instantiate(_param.EnemyPrefab,
-                     _param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight),
-                            Quaternion.identity,
-                            round.transform).name += $" {++index}";
-            }
-
-            float time = Time.deltaTime;
-            yield return new WaitForSeconds(_param.Period-time);
-            timeSinceSpawnStart += time;
-            round.name = $"{currentRound.name} {stop-timeSinceSpawnStart}";
-        } while (timeSinceSpawnStart <= stop);*/
     }
 
     private void Update()
@@ -266,21 +142,12 @@ public class RoundManager : NetworkBehaviour
                 tests[i] = paramSet;
                 continue;
             }
-
-            Debug.Log($"Should spawn {tests[i].prefab.name} x {(int)paramSet.AmountToSpawn}");
+            
             StartCoroutine(Spawn((int)paramSet.AmountToSpawn, tests[i]));
             paramSet.AmountToSpawn -= 1f*(int)paramSet.AmountToSpawn;
             paramSet.currentTime -= paramSet.period;
 
             tests[i] = paramSet;
-            /*while (paramSet.AmountToSpawn >= 1)
-            {
-                Instantiate(paramSet.prefab,
-                    paramSet.Pos,
-                    Quaternion.identity,
-                    paramSet.parentTransform);
-                paramSet.AmountToSpawn--;
-            }*/
         }
 
         foreach (var paramSet in tests)
@@ -294,61 +161,21 @@ public class RoundManager : NetworkBehaviour
         tests.Clear();
     }
 
-    private IEnumerator Spawn(int amount, CompilatedSpawnParams param)
+    private IEnumerator Spawn(int totalAmount, CompilatedSpawnParams param)
     {
-        while (amount>0)
+        int leftAmount = totalAmount;
+
+        while (leftAmount > 0)
         {
             Instantiate(param.prefab, param.param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight), Quaternion.identity, param.parentTransform);
-            amount--;
+
+            if(leftAmount <= totalAmount * param.param.WeaponRate)
+                Debug.Log($"A new {param.prefab.name} will carry a Weapon !");
+            
+            leftAmount--;
             yield return null;
         }
     }
-
-    public IEnumerator Activate(SpawnParams spawnParams)
-    {
-
-
-        while (enemyInvoke < nbEnemiesInWave)
-        {
-            int indexEnemy = Random.Range(minEnemy, maxEnemy);
-            int indexSpawn = Random.Range(0, 5);
-
-            if(indexEnemy == 0 && nbTrashMob > 0){
-                //Instantiate(TypeOfEnemy[0], PositionOfSpawner[spawn], new Quaternion());
-                nbTrashMob--;
-                enemyInvoke++;
-                yield return new WaitForSeconds(timeBetweenEnemy); // Change value for spawning ennemies more and low fast
-            }
-            else if(indexEnemy == 1 && nbSaplin > 0){
-                //Instantiate(TypeOfEnemy[1], PositionOfSpawner[spawn], new Quaternion());
-                nbSaplin--;
-                enemyInvoke++;
-                yield return new WaitForSeconds(timeBetweenEnemy); // Change value for spawning ennemies more and low fast
-            }
-            else if(indexEnemy == 2 && nbSnowman > 0){
-                //Instantiate(TypeOfEnemy[2], PositionOfSpawner[spawn], new Quaternion());
-                nbSnowman--;
-                enemyInvoke++;
-                yield return new WaitForSeconds(timeBetweenEnemy); // Change value for spawning ennemies more and low fast
-            }
-
-            // Change "TypeOfEnemy" by a table where the different type of ennemies are stocked ; Change "PositionOfSpawner" by a table where the position of spawner are stocked
-            //Instantiate(TypeOfEnemy[indexEnemy], PositionOfSpawner[spawn], new Quaternion()); 
-        }
-    }
-
-    //Temporaire, à supprimer à la fin !
-
-    public int nbEnemiesInWave = 150;   // La Wave dure 60sec
-    public int nbTrashMob = 100;        // 30sec => 50 Enemies ; 45sec => 75 Enemies ; 60sec => 100 Enemies
-    public int nbSaplin = 50;           // 30sec => 00 Enemies ; 45sec => 25 Enemies ; 60sec => 050 Enemies
-    public int nbSnowman = 50;          // 30sec => 00 Enemies ; 45sec => 00 Enemies ; 60sec => 050 Enemies
-
-    public int minEnemy = 0;
-    public int maxEnemy = 1;
-
-    public int enemyInvoke = 0;
-    public float timeBetweenEnemy = 0.2f;
 }
 
 [Serializable]

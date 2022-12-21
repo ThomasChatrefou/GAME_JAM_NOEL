@@ -26,6 +26,8 @@ public struct SpawnParams
     [Range(0f, 1f)] public float ActivationTiming;
     [Tooltip("time in % of the GameRound when the Spawn will Stop\nMust be > timeBeforeActivate")]
     [Range(0f, 1f)] public float StopTiming;
+    [Tooltip("Chances in % of carrying a weapon for every Enemy")]
+    [Range(0.01f, 1f)] public float WeaponRate;
 
     public Vector3 RandomPosInRectTopLeftToBottomRight(Vector2 topLeft, Vector2 bottomRight)
     {

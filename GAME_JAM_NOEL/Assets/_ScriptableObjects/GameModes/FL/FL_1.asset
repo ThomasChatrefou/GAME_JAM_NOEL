@@ -22,6 +22,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0
     StopTiming: 1
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 1900797756943192124, guid: d5596560817955848895ba5f7770f379,
       type: 3}
     Zones:
@@ -30,6 +31,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0.14
     StopTiming: 0.86
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 6670057176091957145, guid: c839963e37b75de43bb78f427009d5bb,
       type: 3}
     Zones:
@@ -38,6 +40,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0.28
     StopTiming: 0.72
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 6784999993366175641, guid: 17ff09bfe7eb511448fac8a57ad0fa74,
       type: 3}
     Zones:
@@ -46,6 +49,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0.42
     StopTiming: 0.58
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 8129278428630456117, guid: 9f0606855f95f174fa0d75ff65eb4358,
       type: 3}
     Zones:
@@ -54,6 +58,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0.28
     StopTiming: 0.72
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 3947166682823751886, guid: e8b5b1ff56cd0bf4c9fab30058fb31d3,
       type: 3}
     Zones:
@@ -62,6 +67,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0.14
     StopTiming: 0.86
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 7535087284052586704, guid: d4e3fb252aa1db243aa4322d36bbdd26,
       type: 3}
     Zones:
@@ -70,6 +76,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0
     StopTiming: 1
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 8290258027390627626, guid: 71bcd79b46b092c44bbe82d6ecf2d5ec,
       type: 3}
     Zones:
@@ -79,6 +86,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0
     StopTiming: 0.5
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 3947166682823751886, guid: e8b5b1ff56cd0bf4c9fab30058fb31d3,
       type: 3}
     Zones:
@@ -88,6 +96,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0.3
     StopTiming: 0.7
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 6784999993366175641, guid: 17ff09bfe7eb511448fac8a57ad0fa74,
       type: 3}
     Zones:
@@ -98,3 +107,4 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0.5
     StopTiming: 1
+    WeaponRate: 1
