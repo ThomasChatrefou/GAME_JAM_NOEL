@@ -32,7 +32,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private bool isRunning;
     public bool IsRunning => isRunning;
 
-    [Tooltip("do delete when checked as goog")]
+    [Tooltip("do delete when checked as good")]
     public bool hasbeenlaunched;
 
     [Header("Client Events")]
@@ -48,7 +48,7 @@ public class GameManager : NetworkBehaviour
         hasbeenlaunched = false;
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (isRunning && !hasbeenlaunched)
         {
@@ -56,7 +56,7 @@ public class GameManager : NetworkBehaviour
             roundManager.Launch();
             hasbeenlaunched = true;
         }
-    }
+    }*/
     
     #region ServerRpc
     //[ServerRpc]
