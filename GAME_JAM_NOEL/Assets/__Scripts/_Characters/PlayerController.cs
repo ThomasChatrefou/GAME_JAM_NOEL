@@ -1,5 +1,6 @@
 using System;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class PlayerController : Character
@@ -17,9 +18,9 @@ public class PlayerController : Character
     private Weapon playerWeapon;
     [SerializeField] 
     private Vector2 crossPosition;
-    [SerializeField] 
     private Weapon nearbyWeapon;
-    
+
+
     private void Awake()
     {
         mouseDetection = FindObjectOfType<MouseDetection>();
@@ -89,11 +90,28 @@ public class PlayerController : Character
         Debug.Log("LauchSkillAttack");
     }
 
-    public void EquipWeapon(Weapon weapon)
+    public void EquipWeapon(Weapon nearbyWeapon)
     {
-        if (!IsOwner || !weapon) return;
-        Debug.Log("EquipWeapon " + weapon.name);
-        playerWeapon = weapon;
+        if (!IsOwner || !nearbyWeapon) return;
+            
+        playerWeapon.DespawnWeaponServerRpc();
+        playerWeapon = nearbyWeapon;
+
+        playerWeapon.SpawnWeaponGround(false);
+        
+        playerWeapon.MoveToParentServerRpc(GetComponent<NetworkObject>().OwnerClientId);
+        Transform playerWeaponTransform = playerWeapon.transform;
+        playerWeaponTransform.parent = transform;
+        playerWeaponTransform.localPosition = Vector3.zero;
+
+        
         //TODO Update UI Sprite
     }
+    
+    public Weapon NearbyWeapon
+    {
+        get => nearbyWeapon;
+        set => nearbyWeapon = value;
+    }
+
 }

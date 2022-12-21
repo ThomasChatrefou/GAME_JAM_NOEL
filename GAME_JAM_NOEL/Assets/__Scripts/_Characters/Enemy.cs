@@ -23,16 +23,18 @@ public class Enemy : Character
         
     }
 
-    protected override void Die()
+    
+    [ServerRpc(RequireOwnership = false)]
+    protected override void DieServerRpc()
     {
         spriteRenderer.enabled = false;
         if (lootedWeapon && willLootWeapon)
         {
             //TODO Faire spawn l'arme par terre
             Weapon weapon = Instantiate(lootedWeapon, transform.position, quaternion.identity).GetComponent<Weapon>();
-            weapon.GetComponent<NetworkObject>().Spawn(true);
             //weapon.SpawnWeaponGroundServerRpc();
-            weapon.SpawnWeaponGround();
+            weapon.SpawnWeaponGround(true);
+            weapon.GetComponent<NetworkObject>().Spawn(true);
         }
 
         DestroyEnemyServerRpc();
@@ -41,7 +43,6 @@ public class Enemy : Character
     [ServerRpc(RequireOwnership = false)]
     public void DestroyEnemyServerRpc()
     {
-        Debug.Log("Despawn");
         GetComponent<NetworkObject>().Despawn();
     }
 }

@@ -46,7 +46,6 @@ public class Projectile : NetworkBehaviour
     public void DestroyProjectileServerRpc()
     {
         GetComponent<NetworkObject>().Despawn();
-        //Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
