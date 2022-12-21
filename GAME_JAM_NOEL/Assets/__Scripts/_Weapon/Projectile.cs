@@ -30,7 +30,7 @@ public class Projectile : NetworkBehaviour
         lifeSpawn -= Time.deltaTime;
         if (lifeSpawn <= 0)
         {
-            DestroyProjectile();
+            DestroyProjectileServerRpc();
         }
     }
 
@@ -42,9 +42,11 @@ public class Projectile : NetworkBehaviour
         transform.rotation = Quaternion.Euler(0,0, zAngle);
     }
 
-    public void DestroyProjectile()
+    [ServerRpc(RequireOwnership = false)]
+    public void DestroyProjectileServerRpc()
     {
-        Destroy(gameObject);
+        GetComponent<NetworkObject>().Despawn();
+        //Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -22,7 +22,9 @@ public abstract class Character : NetworkBehaviour
             Die();
         }
     }
-    public virtual void Attack()
+    
+    [ServerRpc(RequireOwnership = false)]
+    public virtual void AttackServerRpc()
     {
 
     }

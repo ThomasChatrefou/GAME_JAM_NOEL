@@ -43,8 +43,7 @@ public class Weapon : NetworkBehaviour
     }
 
     //TODO RPC
-    [ServerRpc]
-    public void LaunchBaseProjectileServerRpc(Vector2 direction, bool isFromEnemy = false)
+    public void LaunchBaseProjectile(Vector2 direction, bool isFromEnemy = false)
     {
         if (!hasShoot)
         {
@@ -58,14 +57,14 @@ public class Weapon : NetworkBehaviour
     }
 
     //TODO RPC
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void LaunchSkillProjectileServerRpc(Vector2 direction)
     {
         Projectile weapon = Instantiate(skillProjectilePrefab,transform.position,Quaternion.identity).GetComponent<Projectile>();
     }
 
     //TODO RPC
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void PickedUpServerRpc()
     {
         //Make the item disapears from the map and be equiped by the player
