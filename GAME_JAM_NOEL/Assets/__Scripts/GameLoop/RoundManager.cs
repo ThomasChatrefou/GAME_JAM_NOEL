@@ -215,8 +215,9 @@ public class RoundManager : NetworkBehaviour
         do
         {
             amount += amountEachPeriod;
+            Debug.Log(amount);
 
-            while(amount>=1)
+            while (amount>=1)
             {
                 amount--;
                 Instantiate(param.EnemyPrefab,
@@ -249,7 +250,7 @@ public class RoundManager : NetworkBehaviour
         }
     }*/
 
-    public IEnumerator Activate(SpawnParams spawnParams)
+    /*public IEnumerator Activate(SpawnParams spawnParams)
     {
 
 
@@ -293,6 +294,6 @@ public class RoundManager : NetworkBehaviour
     public int maxEnemy = 1;
 
     public int enemyInvoke = 0;
-    public float timeBetweenEnemy = 0.2f;
+    public float timeBetweenEnemy = 0.2f;*/
 }
 
