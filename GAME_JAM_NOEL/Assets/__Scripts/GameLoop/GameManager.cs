@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,6 +31,12 @@ public class GameManager : NetworkBehaviour
 
     [Header("Local Test Variables")]
     [SerializeField] private bool isRunning;
+
+    public void UpdateGameMode(GameMode _gameMode)
+    {
+        gameMode = _gameMode;
+    }
+
     public bool IsRunning => isRunning;
 
     [Tooltip("do delete when checked as good")]
