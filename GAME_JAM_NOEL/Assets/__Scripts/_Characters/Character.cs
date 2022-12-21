@@ -17,14 +17,11 @@ public abstract class Character : NetworkBehaviour
 
     public void Tic()
     {
-        if (health <= 0 && !isDead)
-        {
-            Die();
-        }
+        
     }
     
     [ServerRpc(RequireOwnership = false)]
-    public virtual void AttackServerRpc()
+    public virtual void AttackServerRpc(Vector2 crossPosition, Vector2 playerPos)
     {
 
     }

@@ -17,8 +17,9 @@ public class PlayerController : Character
     private Weapon playerWeapon;
     [SerializeField] 
     private Vector2 crossPosition;
+    [SerializeField] 
+    private Weapon nearbyWeapon;
     
-
     private void Awake()
     {
         mouseDetection = FindObjectOfType<MouseDetection>();
@@ -27,6 +28,7 @@ public class PlayerController : Character
         inputs.Player.Shoot.performed += shootContext => Shoot();
         inputs.Player.Movement.performed += moveContext => Move(moveContext.ReadValue<Vector2>());
         inputs.Player.Movement.canceled += moveContext => Move(moveContext.ReadValue<Vector2>());
+        inputs.Player.Interact.performed += interactContext => EquipWeapon(nearbyWeapon);
     }
 
     private void Start()
@@ -63,8 +65,7 @@ public class PlayerController : Character
     private void Shoot()
     {
         if(!IsOwner) return;
-        Debug.Log("Shoot for Client " + OwnerClientId);
-        AttackServerRpc();
+        AttackServerRpc(crossPosition,transform.position);
     }
 
     private void OnEnable()
@@ -77,10 +78,9 @@ public class PlayerController : Character
     }
     
     [ServerRpc(RequireOwnership = false)]
-    public override void AttackServerRpc()
+    public override void AttackServerRpc(Vector2 crossPosition, Vector2 playerPos)
     {
-        base.AttackServerRpc();
-        Vector2 fireDir = crossPosition - new Vector2(transform.position.x,transform.position.y);
+        Vector2 fireDir = crossPosition - playerPos;
         playerWeapon.LaunchBaseProjectile(fireDir.normalized);
     }
 
@@ -91,7 +91,8 @@ public class PlayerController : Character
 
     public void EquipWeapon(Weapon weapon)
     {
-        Debug.Log("EquipWeapon");
+        if (!IsOwner && !weapon) return;
+        Debug.Log("EquipWeapon " + weapon.name);
         playerWeapon = weapon;
         //TODO Update UI Sprite
     }
