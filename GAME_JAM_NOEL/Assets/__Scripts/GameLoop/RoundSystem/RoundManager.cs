@@ -167,7 +167,11 @@ public class RoundManager : NetworkBehaviour
 
         while (leftAmount > 0)
         {
-            Instantiate(param.prefab, param.param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight), Quaternion.identity, param.parentTransform);
+            NetworkObject enemy = Instantiate(param.prefab, param.param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight), Quaternion.identity, param.parentTransform).GetComponent<NetworkObject>();
+            if (enemy)
+            {
+                enemy.Spawn(true);
+            }
 
             if(leftAmount <= totalAmount * param.param.WeaponRate)
                 Debug.Log($"A new {param.prefab.name} will carry a Weapon !");
