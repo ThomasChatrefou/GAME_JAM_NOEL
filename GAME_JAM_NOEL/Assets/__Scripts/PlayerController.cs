@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -9,6 +10,9 @@ public class PlayerController : NetworkBehaviour
     private Vector2 speedDirection;
 
     public PlayerInputs inputs;
+
+    public UnityEvent OnPlayerDeath;
+
 
     private void Awake()
     {
