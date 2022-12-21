@@ -48,8 +48,8 @@ public class Weapon : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    }
+        
+    } 
 
     // Update is called once per frame
     void Update()
@@ -71,6 +71,12 @@ public class Weapon : NetworkBehaviour
                 //TODO Display Grab Key
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        Debug.Log("Sprite Renderer " + spriteRenderer);
     }
 
     //TODO RPC
@@ -113,12 +119,22 @@ public class Weapon : NetworkBehaviour
         onGround = true;
     }
 
+    public void SpawnWeaponGround()
+    {
+        //Make the item disapears from the map and be equiped by the player
+        spriteRenderer.sprite = weaponSpriteGround;
+        colliderPlayerEquip2D.enabled = true;
+        onGround = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (onGround)
         {
+            Debug.Log("OnGround Col " + col.name);
             if (col.GetType() == typeof(PlayerController))
             {
+                Debug.Log("OnTrigger PlayerController");
                 PlayerController player = col.GetComponent<PlayerController>();
                 if (player.IsOwner)
                 {

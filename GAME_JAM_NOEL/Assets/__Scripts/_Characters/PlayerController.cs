@@ -91,7 +91,7 @@ public class PlayerController : Character
 
     public void EquipWeapon(Weapon weapon)
     {
-        if (!IsOwner && !weapon) return;
+        if (!IsOwner || !weapon) return;
         Debug.Log("EquipWeapon " + weapon.name);
         playerWeapon = weapon;
         //TODO Update UI Sprite
