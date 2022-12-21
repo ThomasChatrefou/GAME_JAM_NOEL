@@ -20,6 +20,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     [Header("Lobby Selection Options Panel")]
     [SerializeField] private GameObject lobbySelectionOptionsCanvas;
+    [SerializeField] private Button refreshLobbyListButton;
     [SerializeField] private Button openLobbyCreationButton;
     [SerializeField] private Button backToMenuButton;
 
@@ -34,6 +35,7 @@ public class UserInterfaceManager : MonoBehaviour
     [SerializeField] private TMP_Text lobbyNameDisplay;
     [SerializeField] private TMP_Text membersCountDisplay;
     [SerializeField] private Transform membersContainer;
+    [SerializeField] private Button refreshPlayerListButton;
     [SerializeField] private Button startGameButton;
     [SerializeField] private Button backToLobbySelectionButton;
 
@@ -65,6 +67,8 @@ public class UserInterfaceManager : MonoBehaviour
         cancelCreateLobbyButton.onClick.AddListener(OnHideLobbyCreation);
         startGameButton.onClick.AddListener(OnStartGame);
         backToLobbySelectionButton.onClick.AddListener(OnBackToLobbySelection);
+        refreshLobbyListButton.onClick.AddListener(OnRefreshLobbyList);
+        refreshPlayerListButton.onClick.AddListener(OnRefreshPlayerList);
 
         AutofillLastPickedNameForInputField(playerNameInput, "NickName");
         AutofillLastPickedNameForInputField(createLobbyNameInput, "LobbyName");
@@ -117,7 +121,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     public void ClearLobbyList()
     {
-        foreach(GameObject lobby in LobbyList)
+        foreach (GameObject lobby in LobbyList)
         {
             Destroy(lobby);
         }
@@ -216,5 +220,17 @@ public class UserInterfaceManager : MonoBehaviour
         ClearLobbyList();
 
         LobbyManager.Instance.LeaveLobby();
+    }
+
+    private void OnRefreshLobbyList()
+    {
+        LobbyList.Clear();
+        LobbyManager.Instance.ListLobbies();
+    }
+
+    private void OnRefreshPlayerList()
+    {
+        MemberList.Clear();
+        LobbyManager.Instance.ListPlayers();
     }
 }

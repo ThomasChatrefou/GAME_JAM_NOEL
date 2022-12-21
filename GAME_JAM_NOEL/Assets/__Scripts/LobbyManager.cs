@@ -71,8 +71,9 @@ public class LobbyManager : MonoBehaviour
         print("Signed out");
     }
 
-    private async void ListLobbies()
+    public async void ListLobbies()
     {
+        print("LISTING LOBBY");
         try
         {
             QueryLobbiesOptions queryLobbiesOptions = new QueryLobbiesOptions
@@ -106,6 +107,7 @@ public class LobbyManager : MonoBehaviour
 
     public async void CreateLobby()
     {
+        print("CREATING LOBBY");
         try
         {
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions
@@ -118,9 +120,7 @@ public class LobbyManager : MonoBehaviour
             hostLobby = lobby;
             joinedLobby = hostLobby;
             ListPlayers(hostLobby);
-
-            //UserInterfaceManager.Instance.AddLobbyItemButton(lobby.Name, lobby.MaxPlayers, lobby.AvailableSlots, lobby.LobbyCode);
-
+            PrintPlayers(joinedLobby);
         }
         catch (LobbyServiceException e)
         {
@@ -130,7 +130,7 @@ public class LobbyManager : MonoBehaviour
 
     private Player GetPlayer()
     {
-        Debug.Log(playerName);
+        Debug.Log("GET PLAYER " + playerName);
         return new Player
         {
             Data = new Dictionary<string, PlayerDataObject>
@@ -152,6 +152,7 @@ public class LobbyManager : MonoBehaviour
 
     public async void JoinLobbyByCode(string lobbyCode)
     {
+        print("JOINING LOBBY");
         try
         {
             JoinLobbyByCodeOptions joinLobbyByCodeOptions = new JoinLobbyByCodeOptions
@@ -162,7 +163,7 @@ public class LobbyManager : MonoBehaviour
             Lobby lobbyToJoin = await Lobbies.Instance.JoinLobbyByCodeAsync(lobbyCode, joinLobbyByCodeOptions);
             joinedLobby = lobbyToJoin;
             ListPlayers(joinedLobby);
-
+            PrintPlayers(joinedLobby);
             Debug.Log("Joined Lobby with code " + lobbyCode);
         }
         catch (LobbyServiceException e)
@@ -171,8 +172,14 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    public void ListPlayers()
+    {
+        ListPlayers(joinedLobby);
+    }
+
     private void ListPlayers(Lobby lobby)
     {
+        Debug.Log("LIST PLAYERS IN LOBBY " + lobby.Name);
         UserInterfaceManager.Instance.UpdateLobbyInfos(lobby.Name, lobby.MaxPlayers, lobby.Players.Count);
         foreach (Player player in lobby.Players)
         {
@@ -182,6 +189,7 @@ public class LobbyManager : MonoBehaviour
 
     public async void LeaveLobby()
     {
+        print("LEAVING LOBBY");
         try
         {
             await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
