@@ -87,6 +87,7 @@ public class UserInterfaceManager : MonoBehaviour
     private void OnLaunchClicked()
     {
         print("LAUNCH");
+        GameManager.Instance.LaunchGame();
     }
 
     public void AutofillLastPickedNameForInputField(TMP_InputField inPlayerField, string key)
