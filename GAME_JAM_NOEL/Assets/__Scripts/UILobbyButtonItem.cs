@@ -17,20 +17,30 @@ public class UILobbyButtonItem : MonoBehaviour
     private int lobbySize;
     private int playerCount;
 
+    private string lobbyCode;
+
     [HideInInspector] public ButtonClickedEvent onClick;
 
     private void Awake()
     {
         button = GetComponent<Button>();
         button.onClick = onClick;
+        button.onClick.AddListener(OnJoinLobby);
     }
 
-    public void SetLobby(string inName, int inMaxPLayers, int inPlayerCount)
+    private void OnJoinLobby()
+    {
+        if (lobbyCode == null) return;
+        LobbyManager.Instance.JoinLobbyByCode(lobbyCode);
+    }
+
+    public void SetLobby(string inName, int inMaxPLayers, int inPlayerCount, string inLobbyCode)
     {
         lobbyName = inName; ;
         lobbySize = inMaxPLayers;
         playerCount = inPlayerCount;
         nameText.text = inName;
         sizeText.text = inPlayerCount + "/" + inMaxPLayers;
+        lobbyCode = inLobbyCode;
     }
 }

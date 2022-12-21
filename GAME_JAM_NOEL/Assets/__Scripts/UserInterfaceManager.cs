@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UserInterfaceManager : MonoBehaviour
 {
+    static public UserInterfaceManager Instance;
+
     [Header("Main Menu")]
     [SerializeField] private GameObject mainMenuCanvas;
     [SerializeField] private TMP_InputField playerNameInput;
@@ -39,15 +41,17 @@ public class UserInterfaceManager : MonoBehaviour
     [SerializeField] private GameObject lobbyItemPrefab;
     [SerializeField] private GameObject memberItemPrefab;
 
-    private List<UILobbyButtonItem> activeLobbyButtons = new List<UILobbyButtonItem>();
-
-    // [TEMP] should be better handled
-    private string currentPlayerName;
-    private string lobbyNameToCreate;
-    private int lobbyMaxPlayers = 4;
+    private List<GameObject> LobbyList = new List<GameObject>();
+    private List<GameObject> MemberList = new List<GameObject>();
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(Instance);
+        }
+        Instance = this;
+
         joinButton.interactable = false;
         createLobbyButton.interactable = false;
 
@@ -77,32 +81,6 @@ public class UserInterfaceManager : MonoBehaviour
         }
     }
 
-    public void AddLobbyItemButton()
-    {
-        GameObject newLobby = Instantiate(lobbyItemPrefab, lobbiesContainer);
-        UILobbyButtonItem newLobbyButton = newLobby.GetComponent<UILobbyButtonItem>();
-        if (newLobbyButton != null)
-        {
-            newLobbyButton.onClick.AddListener(OnJoinLobby);
-            newLobbyButton.SetLobby(lobbyNameToCreate, lobbyMaxPlayers, 0);
-            activeLobbyButtons.Add(newLobbyButton);
-        }
-    }
-
-    public void OnJoinLobby()
-    {
-        print("join lobby");
-        lobbySelectionCanvas.SetActive(false);
-        lobbyMenuCanvas.SetActive(true);
-
-        // only for host
-        startGameButton.interactable = true;
-
-        GameObject newPlayer = Instantiate(memberItemPrefab, membersContainer);
-        TMP_Text newPlayerText = newPlayer.transform.GetChild(0).GetComponent<TMP_Text>();
-        newPlayerText.text = currentPlayerName;
-    }
-
     private void OnEditPlayerName(string inPlayerName)
     {
         if (inPlayerName.Length == 0 || inPlayerName == null)
@@ -113,7 +91,7 @@ public class UserInterfaceManager : MonoBehaviour
 
         PlayerPrefs.SetString("NickName", inPlayerName);
         playerNameDisplay.text = inPlayerName;
-        currentPlayerName = inPlayerName;
+        LobbyManager.Instance.SetPlayerName(inPlayerName);
         joinButton.interactable = true;
     }
 
@@ -121,32 +99,35 @@ public class UserInterfaceManager : MonoBehaviour
     {
         mainMenuCanvas.SetActive(false);
         lobbySelectionCanvas.SetActive(true);
+        ClearLobbyList();
+        LobbyManager.Instance.SignIn();
+    }
+
+    public void AddLobbyItemButton(string lobbyName, int maxPlayers, int availableSlots, string inLobbyCode)
+    {
+        GameObject newLobby = Instantiate(lobbyItemPrefab, lobbiesContainer);
+        LobbyList.Add(newLobby);
+        UILobbyButtonItem newLobbyButton = newLobby.GetComponent<UILobbyButtonItem>();
+        if (newLobbyButton != null)
+        {
+            newLobbyButton.onClick.AddListener(OnJoinLobby);
+            newLobbyButton.SetLobby(lobbyName, maxPlayers, maxPlayers - availableSlots, inLobbyCode);
+        }
+    }
+
+    public void ClearLobbyList()
+    {
+        foreach(GameObject lobby in LobbyList)
+        {
+            Destroy(lobby);
+        }
+        LobbyList.Clear();
     }
 
     private void OnOpenLobbyCreation()
     {
         lobbySelectionOptionsCanvas.SetActive(false);
         lobbyCreationCanvas.SetActive(true);
-    }
-
-    private void OnBackToMenu()
-    {
-        lobbySelectionCanvas.SetActive(false);
-        mainMenuCanvas.SetActive(true);
-    }
-
-    private void OnCreateLobby()
-    {
-        // [TEMP] for tests
-        AddLobbyItemButton();
-        // OnJoinLobby();
-        OnHideLobbyCreation();
-    }
-
-    private void OnHideLobbyCreation()
-    {
-        lobbyCreationCanvas.SetActive(false);
-        lobbySelectionOptionsCanvas.SetActive(true);
     }
 
     public void OnEditCreateLobbyName(string inLobbyName)
@@ -156,22 +137,84 @@ public class UserInterfaceManager : MonoBehaviour
             createLobbyButton.interactable = false;
             return;
         }
-        
+
         PlayerPrefs.SetString("LobbyName", inLobbyName);
-        lobbyNameToCreate = inLobbyName;
+        LobbyManager.Instance.SetLobbyToCreateName(inLobbyName);
         lobbyNameDisplay.text = inLobbyName;
         createLobbyButton.interactable = true;
+    }
+
+    private void OnCreateLobby()
+    {
+        LobbyManager.Instance.CreateLobby();
+        OnHideLobbyCreation();
+
+        lobbySelectionCanvas.SetActive(false);
+        lobbyMenuCanvas.SetActive(true);
+        ClearMemberList();
+        startGameButton.interactable = true;
+    }
+
+    private void OnHideLobbyCreation()
+    {
+        lobbyCreationCanvas.SetActive(false);
+        lobbySelectionOptionsCanvas.SetActive(true);
+    }
+
+    private void OnBackToMenu()
+    {
+        LobbyManager.Instance.SignOut();
+
+        lobbySelectionCanvas.SetActive(false);
+        mainMenuCanvas.SetActive(true);
+    }
+
+    public void OnJoinLobby()
+    {
+        print("join lobby");
+        lobbySelectionCanvas.SetActive(false);
+        lobbyMenuCanvas.SetActive(true);
+        ClearMemberList();
+    }
+
+    public void AddMemberItem(string newMemberName)
+    {
+        GameObject newMember = Instantiate(memberItemPrefab, membersContainer);
+        MemberList.Add(newMember);
+        TMP_Text newMemberText = newMember.transform.GetChild(0).GetComponent<TMP_Text>();
+        newMemberText.text = newMemberName;
+    }
+
+    public void ClearMemberList()
+    {
+        foreach (GameObject member in MemberList)
+        {
+            Destroy(member);
+        }
+        LobbyList.Clear();
+    }
+
+    public void UpdateLobbyInfos(string name, int maxPlayers, int playersCount)
+    {
+        lobbyNameDisplay.text = name;
+        membersCountDisplay.text = playersCount.ToString() + "/" + maxPlayers.ToString();
     }
 
     private void OnStartGame()
     {
         startGameButton.interactable = false;
         lobbyMenuCanvas.SetActive(false);
+
+        // add some code to start game => unity relay
     }
 
     private void OnBackToLobbySelection()
     {
+        startGameButton.interactable = false;
         lobbyMenuCanvas.SetActive(false);
         lobbySelectionCanvas.SetActive(true);
+        ClearLobbyList();
+
+        LobbyManager.Instance.LeaveLobby();
     }
 }
