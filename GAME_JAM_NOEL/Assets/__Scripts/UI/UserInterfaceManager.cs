@@ -33,6 +33,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     [Header("Joined Lobby Menu")]
     [SerializeField] private GameObject lobbyMenuCanvas;
+    [SerializeField] private GameObject PanelKonamiCode;
     [SerializeField] private TMP_Text lobbyNameDisplay;
     [SerializeField] private TMP_Text membersCountDisplay;
     [SerializeField] private Transform membersContainer;
@@ -224,6 +225,7 @@ public class UserInterfaceManager : MonoBehaviour
     {
         startGameButton.interactable = false;
         lobbyMenuCanvas.SetActive(false);
+        PanelKonamiCode.SetActive(false);
         inGameHUDCanvas.SetActive(true);
 
         LobbyManager.Instance.StartGame();
