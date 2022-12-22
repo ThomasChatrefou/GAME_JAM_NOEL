@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -3918,8 +3918,8 @@ TextureImporter:
       Download67652_74: 885824379
       Download67652_21: 1516977182
       Download67652_54: 804263647
-      Download67652_98: -480601124
       Download67652_138: -1575353251
+      Download67652_98: -480601124
       Download67652_99: 1982740258
       Download67652_49: -1533765308
       Download67652_93: 846493555
@@ -3989,8 +3989,8 @@ TextureImporter:
       Download67652_154: 1526296355
       Download67652_164: 20988376
       Download67652_27: 63209959
-      Download67652_118: 1733927547
       Download67652_100: -1633849203
+      Download67652_118: 1733927547
       Download67652_172: -1209420082
       Download67652_43: 1989265171
       Download67652_13: -1631662613
@@ -4000,8 +4000,8 @@ TextureImporter:
       Download67652_129: -793328274
       Download67652_103: -278897001
       Download67652_106: -1323531168
-      Download67652_79: 732100722
       Download67652_177: -163593413
+      Download67652_79: 732100722
       Download67652_47: 1823093541
       Download67652_58: 1439010852
       Download67652_66: -722922180

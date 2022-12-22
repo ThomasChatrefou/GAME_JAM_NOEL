@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -3525,12 +3525,12 @@ TextureImporter:
       roguelikeitems_33: 1329246180
       roguelikeitems_90: 177997296
       roguelikeitems_121: -272138939
+      roguelikeitems_107: -441088739
       roguelikeitems_79: 645917652
       roguelikeitems_78: -238173694
       roguelikeitems_26: 1348238055
       roguelikeitems_19: 1922358821
       roguelikeitems_57: -1829440894
-      roguelikeitems_107: -441088739
       roguelikeitems_82: 1837973260
       roguelikeitems_45: 996428777
       roguelikeitems_16: 108469262
@@ -3573,25 +3573,25 @@ TextureImporter:
       roguelikeitems_1: -115628299
       roguelikeitems_53: -1420772788
       roguelikeitems_59: -135045949
-      roguelikeitems_6: -2002166578
-      roguelikeitems_41: -534640647
       roguelikeitems_138: -2085071852
+      roguelikeitems_6: -2002166578
       roguelikeitems_120: 1957014704
       roguelikeitems_30: 1844400484
       roguelikeitems_32: 1409926099
       roguelikeitems_137: -1309875428
       roguelikeitems_31: -47009713
       roguelikeitems_9: -1799288786
-      roguelikeitems_43: 781728224
+      roguelikeitems_41: -534640647
       roguelikeitems_63: 473319631
       roguelikeitems_64: -304827392
+      roguelikeitems_43: 781728224
       roguelikeitems_96: -1918132647
-      roguelikeitems_122: 248723127
       roguelikeitems_22: -78866586
       roguelikeitems_83: 1607147412
+      roguelikeitems_122: 248723127
       roguelikeitems_24: -1100506592
-      roguelikeitems_69: 900393040
       roguelikeitems_20: -1325522731
+      roguelikeitems_69: 900393040
       roguelikeitems_62: 757066934
       roguelikeitems_108: -2079231919
       roguelikeitems_129: 1942337463
