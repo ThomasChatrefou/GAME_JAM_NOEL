@@ -32,7 +32,7 @@ public abstract class Character : NetworkBehaviour
         {
             lastProjectileTaken = projectile;
             health -= projectile.DamageProjectile;
-            if(health <= 0){
+            if(health <= 0){    
                 DieServerRpc();
             }
         }

@@ -102,8 +102,9 @@ public class Weapon : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void MoveToParentServerRpc(ulong idGameObject)
     {
+        NetworkObject playerNetworkObj = NetworkManager.Singleton.ConnectedClients[idGameObject].PlayerObject;
         Debug.Log(GetComponent<NetworkObject>()
-                .TrySetParent(NetworkManager.Singleton.ConnectedClients[idGameObject].PlayerObject.transform));
+                .TrySetParent(playerNetworkObj.transform));
     }
 
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
@@ -112,6 +113,7 @@ public class Weapon : NetworkBehaviour
         transform.SetParent(parentNetworkObject.transform);
         transform.localPosition = Vector3.zero;
         SpawnWeaponGround(false);
+        parentNetworkObject.GetComponent<PlayerController>().PlayerWeapon = this;
     }
     
     public void SpawnWeaponGround(bool value)

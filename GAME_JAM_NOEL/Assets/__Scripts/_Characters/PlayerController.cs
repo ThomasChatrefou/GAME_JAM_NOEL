@@ -16,6 +16,8 @@ public class PlayerController : Character
     private GameObject shovelWeaponPrefab;
     [SerializeField] 
     private Weapon playerWeapon;
+
+
     [SerializeField] 
     private Vector2 crossPosition;
     private Weapon nearbyWeapon;
@@ -102,8 +104,6 @@ public class PlayerController : Character
     public void EquipWeapon(Weapon nearbyWeapon)
     {
         if (!IsOwner || !nearbyWeapon) return;
-        
-        Debug.Log(playerWeapon.enabled);
         playerWeapon.DespawnWeaponServerRpc();
         
         nearbyWeapon.MoveToParentServerRpc(GetComponent<NetworkObject>().OwnerClientId);
@@ -115,6 +115,12 @@ public class PlayerController : Character
     {
         get => nearbyWeapon;
         set => nearbyWeapon = value;
+    }
+
+    public Weapon PlayerWeapon
+    {
+        get => playerWeapon;
+        set => playerWeapon = value;
     }
 
 }
