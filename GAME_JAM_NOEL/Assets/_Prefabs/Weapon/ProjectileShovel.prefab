@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedProjectile: 0
-  lifeSpawn: 0.25
+  lifeSpawn: 0.15
   damageProjectile: 25
   dirProjectile: {x: 0, y: 0}
   isFromEnemy: 0
