@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -3886,10 +3886,10 @@ TextureImporter:
       male_13: -934601014
       male_140: -1154770317
       male_20: 734734830
-      male_49: 655682568
+      male_97: 594289427
       male_74: -512913888
       male_164: 1269444264
-      male_97: 594289427
+      male_49: 655682568
       male_84: -384927236
       male_27: 414021
       male_9: -1594267558

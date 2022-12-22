@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -3857,7 +3857,7 @@ TextureImporter:
       Download21605_168: 1753478877
       Download21605_5: -67819949
       Download21605_32: 995240800
-      Download21605_7: 1498750134
+      Download21605_37: -196032461
       Download21605_8: -936253195
       Download21605_110: 761102621
       Download21605_12: 1952352989
@@ -3873,9 +3873,9 @@ TextureImporter:
       Download21605_78: 412620684
       Download21605_20: -1930681610
       Download21605_70: -1981418893
-      Download21605_55: -1821039322
-      Download21605_114: 1321690598
       Download21605_75: 1257863647
+      Download21605_114: 1321690598
+      Download21605_55: -1821039322
       Download21605_107: 996658851
       Download21605_23: -491273
       Download21605_174: -597788598
@@ -3996,8 +3996,8 @@ TextureImporter:
       Download21605_28: 1074061405
       Download21605_133: -1197450574
       Download21605_91: -1474430586
-      Download21605_112: -449222453
       Download21605_153: -2003977418
+      Download21605_112: -449222453
       Download21605_163: -1300330908
       Download21605_11: -1123368472
       Download21605_72: 1059657519
@@ -4011,9 +4011,9 @@ TextureImporter:
       Download21605_131: -166265500
       Download21605_140: 1451080460
       Download21605_14: 2007929980
-      Download21605_88: 21715937
       Download21605_101: 484605473
       Download21605_150: 527337743
+      Download21605_88: 21715937
       Download21605_169: 1715594434
       Download21605_51: -109342169
       Download21605_134: 1292183615
@@ -4030,7 +4030,7 @@ TextureImporter:
       Download21605_166: 1991303001
       Download21605_94: -368296185
       Download21605_9: -1545717887
-      Download21605_37: -196032461
+      Download21605_7: 1498750134
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
