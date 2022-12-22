@@ -46,7 +46,6 @@ public class Projectile : NetworkBehaviour
     public void DestroyProjectileServerRpc()
     {
         GetComponent<NetworkObject>().Despawn();
-        //Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -57,7 +56,6 @@ public class Projectile : NetworkBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log("HitPlayer");
                 character.TakeDamage(this);
             }
         }
@@ -65,7 +63,6 @@ public class Projectile : NetworkBehaviour
         {
             if (other.CompareTag("Enemy"))
             {
-                Debug.Log("HitEnemy");
                 character.TakeDamage(this);
             }
         }
