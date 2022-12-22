@@ -56,7 +56,6 @@ public class Projectile : NetworkBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log("HitPlayer");
                 character.TakeDamage(this);
             }
         }
@@ -64,7 +63,6 @@ public class Projectile : NetworkBehaviour
         {
             if (other.CompareTag("Enemy"))
             {
-                Debug.Log("HitEnemy");
                 character.TakeDamage(this);
             }
         }

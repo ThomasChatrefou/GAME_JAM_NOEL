@@ -31,7 +31,7 @@ public class Weapon : NetworkBehaviour
     public Collider2D colliderPlayerEquip2D;
     [SerializeField]
     private GameObject pressKeyUI;
-    
+
     [Header("Ground")] 
     public bool onGround;
     [SerializeField]
@@ -39,7 +39,7 @@ public class Weapon : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        pressKeyUI.SetActive(false);
     } 
 
     // Update is called once per frame
@@ -60,8 +60,7 @@ public class Weapon : NetworkBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
-
-    //TODO RPC
+    
     public void LaunchBaseProjectile(Vector2 direction, bool isFromEnemy = false)
     {
         if (!hasShoot)
@@ -96,16 +95,25 @@ public class Weapon : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void DespawnWeaponServerRpc()
     {
+        Debug.Log(GetComponent<NetworkObject>().TryRemoveParent());
         GetComponent<NetworkObject>().Despawn();
-        Destroy(gameObject);
     }
-    
+
     [ServerRpc(RequireOwnership = false)]
     public void MoveToParentServerRpc(ulong idGameObject)
     {
-        transform.parent = FindObjectsOfType<NetworkObject>().First( o => o.OwnerClientId == idGameObject).transform;
+        Debug.Log(GetComponent<NetworkObject>()
+                .TrySetParent(NetworkManager.Singleton.ConnectedClients[idGameObject].PlayerObject.transform));
     }
 
+    public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
+    {
+        if(parentNetworkObject == null) return;
+        transform.SetParent(parentNetworkObject.transform);
+        transform.localPosition = Vector3.zero;
+        SpawnWeaponGround(false);
+    }
+    
     public void SpawnWeaponGround(bool value)
     {
         //Make the item disapears from the map and be equiped by the player
@@ -127,8 +135,6 @@ public class Weapon : NetworkBehaviour
         {
             if (col.CompareTag("Player"))
             {
-                Debug.Log("Detect Plater : " + OwnerClientId);
-                Debug.Log("Is Owner : " + IsOwner);
                 PlayerController player = col.gameObject.GetComponent<PlayerController>();
                 if (player.IsOwner)
                 {

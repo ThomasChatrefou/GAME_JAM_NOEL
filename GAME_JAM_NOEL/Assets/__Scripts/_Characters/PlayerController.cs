@@ -34,7 +34,16 @@ public class PlayerController : Character
 
     private void Start()
     {
+        if(!IsOwner) return;
+        SpawnWeaponFromPlayerServerRpc();
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnWeaponFromPlayerServerRpc()
+    {
         playerWeapon = Instantiate(shovelWeaponPrefab, shovelWeaponPrefab.transform.position, Quaternion.identity,transform).GetComponent<Weapon>();
+        playerWeapon.GetComponent<NetworkObject>().Spawn();
+        playerWeapon.MoveToParentServerRpc(GetComponent<NetworkObject>().OwnerClientId);
     }
 
     private void FixedUpdate()
@@ -93,18 +102,12 @@ public class PlayerController : Character
     public void EquipWeapon(Weapon nearbyWeapon)
     {
         if (!IsOwner || !nearbyWeapon) return;
-            
+        
+        Debug.Log(playerWeapon.enabled);
         playerWeapon.DespawnWeaponServerRpc();
+        
+        nearbyWeapon.MoveToParentServerRpc(GetComponent<NetworkObject>().OwnerClientId);
         playerWeapon = nearbyWeapon;
-
-        playerWeapon.SpawnWeaponGround(false);
-        
-        playerWeapon.MoveToParentServerRpc(GetComponent<NetworkObject>().OwnerClientId);
-        Transform playerWeaponTransform = playerWeapon.transform;
-        playerWeaponTransform.parent = transform;
-        playerWeaponTransform.localPosition = Vector3.zero;
-
-        
         //TODO Update UI Sprite
     }
     

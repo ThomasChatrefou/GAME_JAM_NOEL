@@ -30,9 +30,7 @@ public class Enemy : Character
         spriteRenderer.enabled = false;
         if (lootedWeapon && willLootWeapon)
         {
-            //TODO Faire spawn l'arme par terre
             Weapon weapon = Instantiate(lootedWeapon, transform.position, quaternion.identity).GetComponent<Weapon>();
-            //weapon.SpawnWeaponGroundServerRpc();
             weapon.SpawnWeaponGround(true);
             weapon.GetComponent<NetworkObject>().Spawn(true);
         }
