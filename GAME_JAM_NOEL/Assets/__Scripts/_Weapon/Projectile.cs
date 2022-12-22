@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class Projectile : NetworkBehaviour
@@ -22,6 +24,8 @@ public class Projectile : NetworkBehaviour
     private bool isDestroyedOnFirstHit;
     
     public bool isFromEnemy;
+
+    public UnityEvent onSpawnEvent;
     private Rigidbody2D rgbd;
     // Start is called before the first frame update
     void Start()
@@ -45,6 +49,10 @@ public class Projectile : NetworkBehaviour
         var zAngle = Mathf.Atan2(dirProjectile.x, dirProjectile.y) * Mathf.Rad2Deg;
         // Store the target rotation
         transform.rotation = Quaternion.Euler(0,0, zAngle);
+        if (onSpawnEvent.GetPersistentEventCount() > 0)
+        {
+            onSpawnEvent.Invoke();
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -79,6 +87,11 @@ public class Projectile : NetworkBehaviour
                 }
             }
         }
+    }
+
+    public void RotationTreeSkill()
+    {
+        transform.DORotate(new Vector3(0, 0, 360), lifeSpawn-0.15f,RotateMode.FastBeyond360).SetRelative(true);
     }
     
 

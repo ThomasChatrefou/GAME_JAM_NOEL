@@ -499,6 +499,9 @@ MonoBehaviour:
   pressKeyUI: {fileID: 6418285653334924312}
   onGround: 1
   nearbyPlayer: {fileID: 0}
+  isBaseWeapon: 0
+  maxAmmo: 10
+  actualAmmo: 0
 --- !u!61 &5939452962539936811
 BoxCollider2D:
   m_ObjectHideFlags: 0

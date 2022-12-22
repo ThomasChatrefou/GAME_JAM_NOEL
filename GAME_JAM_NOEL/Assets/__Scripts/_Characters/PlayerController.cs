@@ -100,7 +100,16 @@ public class PlayerController : Character
     public override void AttackServerRpc(Vector2 crossPosition, Vector2 playerPos)
     {
         Vector2 fireDir = crossPosition - playerPos;
-        playerWeapon.LaunchProjectile(fireDir.normalized);
+
+        if (playerWeapon.ActualAmmo >= 1 || playerWeapon.IsBaseWeapon)
+        {
+            playerWeapon.LaunchProjectile(fireDir.normalized);
+        }
+        else
+        {
+            SpecialAttackServerRpc(crossPosition, playerPos);
+        }
+      
     }
     
     [ServerRpc(RequireOwnership = false)]
@@ -111,6 +120,7 @@ public class PlayerController : Character
             Vector2 fireDir = crossPosition - playerPos;
             playerWeapon.LaunchSpecialProjectile(fireDir.normalized);
             //Re-equip Shovel Weapon
+            playerWeapon.DespawnWeaponServerRpc();
             SpawnWeaponFromPlayerServerRpc();
         }
     }
