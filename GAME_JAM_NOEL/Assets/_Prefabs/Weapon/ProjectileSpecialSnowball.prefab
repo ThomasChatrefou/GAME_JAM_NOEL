@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -5547670675841736768}
   - component: {fileID: 5935852838682934160}
   m_Layer: 0
-  m_Name: ProjectileSnowball
+  m_Name: ProjectileSpecialSnowball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2402794893409346866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.0074, y: -0.4296, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 40, y: 40, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -139,12 +139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5c17af6fab84045a354aea393e3427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedProjectile: 20
-  lifeSpawn: 4
-  damageProjectile: 5
+  speedProjectile: 30
+  lifeSpawn: 3
+  damageProjectile: 100
   knockbackProjectile: 0
   dirProjectile: {x: 0, y: 0}
-  isDestroyedOnFirstHit: 1
+  isDestroyedOnFirstHit: 0
   isFromEnemy: 0
 --- !u!114 &7595316704135261825
 MonoBehaviour:
