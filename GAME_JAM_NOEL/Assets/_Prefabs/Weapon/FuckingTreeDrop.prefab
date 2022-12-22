@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761938582874347791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.13, y: 0, z: 0}
+  m_LocalPosition: {x: 1.53, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -350,14 +350,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6450046256893516661}
-  m_LocalRotation: {x: -0, y: -0, z: 0.92387944, w: 0.38268378}
+  m_LocalRotation: {x: -0, y: -0, z: 0.70496947, w: -0.7092377}
   m_LocalPosition: {x: 1.24, y: 0, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8765429010469821179}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 135}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270.346}
 --- !u!212 &5877519236277182076
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9000
-  m_Sprite: {fileID: 21300000, guid: 629013ee560b6314d826ec4448f03e19, type: 3}
+  m_Sprite: {fileID: -1917382583, guid: 2dbab09e0b28b1a41a1b9870b55ae3c3, type: 3}
   m_Color: {r: 0.03127098, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -485,22 +485,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerReload: 1
   timerReloadMax: 1
-  baseProjectilePrefab: {fileID: 2402794893409346866, guid: 7c5cf6f94a90d5141a219f7bc8f5b80f,
+  baseProjectilePrefab: {fileID: 2402794893409346866, guid: 491e977083af70c4b8effebe14594fee,
     type: 3}
-  skillProjectilePrefab: {fileID: 2402794893409346866, guid: 6979a8c40ef4d4d4ba539841fb1470ed,
+  skillProjectilePrefab: {fileID: 2402794893409346866, guid: fe0ceeebd0ef874419e527025276a9f8,
     type: 3}
   firePos: {fileID: 4811188359090800566}
-  weaponSpriteUI: {fileID: -532265105, guid: de357bc00799b5a4c89541c83cee7958, type: 3}
-  weaponSpriteGround: {fileID: -532265105, guid: de357bc00799b5a4c89541c83cee7958,
+  weaponSpriteUI: {fileID: -1917382583, guid: 2dbab09e0b28b1a41a1b9870b55ae3c3, type: 3}
+  weaponSpriteGround: {fileID: -1917382583, guid: 2dbab09e0b28b1a41a1b9870b55ae3c3,
     type: 3}
-  weaponSpriteHands: {fileID: -532265105, guid: de357bc00799b5a4c89541c83cee7958,
+  weaponSpriteHands: {fileID: -1917382583, guid: 2dbab09e0b28b1a41a1b9870b55ae3c3,
     type: 3}
   colliderPlayerEquip2D: {fileID: 5939452962539936811}
   pressKeyUI: {fileID: 6418285653334924312}
   onGround: 1
   nearbyPlayer: {fileID: 0}
   isBaseWeapon: 0
-  maxAmmo: 10
+  maxAmmo: 5
   actualAmmo: 0
 --- !u!61 &5939452962539936811
 BoxCollider2D:

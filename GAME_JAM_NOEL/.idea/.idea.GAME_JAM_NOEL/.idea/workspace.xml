@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="623fa893-386a-4115-9343-d0f3a09852cf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/Shovel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/Shovel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannon.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannon.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannonDrop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannonDrop.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/FuckingTreeDrop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/FuckingTreeDrop.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Characters/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Characters/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +100,7 @@
       <workItem from="1671545550110" duration="6883000" />
       <workItem from="1671610122361" duration="10667000" />
       <workItem from="1671696573906" duration="14226000" />
-      <workItem from="1671737839986" duration="2153000" />
+      <workItem from="1671737839986" duration="3831000" />
     </task>
     <servers />
   </component>

@@ -979,6 +979,24 @@ MonoBehaviour:
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 8765429010469821169, guid: 3e24109172b48454ca00f36424b7d56b,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 2402794893409346866, guid: 491e977083af70c4b8effebe14594fee,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 2402794893409346866, guid: fe0ceeebd0ef874419e527025276a9f8,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
@@ -1020,7 +1038,7 @@ PrefabInstance:
         type: 3}
       propertyPath: lootedWeapon
       value: 
-      objectReference: {fileID: 8765429010469821169, guid: e66878528489a3c4f967f5fa448d1c02,
+      objectReference: {fileID: 8765429010469821169, guid: 3e24109172b48454ca00f36424b7d56b,
         type: 3}
     - target: {fileID: 3005033762924187298, guid: d0bf58b8383845142a1819954cc4f4c4,
         type: 3}
