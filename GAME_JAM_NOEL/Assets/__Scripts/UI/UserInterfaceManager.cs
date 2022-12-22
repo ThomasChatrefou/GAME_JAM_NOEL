@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.UI.Button;
 
 public class UserInterfaceManager : MonoBehaviour
 {
@@ -43,8 +44,14 @@ public class UserInterfaceManager : MonoBehaviour
     [SerializeField] private GameObject lobbyItemPrefab;
     [SerializeField] private GameObject memberItemPrefab;
 
+    [Header("HUD")]
+    [SerializeField] private GameObject inGameHUDCanvas;
+    [SerializeField] private Button launchButton;
+
     private List<GameObject> LobbyList = new List<GameObject>();
     private List<GameObject> MemberList = new List<GameObject>();
+
+    [HideInInspector] public ButtonClickedEvent onClick;
 
     private void Awake()
     {
@@ -72,6 +79,15 @@ public class UserInterfaceManager : MonoBehaviour
 
         AutofillLastPickedNameForInputField(playerNameInput, "NickName");
         AutofillLastPickedNameForInputField(createLobbyNameInput, "LobbyName");
+
+        launchButton.onClick = onClick;
+        launchButton.onClick.AddListener(OnLaunchClicked);
+    }
+
+    private void OnLaunchClicked()
+    {
+        print("LAUNCH");
+        GameManager.Instance.LaunchGame();
     }
 
     public void AutofillLastPickedNameForInputField(TMP_InputField inPlayerField, string key)
@@ -208,6 +224,7 @@ public class UserInterfaceManager : MonoBehaviour
     {
         startGameButton.interactable = false;
         lobbyMenuCanvas.SetActive(false);
+        inGameHUDCanvas.SetActive(true);
 
         LobbyManager.Instance.StartGame();
         // add some code to start game => unity relay
@@ -237,5 +254,6 @@ public class UserInterfaceManager : MonoBehaviour
     public void OnHostJoiningGame()
     {
         lobbyMenuCanvas.SetActive(false);
+        inGameHUDCanvas.SetActive(true);
     }
 }
