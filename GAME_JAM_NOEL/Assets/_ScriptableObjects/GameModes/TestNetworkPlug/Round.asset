@@ -23,7 +23,7 @@ MonoBehaviour:
     ActivationTiming: 0
     StopTiming: 1
     WeaponRate: 0.1
-  - EnemyPrefab: {fileID: 8290258027390627626, guid: 71bcd79b46b092c44bbe82d6ecf2d5ec,
+  - EnemyPrefab: {fileID: 3005033762924187302, guid: d0bf58b8383845142a1819954cc4f4c4,
       type: 3}
     Zones:
     - {fileID: 11400000, guid: 37cd88e6271bc4948a0211027d298ab9, type: 2}
@@ -32,7 +32,7 @@ MonoBehaviour:
     ActivationTiming: 0
     StopTiming: 1
     WeaponRate: 0.1
-  - EnemyPrefab: {fileID: 3343039960757011054, guid: cbe1e99be2790f64caa2b2eae7c8d911,
+  - EnemyPrefab: {fileID: 3005033762924187302, guid: d0bf58b8383845142a1819954cc4f4c4,
       type: 3}
     Zones:
     - {fileID: 11400000, guid: b2788a07cdf683f478a67c3fb5d8a62d, type: 2}
@@ -41,7 +41,7 @@ MonoBehaviour:
     ActivationTiming: 0.5
     StopTiming: 1
     WeaponRate: 0.1
-  - EnemyPrefab: {fileID: 8265188317863998578, guid: 522d2c8049ce00a45a88002dd5061a54,
+  - EnemyPrefab: {fileID: 3005033762924187302, guid: d0bf58b8383845142a1819954cc4f4c4,
       type: 3}
     Zones:
     - {fileID: 11400000, guid: 84abdd9ee1fd76a42b296e0fc52c0749, type: 2}
