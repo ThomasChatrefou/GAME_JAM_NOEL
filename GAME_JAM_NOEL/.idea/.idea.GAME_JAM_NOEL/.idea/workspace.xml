@@ -4,10 +4,12 @@
     <list default="true" id="623fa893-386a-4115-9343-d0f3a09852cf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileShovel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileShovel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/Shovel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/Shovel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ShovelDrop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ShovelDrop.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileSnowBall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileSnowBall.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileSnowBall.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileSnowBall.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBall.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBall.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Characters/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Characters/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Characters/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Characters/Character.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Characters/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Characters/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs" afterDir="false" />
@@ -115,37 +117,5 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/__Scripts/_Characters/PlayerController.cs</url>
-          <line>106</line>
-          <properties documentPath="C:\Users\Jean Michel\Documents\Unity Project\GAME_JAM_NOEL\GAME_JAM_NOEL\Assets\__Scripts\_Characters\PlayerController.cs" initialLine="97" containingFunctionPresentation="method 'EquipWeapon'">
-            <startOffsets>
-              <option value="2884" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2922" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs</url>
-          <line>100</line>
-          <properties documentPath="C:\Users\Jean Michel\Documents\Unity Project\GAME_JAM_NOEL\GAME_JAM_NOEL\Assets\__Scripts\_Weapon\Weapon.cs" initialLine="98" containingFunctionPresentation="method 'DespawnWeaponServerRpc'">
-            <startOffsets>
-              <option value="2844" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2884" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -12,9 +12,13 @@ public class Projectile : NetworkBehaviour
     private float lifeSpawn;
     [SerializeField]
     private float damageProjectile;
+    [SerializeField]
+    private float knockbackProjectile;
     
     [SerializeField]
     private Vector2 dirProjectile;
+    [SerializeField]
+    private bool isRange;
     
     public bool isFromEnemy;
     private Rigidbody2D rgbd;
@@ -57,6 +61,10 @@ public class Projectile : NetworkBehaviour
             if (other.CompareTag("Player"))
             {
                 character.TakeDamage(this);
+                if (isRange)
+                {
+                    DestroyProjectileServerRpc();
+                }
             }
         }
         else
@@ -64,9 +72,15 @@ public class Projectile : NetworkBehaviour
             if (other.CompareTag("Enemy"))
             {
                 character.TakeDamage(this);
+                if (isRange)
+                {
+                    DestroyProjectileServerRpc();
+                }
             }
         }
-    }   
+    }
+    
+
     public Vector2 DirProjectile
     {
         get => dirProjectile;

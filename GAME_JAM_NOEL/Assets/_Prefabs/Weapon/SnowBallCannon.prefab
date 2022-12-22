@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761938582874347791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.079, y: -0.274, z: 0}
+  m_LocalPosition: {x: 1.74, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -352,7 +352,7 @@ Transform:
   m_GameObject: {fileID: 6450046256893516661}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.24, y: -0.24, z: 0}
-  m_LocalScale: {x: 0.654, y: 0.1433424, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8765429010469821179}
@@ -399,8 +399,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9000
-  m_Sprite: {fileID: 21300000, guid: 05e3b9dc3141a394b9f4c6ef1f26eac1, type: 3}
-  m_Color: {r: 0.099044085, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: -532265105, guid: de357bc00799b5a4c89541c83cee7958, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 4411226458731785881}
   - component: {fileID: 1208405029471340463}
   m_Layer: 0
-  m_Name: SnowBall
+  m_Name: SnowBallCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,13 +485,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerReload: 1
   timerReloadMax: 1
-  baseProjectilePrefab: {fileID: 2402794893409346866, guid: cf9d08890e088f840b182a89c56c0b03,
+  baseProjectilePrefab: {fileID: 2402794893409346866, guid: 7c5cf6f94a90d5141a219f7bc8f5b80f,
     type: 3}
   skillProjectilePrefab: {fileID: 0}
   firePos: {fileID: 4811188359090800566}
-  weaponSpriteUI: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  weaponSpriteGround: {fileID: 21300000, guid: 05e3b9dc3141a394b9f4c6ef1f26eac1, type: 3}
-  weaponSpriteHands: {fileID: 21300000, guid: 05e3b9dc3141a394b9f4c6ef1f26eac1, type: 3}
+  weaponSpriteUI: {fileID: -532265105, guid: de357bc00799b5a4c89541c83cee7958, type: 3}
+  weaponSpriteGround: {fileID: -532265105, guid: de357bc00799b5a4c89541c83cee7958,
+    type: 3}
+  weaponSpriteHands: {fileID: -532265105, guid: de357bc00799b5a4c89541c83cee7958,
+    type: 3}
   colliderPlayerEquip2D: {fileID: 5939452962539936811}
   pressKeyUI: {fileID: 6418285653334924312}
   onGround: 0
