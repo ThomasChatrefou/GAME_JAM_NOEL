@@ -6,12 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/ThomasMain.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/_Scenes/LenyScene.unity
-    guid: 4016ed42ae536914d92e231c01ad8bd9
-  - enabled: 1
-    path: Assets/_Scenes/SceneTest.unity
-    guid: 4ea2698d45167ac4db3cad55c89696c6
+    path: Assets/_Scenes/MainScene1.unity
+    guid: 326914513c4f6f74d9299379a42c9d5b
   m_configObjects: {}

@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,9 +31,15 @@ public class GameManager : NetworkBehaviour
 
     [Header("Local Test Variables")]
     [SerializeField] private bool isRunning;
+
+    public void UpdateGameMode(GameMode _gameMode)
+    {
+        gameMode = _gameMode;
+    }
+
     public bool IsRunning => isRunning;
 
-    [Tooltip("do delete when checked as goog")]
+    [Tooltip("do delete when checked as good")]
     public bool hasbeenlaunched;
 
     [Header("Client Events")]
@@ -48,7 +55,7 @@ public class GameManager : NetworkBehaviour
         hasbeenlaunched = false;
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (isRunning && !hasbeenlaunched)
         {
@@ -56,7 +63,7 @@ public class GameManager : NetworkBehaviour
             roundManager.Launch();
             hasbeenlaunched = true;
         }
-    }
+    }*/
     
     #region ServerRpc
     //[ServerRpc]
@@ -70,6 +77,8 @@ public class GameManager : NetworkBehaviour
 
         //foreach (PlayerController playerController in players)
         //    playerController.OnPlayerDeath.AddListener(CheckGameState);
+
+        Debug.LogWarning("On passe par LaunchGame de GameManager");
 
         /* Actual Launching */
         isRunning = true;
@@ -118,6 +127,6 @@ public class GameManager : NetworkBehaviour
 
     public void SaySmtg(string message)
     {
-        Debug.Log(message);
+        Debug.Log($"{message}");
     }
 }
