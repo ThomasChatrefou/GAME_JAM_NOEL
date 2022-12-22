@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="623fa893-386a-4115-9343-d0f3a09852cf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/InputSystem/PlayerActions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputSystem/PlayerActions.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/InputSystem/PlayerInputs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputSystem/PlayerInputs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannon.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannonDrop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannonDrop.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Characters/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Characters/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,10 +75,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="13844">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="13844" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -105,6 +99,7 @@
       <workItem from="1671545550110" duration="6883000" />
       <workItem from="1671610122361" duration="10667000" />
       <workItem from="1671696573906" duration="14226000" />
+      <workItem from="1671737839986" duration="372000" />
     </task>
     <servers />
   </component>

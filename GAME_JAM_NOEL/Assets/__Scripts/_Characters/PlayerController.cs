@@ -100,6 +100,7 @@ public class PlayerController : Character
     public override void AttackServerRpc(Vector2 crossPosition, Vector2 playerPos)
     {
         Vector2 fireDir = crossPosition - playerPos;
+        
         playerWeapon.LaunchProjectile(fireDir.normalized);
     }
     

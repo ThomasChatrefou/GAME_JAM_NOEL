@@ -35,13 +35,20 @@ public class Weapon : NetworkBehaviour
     private GameObject pressKeyUI;
 
     [Header("Ground")] 
-    public bool onGround;
+    private bool onGround;
     [SerializeField]
     private PlayerController nearbyPlayer;
+
+    [Header("Ammo")] 
+    [SerializeField] private int maxAmmo;
+    [SerializeField] private int actualAmmo;
+    
     // Start is called before the first frame update
     void Start()
     {
         pressKeyUI.SetActive(false);
+        actualAmmo = maxAmmo;
+        //Set Ammo to max
     } 
 
     // Update is called once per frame
@@ -65,16 +72,25 @@ public class Weapon : NetworkBehaviour
     
     public void LaunchProjectile(Vector2 direction, bool isFromEnemy = false)
     {
-        if (!hasShoot)
+        if (actualAmmo >= 1)
         {
-            Projectile proj = Instantiate(baseProjectilePrefab,firePos.position,
-                Quaternion.Euler(0,0,Mathf.Atan2(firePos.position.x, firePos.position.y) * Mathf.Rad2Deg))
-                .GetComponent<Projectile>();
-            proj.DirProjectile = direction;
-            proj.isFromEnemy = isFromEnemy;
-            proj.GetComponent<NetworkObject>().Spawn(true);
+             if (!hasShoot)
+            {
+                Projectile proj = Instantiate(baseProjectilePrefab,firePos.position,
+                    Quaternion.Euler(0,0,Mathf.Atan2(firePos.position.x, firePos.position.y) * Mathf.Rad2Deg))
+                    .GetComponent<Projectile>();
+                proj.DirProjectile = direction;
+                proj.isFromEnemy = isFromEnemy;
+                proj.GetComponent<NetworkObject>().Spawn(true);
+            }
+            hasShoot = true;
+            actualAmmo -= 1;
         }
-        hasShoot = true;
+        else
+        {
+            LaunchSpecialProjectile(direction,isFromEnemy);
+        }
+       
     }
     
     public void LaunchSpecialProjectile(Vector2 direction, bool isFromEnemy = false)
