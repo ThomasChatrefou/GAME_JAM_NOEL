@@ -29,11 +29,11 @@ public class UserInterfaceManager : MonoBehaviour
     [SerializeField] private GameObject lobbyCreationCanvas;
     [SerializeField] private TMP_InputField createLobbyNameInput;
     [SerializeField] private Button createLobbyButton;
+    [SerializeField] private GameObject PanelKonamiCode;
     [SerializeField] private Button cancelCreateLobbyButton;
 
     [Header("Joined Lobby Menu")]
     [SerializeField] private GameObject lobbyMenuCanvas;
-    [SerializeField] private GameObject PanelKonamiCode;
     [SerializeField] private TMP_Text lobbyNameDisplay;
     [SerializeField] private TMP_Text membersCountDisplay;
     [SerializeField] private Transform membersContainer;
@@ -170,6 +170,7 @@ public class UserInterfaceManager : MonoBehaviour
         LobbyManager.Instance.CreateLobby();
         OnHideLobbyCreation();
 
+        PanelKonamiCode.SetActive(true);
         lobbySelectionCanvas.SetActive(false);
         lobbyMenuCanvas.SetActive(true);
         ClearMemberList();
@@ -237,6 +238,7 @@ public class UserInterfaceManager : MonoBehaviour
         startGameButton.interactable = false;
         lobbyMenuCanvas.SetActive(false);
         lobbySelectionCanvas.SetActive(true);
+        //PanelKonamiCode.SetActive(false);
         ClearLobbyList();
         LobbyManager.Instance.LeaveLobby();
     }

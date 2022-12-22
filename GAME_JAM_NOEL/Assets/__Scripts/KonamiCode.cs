@@ -1,12 +1,20 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
 public class KonamiCode : MonoBehaviour
 {
     private const float WaitTime = 1f;
     public Text successText;
     public bool success;
+    private bool corou = true;
+
+    public GameObject playerCheat;
+    
+
+    private NetworkManager networkManager;
+    private GameObject playerKonamiCode;
 
     private KeyCode[] keys = new KeyCode[]
     {
@@ -22,7 +30,8 @@ public class KonamiCode : MonoBehaviour
         KeyCode.A
     };
 
-   
+    
+
 
     IEnumerator Start()
     {
@@ -79,10 +88,21 @@ public class KonamiCode : MonoBehaviour
 
     void Update()
     {
+
+
         if (success == true)
         {
             successText.gameObject.SetActive(true);
 
+            playerKonamiCode = GameObject.FindGameObjectWithTag("NetworkManager");
+            if (playerKonamiCode != null)
+            {
+                Debug.Log("playerKonamiCode :" + playerKonamiCode);
+            }
+            networkManager = playerKonamiCode.GetComponent<NetworkManager>();
+            Debug.Log("networkManager :" + networkManager);
+            networkManager.NetworkConfig.PlayerPrefab = playerCheat;
+            success = false;
         }
     }
 }
