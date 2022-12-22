@@ -3,13 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="623fa893-386a-4115-9343-d0f3a09852cf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileShovel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileShovel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileSnowBall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileSnowBall.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileSnowBall.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/ProjectileSnowBall.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBall.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBall.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputSystem/PlayerActions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputSystem/PlayerActions.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputSystem/PlayerInputs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/InputSystem/PlayerInputs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannon.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannonDrop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/SnowBallCannonDrop.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Characters/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Characters/Character.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Characters/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Characters/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs" afterDir="false" />

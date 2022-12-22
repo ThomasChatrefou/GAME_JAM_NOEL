@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Projectile : NetworkBehaviour
 {
@@ -18,7 +19,7 @@ public class Projectile : NetworkBehaviour
     [SerializeField]
     private Vector2 dirProjectile;
     [SerializeField]
-    private bool isRange;
+    private bool isDestroyedOnFirstHit;
     
     public bool isFromEnemy;
     private Rigidbody2D rgbd;
@@ -61,7 +62,7 @@ public class Projectile : NetworkBehaviour
             if (other.CompareTag("Player"))
             {
                 character.TakeDamage(this);
-                if (isRange)
+                if (isDestroyedOnFirstHit)
                 {
                     DestroyProjectileServerRpc();
                 }
@@ -72,7 +73,7 @@ public class Projectile : NetworkBehaviour
             if (other.CompareTag("Enemy"))
             {
                 character.TakeDamage(this);
-                if (isRange)
+                if (isDestroyedOnFirstHit)
                 {
                     DestroyProjectileServerRpc();
                 }

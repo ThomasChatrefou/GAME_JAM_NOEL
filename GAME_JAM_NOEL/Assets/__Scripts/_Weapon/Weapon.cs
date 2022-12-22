@@ -14,6 +14,8 @@ public class Weapon : NetworkBehaviour
     private float timerReloadMax;
     [SerializeField]
     private GameObject baseProjectilePrefab;
+
+
     [SerializeField]
     private GameObject skillProjectilePrefab;
     [SerializeField] 
@@ -61,7 +63,7 @@ public class Weapon : NetworkBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
     
-    public void LaunchBaseProjectile(Vector2 direction, bool isFromEnemy = false)
+    public void LaunchProjectile(Vector2 direction, bool isFromEnemy = false)
     {
         if (!hasShoot)
         {
@@ -73,6 +75,16 @@ public class Weapon : NetworkBehaviour
             proj.GetComponent<NetworkObject>().Spawn(true);
         }
         hasShoot = true;
+    }
+    
+    public void LaunchSpecialProjectile(Vector2 direction, bool isFromEnemy = false)
+    {
+        Projectile proj = Instantiate(skillProjectilePrefab,firePos.position,
+                Quaternion.Euler(0,0,Mathf.Atan2(firePos.position.x, firePos.position.y) * Mathf.Rad2Deg))
+            .GetComponent<Projectile>();
+        proj.DirProjectile = direction;
+        proj.isFromEnemy = isFromEnemy;
+        proj.GetComponent<NetworkObject>().Spawn(true);
     }
 
     //TODO RPC
@@ -165,5 +177,18 @@ public class Weapon : NetworkBehaviour
                 nearbyPlayer = null;
             }
         }
+    }
+    
+    
+    public GameObject BaseProjectilePrefab
+    {
+        get => baseProjectilePrefab;
+        set => baseProjectilePrefab = value;
+    }
+
+    public GameObject SkillProjectilePrefab
+    {
+        get => skillProjectilePrefab;
+        set => skillProjectilePrefab = value;
     }
 }

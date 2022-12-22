@@ -487,7 +487,8 @@ MonoBehaviour:
   timerReloadMax: 1
   baseProjectilePrefab: {fileID: 2402794893409346866, guid: 7c5cf6f94a90d5141a219f7bc8f5b80f,
     type: 3}
-  skillProjectilePrefab: {fileID: 0}
+  skillProjectilePrefab: {fileID: 2402794893409346866, guid: 6979a8c40ef4d4d4ba539841fb1470ed,
+    type: 3}
   firePos: {fileID: 4811188359090800566}
   weaponSpriteUI: {fileID: -532265105, guid: de357bc00799b5a4c89541c83cee7958, type: 3}
   weaponSpriteGround: {fileID: -532265105, guid: de357bc00799b5a4c89541c83cee7958,
