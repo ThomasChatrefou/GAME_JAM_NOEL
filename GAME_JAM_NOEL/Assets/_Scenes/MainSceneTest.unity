@@ -1557,7 +1557,6 @@ GameObject:
   m_Component:
   - component: {fileID: 850294879}
   - component: {fileID: 850294878}
-  - component: {fileID: 850294877}
   m_Layer: 0
   m_Name: KonamiCode
   m_TagString: Untagged
@@ -1565,19 +1564,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &850294877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850294876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1937b73e82458f94989daa7fd3d9ccd0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  successText: {fileID: 2119512743}
 --- !u!114 &850294878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1590,6 +1576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf1e016420b51146898b00393be9533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  successText: {fileID: 2119512743}
   success: 0
 --- !u!4 &850294879
 Transform:
@@ -3213,6 +3200,18 @@ PrefabInstance:
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[3].Prefab
       value: 
       objectReference: {fileID: 2402794893409346866, guid: cf9d08890e088f840b182a89c56c0b03,
+        type: 3}
+    - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
+        type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[4].Prefab
+      value: 
+      objectReference: {fileID: 5019378520150716569, guid: 3265f23f6123bf741b51abb58fca8f1c,
+        type: 3}
+    - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
+        type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[5].Prefab
+      value: 
+      objectReference: {fileID: 5019378520150716569, guid: c7a238a5b3601f14689acdc7834e4337,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bc2f05b8b72f3146b2da39dee3b5103, type: 3}

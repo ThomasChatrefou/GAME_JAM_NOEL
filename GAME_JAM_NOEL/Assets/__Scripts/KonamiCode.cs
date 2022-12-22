@@ -1,9 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KonamiCode : MonoBehaviour
 {
     private const float WaitTime = 1f;
+    public Text successText;
+    public bool success;
 
     private KeyCode[] keys = new KeyCode[]
     {
@@ -19,7 +22,7 @@ public class KonamiCode : MonoBehaviour
         KeyCode.A
     };
 
-    public bool success;
+   
 
     IEnumerator Start()
     {
@@ -30,25 +33,27 @@ public class KonamiCode : MonoBehaviour
         {
             if (Input.GetKeyDown(keys[index]))
             {
+
+                Debug.Log(keys[index]);                
                 index++;
+                
 
                 if (index == keys.Length)
                 {
+                    Debug.Log("Konami code réussi !");
                     success = true;
                     timer = 0f;
                     index = 0;
-                    Debug.Log("Konami code réussi !");
                 }
                 else
                 {
                     timer = WaitTime;
-                    Debug.Log("Trop lent pour le konami code :/");
                 }
             }
             else if (Input.anyKeyDown)
             {
                 
-                Debug.Log("Wrong key in sequence.");
+                Debug.Log("Mauvaise touche, Konami Code cassé");
                 timer = 0;
                 index = 0;
             }
@@ -60,6 +65,7 @@ public class KonamiCode : MonoBehaviour
 
                 if (timer <= 0)
                 {
+                    Debug.Log("Trop lent pour le konami code :/");
                     timer = 0;
                     index = 0;
                 }
@@ -67,6 +73,16 @@ public class KonamiCode : MonoBehaviour
             
 
             yield return null;
+        }
+    }
+
+
+    void Update()
+    {
+        if (success == true)
+        {
+            successText.gameObject.SetActive(true);
+
         }
     }
 }
