@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1761938582874347791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.079, y: -0.274, z: 0}
+  m_LocalPosition: {x: 2.129, y: 0.025999963, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -279,7 +279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.24, y: 1.7}
+  m_AnchoredPosition: {x: 1.29, y: 2}
   m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6513538337478346899
@@ -351,7 +351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6450046256893516661}
   m_LocalRotation: {x: -0, y: -0, z: 0.92387944, w: 0.38268375}
-  m_LocalPosition: {x: 1.24, y: -0.24, z: 0}
+  m_LocalPosition: {x: 1.29, y: 0.059999958, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -489,9 +489,9 @@ MonoBehaviour:
     type: 3}
   skillProjectilePrefab: {fileID: 0}
   firePos: {fileID: 4811188359090800566}
-  weaponSpriteUI: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  weaponSpriteGround: {fileID: 21300000, guid: 05e3b9dc3141a394b9f4c6ef1f26eac1, type: 3}
-  weaponSpriteHands: {fileID: 21300000, guid: 05e3b9dc3141a394b9f4c6ef1f26eac1, type: 3}
+  weaponSpriteUI: {fileID: 21300000, guid: 629013ee560b6314d826ec4448f03e19, type: 3}
+  weaponSpriteGround: {fileID: 21300000, guid: 629013ee560b6314d826ec4448f03e19, type: 3}
+  weaponSpriteHands: {fileID: 21300000, guid: 629013ee560b6314d826ec4448f03e19, type: 3}
   colliderPlayerEquip2D: {fileID: 5939452962539936811}
   pressKeyUI: {fileID: 6418285653334924312}
   onGround: 0

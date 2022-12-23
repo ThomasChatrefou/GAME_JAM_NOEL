@@ -8,7 +8,6 @@ public class KonamiCode : MonoBehaviour
     private const float WaitTime = 1f;
     public Text successText;
     public bool success;
-    private bool corou = true;
 
     public GameObject playerCheat;
     
@@ -33,7 +32,7 @@ public class KonamiCode : MonoBehaviour
     
 
 
-    IEnumerator Test()
+    IEnumerator Code()
     {
         float timer = 0f;
         int index = 0;
@@ -89,7 +88,7 @@ public class KonamiCode : MonoBehaviour
     void Update()
     {
 
-        StartCoroutine(Test());
+        StartCoroutine(Code());
 
 
         if (success == true)

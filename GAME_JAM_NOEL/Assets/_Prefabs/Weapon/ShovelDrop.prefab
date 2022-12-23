@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2555866861973214847, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.061
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555866861973214847, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.924
+      objectReference: {fileID: 0}
     - target: {fileID: 4411226458731785881, guid: 978525fa936920a428a330a978d66de2,
         type: 3}
       propertyPath: m_Enabled
@@ -22,10 +32,35 @@ PrefabInstance:
       propertyPath: SyncPositionY
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4811188359090800566, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4811188359090800566, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4942397669146153816, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.061
+      objectReference: {fileID: 0}
+    - target: {fileID: 4942397669146153816, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.016000018
+      objectReference: {fileID: 0}
     - target: {fileID: 5939452962539936811, guid: 978525fa936920a428a330a978d66de2,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939452962539936811, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6418285653334924312, guid: 978525fa936920a428a330a978d66de2,
         type: 3}
@@ -47,6 +82,24 @@ PrefabInstance:
       propertyPath: onGround
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8765429010469821178, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: weaponSpriteUI
+      value: 
+      objectReference: {fileID: 21300000, guid: 629013ee560b6314d826ec4448f03e19,
+        type: 3}
+    - target: {fileID: 8765429010469821178, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: weaponSpriteHands
+      value: 
+      objectReference: {fileID: 21300000, guid: 629013ee560b6314d826ec4448f03e19,
+        type: 3}
+    - target: {fileID: 8765429010469821178, guid: 978525fa936920a428a330a978d66de2,
+        type: 3}
+      propertyPath: weaponSpriteGround
+      value: 
+      objectReference: {fileID: 21300000, guid: 629013ee560b6314d826ec4448f03e19,
+        type: 3}
     - target: {fileID: 8765429010469821179, guid: 978525fa936920a428a330a978d66de2,
         type: 3}
       propertyPath: m_RootOrder
