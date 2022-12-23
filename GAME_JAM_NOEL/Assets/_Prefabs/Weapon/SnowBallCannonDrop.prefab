@@ -423,8 +423,8 @@ GameObject:
   - component: {fileID: 8765429010469821178}
   - component: {fileID: 5939452962539936811}
   - component: {fileID: 7961837012347713176}
-  - component: {fileID: 4411226458731785881}
-  - component: {fileID: 1208405029471340463}
+  - component: {fileID: 9090025365254653067}
+  - component: {fileID: 9184264979710733228}
   m_Layer: 0
   m_Name: SnowBallCannonDrop
   m_TagString: Untagged
@@ -498,7 +498,6 @@ MonoBehaviour:
   colliderPlayerEquip2D: {fileID: 5939452962539936811}
   pressKeyUI: {fileID: 6418285653334924312}
   onGround: 1
-  nearbyPlayer: {fileID: 0}
   isBaseWeapon: 0
   maxAmmo: 10
   actualAmmo: 0
@@ -544,16 +543,16 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &4411226458731785881
+--- !u!114 &9090025365254653067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765429010469821169}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: b396fd53b1451a54dbf83bd030531675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 0
@@ -570,7 +569,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &1208405029471340463
+--- !u!114 &9184264979710733228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
