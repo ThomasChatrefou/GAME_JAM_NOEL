@@ -23,6 +23,7 @@ public class GameManager : NetworkBehaviour
 
     [Header("Refs")]
     [SerializeField] private PlayerController[] players;
+    public PlayerController[] PlayerList => players;
     [SerializeField] private GameMode gameMode;
     [SerializeField] private RoundManager roundManager;
     public Transform topLeft, bottomRight;

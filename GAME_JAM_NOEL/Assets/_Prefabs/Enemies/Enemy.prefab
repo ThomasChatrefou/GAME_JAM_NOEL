@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 3005033762924187303}
   - component: {fileID: 3005033762924187296}
   - component: {fileID: 3005033762924187299}
+  - component: {fileID: 8152189475480276576}
   m_Layer: 0
-  m_Name: Enemy1
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,9 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  speedValue: 0
-  lootedWeapon: {fileID: 8765429010469821169, guid: 978525fa936920a428a330a978d66de2,
-    type: 3}
+  speedValue: 15
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  lootedWeapon: {fileID: 0}
   willLootWeapon: 1
 --- !u!114 &3005033762924187299
 MonoBehaviour:
@@ -168,3 +171,19 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &8152189475480276576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3005033762924187302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77d7c6fae4ac1c4bb119952096111ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _root: {fileID: 11400000, guid: 6b1f4545279607149875bf4b7ca5e7e2, type: 2}
+  isRunning: 0
+  _timeSinceLastTick: 0
+  _timeBetweenTicks: 1.5
