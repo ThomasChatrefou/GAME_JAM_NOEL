@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4159794920957104724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 888.79926, y: 572.4508, z: -7.1046495}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,7 +62,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.35, y: 0.5}
   m_EdgeRadius: 0
 --- !u!212 &4159794920957104730
 SpriteRenderer:
@@ -163,7 +163,8 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
-  lootedWeapon: {fileID: 0}
+  lootedWeapon: {fileID: 8765429010469821169, guid: 3e24109172b48454ca00f36424b7d56b,
+    type: 3}
   willLootWeapon: 0
   moveModeSprite: {fileID: -642102867, guid: 2dbab09e0b28b1a41a1b9870b55ae3c3, type: 3}
   invincibleModeSprite: {fileID: -1917382583, guid: 2dbab09e0b28b1a41a1b9870b55ae3c3,

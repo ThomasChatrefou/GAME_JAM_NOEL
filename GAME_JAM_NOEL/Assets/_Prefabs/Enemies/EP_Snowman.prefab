@@ -7,6 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3005033762924187296, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: lootedWeapon
+      value: 
+      objectReference: {fileID: 8765429010469821169, guid: e66878528489a3c4f967f5fa448d1c02,
+        type: 3}
     - target: {fileID: 3005033762924187298, guid: d0bf58b8383845142a1819954cc4f4c4,
         type: 3}
       propertyPath: m_RootOrder
@@ -62,10 +68,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187299, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187300, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187300, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187300, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187300, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187300, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187300, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187301, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f0c120d0fa4ddc247882fc6133d0f04e,
+        type: 3}
+    - target: {fileID: 3005033762924187301, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187301, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187301, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3005033762924187302, guid: d0bf58b8383845142a1819954cc4f4c4,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: EP_Snowman
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0bf58b8383845142a1819954cc4f4c4, type: 3}
