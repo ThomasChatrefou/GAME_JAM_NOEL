@@ -152,4 +152,6 @@ MonoBehaviour:
   hitEnemy: []
   playerDie: []
   hitPlayer: []
+  mixerSound: {fileID: 8169041164645685099, guid: 17380281c0d6c024ab2e10ebd0f2b0ee,
+    type: 2}
   audioSource: {fileID: 1621142867246638054}

@@ -4511,12 +4511,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1621142867246638049, guid: ab51c9aa49a9240468d9172e64564656,
-        type: 3}
-      propertyPath: mixerSound
-      value: 
-      objectReference: {fileID: 8169041164645685099, guid: 17380281c0d6c024ab2e10ebd0f2b0ee,
-        type: 2}
     - target: {fileID: 1621142867246638052, guid: ab51c9aa49a9240468d9172e64564656,
         type: 3}
       propertyPath: m_Name
