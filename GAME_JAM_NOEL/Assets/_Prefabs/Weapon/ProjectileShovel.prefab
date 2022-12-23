@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b396fd53b1451a54dbf83bd030531675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SyncPositionX: 0
-  SyncPositionY: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
   SyncPositionZ: 0
   SyncRotAngleX: 0
   SyncRotAngleY: 0
