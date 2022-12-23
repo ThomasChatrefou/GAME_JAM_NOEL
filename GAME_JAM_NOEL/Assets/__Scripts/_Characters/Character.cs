@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public abstract class Character : NetworkBehaviour
 {
+    public UnityEvent OnDeath;
+
     [SerializeField]
     protected float health;
     [SerializeField]
     protected float speedValue;
 
     protected bool isDead;
+    public bool IsDead => isDead;
     protected Projectile lastProjectileTaken;
 
 
@@ -43,5 +47,6 @@ public abstract class Character : NetworkBehaviour
     {
         Debug.Log("Character " + gameObject.name + " Die");
         isDead = true;
+        OnDeath.Invoke();
     }
 }
