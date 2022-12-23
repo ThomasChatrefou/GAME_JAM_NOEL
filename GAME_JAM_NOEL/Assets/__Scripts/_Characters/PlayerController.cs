@@ -8,27 +8,31 @@ public class PlayerController : Character
     
     [SerializeField]
     private Vector2 speedDirection;
-    private MouseDetection mouseDetection;
 
     [Header("Weapon")] 
-    [SerializeField] 
-    private GameObject shovelWeaponPrefab;
-    [SerializeField] 
+    [SerializeField] private GameObject shovelWeaponPrefab;
+
     private Weapon playerWeapon;
-    [SerializeField] 
-    private Vector2 crossPosition;
-    [SerializeField] 
     private Weapon nearbyWeapon;
 
     private void Awake()
     {
-        mouseDetection = FindObjectOfType<MouseDetection>();
         inputs = new PlayerInputs();
 
         inputs.Player.Shoot.performed += shootContext => Shoot();
+        inputs.Player.SpecialShoot.performed += shootContext => SpecialShoot();
         inputs.Player.Movement.performed += moveContext => Move(moveContext.ReadValue<Vector2>());
         inputs.Player.Movement.canceled += moveContext => Move(moveContext.ReadValue<Vector2>());
         inputs.Player.Interact.performed += interactContext => EquipWeapon(nearbyWeapon);
+    }
+
+    private void OnEnable()
+    {
+        inputs.Enable();
+    }
+    private void OnDisable()
+    {
+        inputs.Disable();
     }
 
     private void Start()
@@ -41,7 +45,6 @@ public class PlayerController : Character
     private void SpawnMyWeaponServerRpc()
     {
         playerWeapon = Instantiate(shovelWeaponPrefab, transform.position, Quaternion.identity, transform).GetComponent<Weapon>();
-        playerWeapon.weaponOwner = this;
         NetworkObject weaponNO = playerWeapon.GetComponent<NetworkObject>();
         weaponNO.SpawnWithOwnership(GetComponent<NetworkObject>().OwnerClientId);
         weaponNO.TrySetParent(gameObject);
@@ -50,14 +53,6 @@ public class PlayerController : Character
     private void FixedUpdate()
     {
         transform.position += Time.fixedDeltaTime * speedValue * new Vector3(speedDirection.x, speedDirection.y, 0.0f);
-    }
-
-    private void Update()
-    {
-        if (!IsOwner) return;
-        Tic();
-        //TODO Faire viser le personnage où la souris est placée uniquement si c'est le perso du client 
-        crossPosition = mouseDetection.MousePos;
     }
 
     private void Move(Vector2 direction)
@@ -79,31 +74,47 @@ public class PlayerController : Character
         OnShootServerRpc();
     }
 
-    private void OnEnable()
-    {
-        inputs.Enable();
-    }
-    private void OnDisable()
-    {
-        inputs.Disable();
-    }
-    
     [ServerRpc(RequireOwnership = false)]
     public void OnShootServerRpc()
     {
-        playerWeapon.LaunchBaseProjectile();
+        playerWeapon.LaunchProjectile();
     }
 
-    private void SkillAttack()
+    private void SpecialShoot()
     {
-        Debug.Log("LauchSkillAttack");
+        if (!IsOwner) return;
+        SpecialShootServerRpc(transform.position);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SpecialShootServerRpc(Vector2 playerPos)
+    {
+        playerWeapon.LaunchProjectile();
+
+        // Re-equip Shovel Weapon
+        playerWeapon.DespawnWeaponServerRpc();
+        SpawnMyWeaponServerRpc();
     }
 
     public void EquipWeapon(Weapon weapon)
     {
         if (!IsOwner || !weapon) return;
-        Debug.Log("EquipWeapon " + weapon.name);
+        playerWeapon.DespawnWeaponServerRpc();
+
+        weapon.MoveToParentServerRpc(GetComponent<NetworkObject>().OwnerClientId);
         playerWeapon = weapon;
         //TODO Update UI Sprite
+    }
+
+    public Weapon NearbyWeapon
+    {
+        get => nearbyWeapon;
+        set => nearbyWeapon = value;
+    }
+
+    public Weapon PlayerWeapon
+    {
+        get => playerWeapon;
+        set => playerWeapon = value;
     }
 }

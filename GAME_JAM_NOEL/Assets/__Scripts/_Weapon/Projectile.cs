@@ -1,24 +1,30 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Projectile : NetworkBehaviour
 {
     [SerializeField]
     private float speedProjectile;
     [SerializeField] 
-    private float lifeSpawn;
+    private float lifeSpan;
     [SerializeField]
     private float damageProjectile;
-    
-    [SerializeField]
+
+    //Unused
+    //[SerializeField] private float knockbackProjectile;
+
     private Vector2 dirProjectile;
-    
-    public bool isFromEnemy;
+    [SerializeField]
+    private bool isDestroyedOnFirstHit;
+
+    [HideInInspector] public bool isFromEnemy;
+
+    public UnityEvent onSpawnEvent;
     private Rigidbody2D rgbd;
 
+    [Header("Feedback")]
     [HideInInspector] public NetworkBehaviour ParentWeapon;
     [SerializeField] private GameObject HitEffectPrefab;
     [SerializeField] private float cameraShakeIntensity;
@@ -34,8 +40,8 @@ public class Projectile : NetworkBehaviour
 
     private void Update()
     {
-        lifeSpawn -= Time.deltaTime;
-        if (lifeSpawn <= 0)
+        lifeSpan -= Time.deltaTime;
+        if (lifeSpan <= 0)
         {
             Destroy(gameObject);
         }
@@ -45,36 +51,22 @@ public class Projectile : NetworkBehaviour
     {
         rgbd.velocity = (dirProjectile * speedProjectile);
         var zAngle = Mathf.Atan2(dirProjectile.x, dirProjectile.y) * Mathf.Rad2Deg;
-        // Store the target rotation
-        //transform.rotation = Quaternion.Euler(0,0, zAngle);
-    }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void DestroyProjectileServerRpc()
-    {
-        GetComponent<NetworkObject>().Despawn();
-        //Destroy(gameObject);
+        if (onSpawnEvent.GetPersistentEventCount() > 0)
+        {
+            onSpawnEvent.Invoke();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         Character character = other.GetComponent<Character>();
+        character.TakeDamage(this);
 
-        if (isFromEnemy)
-        {
-            if (other.CompareTag("Player"))
-            {
-                Debug.Log("HitPlayer");
-                character.TakeDamage(this);
-            }
-        }
-        else
+        if (!isFromEnemy)
         {
             if (other.CompareTag("Enemy"))
             {
-                Debug.Log("HitEnemy");
-                character.TakeDamage(this);
-
                 GameObject particlesGO = Instantiate(HitEffectPrefab, character.transform.position, Quaternion.identity);
                 particlesGO.transform.eulerAngles = transform.eulerAngles + graphicsOrientation;
                 if (ParentWeapon == null) return;
@@ -82,14 +74,17 @@ public class Projectile : NetworkBehaviour
                 CameraShaker.Instance.ShakeCamera(cameraShakeIntensity, cameraShakeDuration, cameraShakeFrequency);
             }
         }
+
+        if (isDestroyedOnFirstHit)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    [ServerRpc(RequireOwnership = true)]
-    private void SpawnParticlesServerRpc()
+    public void RotationTreeSkill()
     {
-
+        transform.DORotate(new Vector3(0, 0, 360), lifeSpan - 0.15f, RotateMode.FastBeyond360).SetRelative(true);
     }
-
 
     public Vector2 DirProjectile
     {

@@ -1,55 +1,37 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public struct WeaponData : INetworkSerializable
-{
-    public SpriteRenderer spriteRenderer;
-    public Collider2D collider2D;
-    public bool onGround;
-    
-    public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
-    {
-        serializer.SerializeValue(ref onGround);
-        //serializer.SerializeNetworkSerializable(ref );
-        throw new NotImplementedException();
-    }
-}
 public class Weapon : NetworkBehaviour
 {
     [Header("Projectiles")]
-    [SerializeField]
-    private float timerReload;
-    [SerializeField] 
-    private float timerReloadMax;
-    [SerializeField]
-    private GameObject baseProjectilePrefab;
-    [SerializeField]
-    private GameObject skillProjectilePrefab;
-    [SerializeField] 
-    private Transform firePos;
+    [SerializeField] private float timerReload;
+    [SerializeField] private float timerReloadMax;
+    [SerializeField] private GameObject baseProjectilePrefab;
 
-    private bool hasShoot;
+    [Space]
+    [SerializeField] private GameObject skillProjectilePrefab;
+    [SerializeField] private Transform firePos;
 
-    [Header("Sprite Management")] 
+    [Header("Sprite Management")]
+    [SerializeField] private Sprite weaponSpriteUI;
+    [SerializeField] private Sprite weaponSpriteGround;
+    [SerializeField] private Sprite weaponSpriteHands;
+
+    [Header("Trigger Equip")]
+    [SerializeField] private Collider2D colliderPlayerEquip2D;
+    [SerializeField] private GameObject pressKeyUI;
+
+    [Header("Ground")]
+    [SerializeField] private bool onGround;
+
+    [Header("Ammo")]
+    [SerializeField] private bool isBaseWeapon;
+    [SerializeField] private int maxAmmo;
+    
+    private int actualAmmo;
+
     private SpriteRenderer spriteRenderer;
-    public Sprite weaponSpriteUI;
-    public Sprite weaponSpriteGround;
-    public Sprite weaponSpriteHands;
-
-    [Header("Trigger Equip")] 
-    public Collider2D colliderPlayerEquip2D;
-
-    [Header("Ground")] 
-    public bool onGround;
     private PlayerController nearbyPlayer;
-
-    public PlayerController weaponOwner;
 
     private NetworkVariable<Vector2> aimPosition = new NetworkVariable<Vector2>(
         Vector2.zero,
@@ -57,23 +39,26 @@ public class Weapon : NetworkBehaviour
         NetworkVariableWritePermission.Owner
         );
 
+    private bool hasShot;
+
+    void Start()
+    {
+        if (pressKeyUI != null)
+        {
+            pressKeyUI.SetActive(false);
+        }
+        actualAmmo = maxAmmo;
+    }
+
     void Update()
     {
-        if (hasShoot)
+        if (hasShot)
         {
             timerReload -= Time.deltaTime;
             if (timerReload <= 0)
             {
-                hasShoot = !hasShoot;
+                hasShot = !hasShot;
                 timerReload = timerReloadMax;
-            }
-        }
-
-        if (onGround)
-        {
-            if (nearbyPlayer)
-            {
-                //TODO Display Grab Key
             }
         }
 
@@ -122,42 +107,57 @@ public class Weapon : NetworkBehaviour
     private void OnEnable()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        Debug.Log("Sprite Renderer " + spriteRenderer);
     }
 
-    //TODO RPC
-    public void LaunchBaseProjectile(bool isFromEnemy = false)
+    public void LaunchProjectile(bool isFromEnemy = false)
     {
-        if (!hasShoot)
+        if (actualAmmo >= 1 || isBaseWeapon)
         {
-            GameObject projectileGO = Instantiate(baseProjectilePrefab, firePos.position, firePos.rotation);
-            Projectile proj = projectileGO.GetComponent<Projectile>();
+            if (!hasShot)
+            {
+                LaunchBaseProjectile();
 
-            proj.DirProjectile = GetAimDirection2D();
-            proj.isFromEnemy = isFromEnemy;
-            proj.ParentWeapon = this;
-
-            //proj.GetComponent<NetworkObject>().Spawn(true);
+                if (!isBaseWeapon)
+                {
+                    actualAmmo -= 1;
+                }
+            }
+            hasShot = true;
         }
-        hasShoot = true;
+        else
+        {
+            LaunchSpecialProjectile(isFromEnemy);
+        }
     }
 
-    //TODO RPC
+    private void LaunchBaseProjectile(bool isFromEnemy = false)
+    {
+        GameObject projectileGO = Instantiate(baseProjectilePrefab, firePos.position, firePos.rotation);
+        Projectile proj = projectileGO.GetComponent<Projectile>();
+
+        proj.DirProjectile = GetAimDirection2D();
+        proj.isFromEnemy = isFromEnemy;
+        proj.ParentWeapon = this;
+
+        hasShot = true;
+    }
+
+    private void LaunchSpecialProjectile(bool isFromEnemy = false)
+    {
+        Projectile proj = Instantiate(skillProjectilePrefab, firePos.position,
+                Quaternion.Euler(0, 0, Mathf.Atan2(firePos.position.x, firePos.position.y) * Mathf.Rad2Deg))
+            .GetComponent<Projectile>();
+        proj.DirProjectile = GetAimDirection2D();
+        proj.isFromEnemy = isFromEnemy;
+        proj.GetComponent<NetworkObject>().Spawn(true);
+    }
+
     [ServerRpc(RequireOwnership = false)]
-    public void LaunchSkillProjectileServerRpc(Vector2 direction)
+    public void LaunchSkillProjectileServerRpc()
     {
         Projectile weapon = Instantiate(skillProjectilePrefab,transform.position,Quaternion.identity).GetComponent<Projectile>();
     }
-
-    //TODO RPC
-    [ServerRpc(RequireOwnership = false)]
-    public void PickedUpServerRpc()
-    {
-        //Make the item disapears from the map and be equiped by the player
-        GetComponent<SpriteRenderer>().sprite = weaponSpriteHands;
-    }
     
-    //TODO RPC
     [ServerRpc(RequireOwnership = false)]
     public void SpawnWeaponGroundServerRpc()
     {
@@ -167,27 +167,56 @@ public class Weapon : NetworkBehaviour
         onGround = true;
     }
 
-    public void SpawnWeaponGround()
+    [ServerRpc(RequireOwnership = false)]
+    public void DespawnWeaponServerRpc()
     {
-        //Make the item disapears from the map and be equiped by the player
-        spriteRenderer.sprite = weaponSpriteGround;
-        colliderPlayerEquip2D.enabled = true;
-        onGround = true;
+        Debug.Log(GetComponent<NetworkObject>().TryRemoveParent());
+        GetComponent<NetworkObject>().Despawn();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void MoveToParentServerRpc(ulong idGameObject)
+    {
+        NetworkObject playerNetworkObj = NetworkManager.Singleton.ConnectedClients[idGameObject].PlayerObject;
+        Debug.Log(GetComponent<NetworkObject>().TrySetParent(playerNetworkObj.transform));
+    }
+
+    public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
+    {
+        transform.localPosition = Vector3.zero;
+        SpawnWeaponGround(false);
+    }
+
+    public void SpawnWeaponGround(bool value)
+    {
+        //Make the item disapear from the map and be equiped by the player
+        if (value)
+        {
+            spriteRenderer.sprite = weaponSpriteGround;
+        }
+        else
+        {
+            spriteRenderer.sprite = weaponSpriteHands;
+        }
+        colliderPlayerEquip2D.enabled = value;
+        onGround = value;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (onGround)
         {
-            Debug.Log("OnGround Col " + col.name);
-            if (col.GetType() == typeof(PlayerController))
+            if (col.CompareTag("Player"))
             {
-                Debug.Log("OnTrigger PlayerController");
-                PlayerController player = col.GetComponent<PlayerController>();
+                PlayerController player = col.gameObject.GetComponent<PlayerController>();
                 if (player.IsOwner)
                 {
-                    Debug.Log("Enable Equip Weapon");
+                    if (!nearbyPlayer)
+                    {
+                        pressKeyUI.SetActive(true);
+                    }
                     nearbyPlayer = player;
+                    nearbyPlayer.NearbyWeapon = this;
                 }
             }
         }
@@ -195,9 +224,32 @@ public class Weapon : NetworkBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.Equals(nearbyPlayer.gameObject))
+        if (other.CompareTag("Player") && nearbyPlayer)
         {
-            nearbyPlayer = null;
+            if (other.gameObject.Equals(nearbyPlayer.gameObject))
+            {
+                if (nearbyPlayer)
+                {
+                    pressKeyUI.SetActive(false);
+                }
+                nearbyPlayer.NearbyWeapon = null;
+                nearbyPlayer = null;
+            }
         }
     }
+
+    public GameObject BaseProjectilePrefab
+    {
+        get => baseProjectilePrefab;
+        set => baseProjectilePrefab = value;
+    }
+
+    public GameObject SkillProjectilePrefab
+    {
+        get => skillProjectilePrefab;
+        set => skillProjectilePrefab = value;
+    }
+
+    public int ActualAmmo => actualAmmo;
+    public bool IsBaseWeapon => isBaseWeapon;
 }

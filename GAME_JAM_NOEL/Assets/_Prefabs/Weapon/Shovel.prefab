@@ -197,7 +197,11 @@ MonoBehaviour:
   weaponSpriteGround: {fileID: 21300000, guid: 05e3b9dc3141a394b9f4c6ef1f26eac1, type: 3}
   weaponSpriteHands: {fileID: 21300000, guid: 05e3b9dc3141a394b9f4c6ef1f26eac1, type: 3}
   colliderPlayerEquip2D: {fileID: 5939452962539936811}
+  pressKeyUI: {fileID: 0}
   onGround: 0
+  isBaseWeapon: 1
+  maxAmmo: 0
+  actualAmmo: 0
   weaponOwner: {fileID: 0}
 --- !u!61 &5939452962539936811
 BoxCollider2D:

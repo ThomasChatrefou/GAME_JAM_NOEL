@@ -8,11 +8,9 @@ public class KonamiCode : MonoBehaviour
     private const float WaitTime = 1f;
     public Text successText;
     public bool success;
-    private bool corou = true;
 
     public GameObject playerCheat;
     
-
     private NetworkManager networkManager;
     private GameObject playerKonamiCode;
 
@@ -29,9 +27,6 @@ public class KonamiCode : MonoBehaviour
         KeyCode.B,
         KeyCode.A
     };
-
-    
-
 
     IEnumerator Start()
     {
@@ -85,11 +80,8 @@ public class KonamiCode : MonoBehaviour
         }
     }
 
-
     void Update()
     {
-
-
         if (success == true)
         {
             successText.gameObject.SetActive(true);

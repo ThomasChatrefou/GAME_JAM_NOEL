@@ -87,14 +87,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedProjectile: 0
-  lifeSpawn: 0.15
+  lifeSpan: 0.2
   damageProjectile: 25
-  dirProjectile: {x: 0, y: 0}
+  isDestroyedOnFirstHit: 1
   isFromEnemy: 0
+  onSpawnEvent:
+    m_PersistentCalls:
+      m_Calls: []
   ParentWeapon: {fileID: 0}
   HitEffectPrefab: {fileID: 7126935989005067234, guid: b39cc8d021b50e94fbe4d6b3c81ad8e9,
     type: 3}
-  cameraShakeIntensity: 10
+  cameraShakeIntensity: 15
   cameraShakeDuration: 0.25
   cameraShakeFrequency: 5
   graphicsOrientation: {x: 0, y: 0, z: -90}
