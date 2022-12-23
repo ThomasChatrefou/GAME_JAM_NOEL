@@ -41,6 +41,9 @@ public class Enemy : Character
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
+        if(!IsHost)
+            return;
+
         if (target != null)
         {
             transform.position += Time.fixedDeltaTime * speedValue * (target.position - transform.position).normalized;
