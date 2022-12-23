@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
@@ -15,6 +17,7 @@ public class Enemy : Character
     private BT_Tree aiTree;
     protected Transform target;
 
+    // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -29,8 +32,18 @@ public class Enemy : Character
         aiTree.StartBehaviour();
     }
 
+    protected virtual void Update()
+    {
+        if (health <= 0 && !isDead)
+            DieServerRpc();
+    }
+
+    // Update is called once per frame
     protected virtual void FixedUpdate()
     {
+        if(!IsHost)
+            return;
+
         if (target != null)
         {
             transform.position += Time.fixedDeltaTime * speedValue * (target.position - transform.position).normalized;
@@ -42,6 +55,7 @@ public class Enemy : Character
         target = _target;
     }
 
+    
     [ServerRpc(RequireOwnership = false)]
     protected override void DieServerRpc()
     {

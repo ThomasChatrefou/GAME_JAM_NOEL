@@ -9,6 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3005033762924187296, guid: d0bf58b8383845142a1819954cc4f4c4,
         type: 3}
+      propertyPath: speedValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187296, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
       propertyPath: lootedWeapon
       value: 
       objectReference: {fileID: 0}
@@ -16,6 +21,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187298, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187298, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3005033762924187298, guid: d0bf58b8383845142a1819954cc4f4c4,
         type: 3}
@@ -72,6 +87,22 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 951099334
       objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187300, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187300, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187301, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1956157588, guid: 9a6ad61ec518ece4fa0c3e8bf094327f,
+        type: 3}
     - target: {fileID: 3005033762924187302, guid: d0bf58b8383845142a1819954cc4f4c4,
         type: 3}
       propertyPath: m_Name

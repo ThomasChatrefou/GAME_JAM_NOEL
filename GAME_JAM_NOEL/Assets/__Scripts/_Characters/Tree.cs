@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Tree : Enemy
 {
-    private bool isInMoveMode;
     private float timer;
     [Header("Tree")]
+    [SerializeField] private bool isInMoveMode;
     [SerializeField] private Sprite moveModeSprite;
     [SerializeField] private Sprite invincibleModeSprite;
     [SerializeField] private float moveModeDuration;
     [SerializeField] private float invincibleModeDuration;
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (timer > 0)
             timer -= Time.deltaTime;
         else
