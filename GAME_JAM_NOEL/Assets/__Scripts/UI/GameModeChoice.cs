@@ -24,7 +24,7 @@ public class GameModeChoice : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
-        if (!IsHost && !IsServer)
+        if (!IsHost)
         {
             prevButton.gameObject.SetActive(false);
             nextButton.gameObject.SetActive(false);
@@ -33,7 +33,7 @@ public class GameModeChoice : NetworkBehaviour
 
         prevButton.onClick.AddListener(PreviousChoice);
         nextButton.onClick.AddListener(NextChoice);
-        OnUpdate();
+        OnUpdateServerRpc();
     }
 
     private void PreviousChoice()
@@ -41,7 +41,7 @@ public class GameModeChoice : NetworkBehaviour
         if (choice > 0)
             choice--;
 
-        OnUpdate();
+        OnUpdateServerRpc();
     }
 
     private void NextChoice()
@@ -49,10 +49,17 @@ public class GameModeChoice : NetworkBehaviour
         if (choice+1 < options.Length)
             choice++;
 
-        OnUpdate();
+        OnUpdateServerRpc();
     }
 
-    private void OnUpdate()
+    [ServerRpc(RequireOwnership = false)]
+    private void OnUpdateServerRpc()
+    {
+        OnUpdateClientRpc();
+    }
+
+    [ClientRpc]
+    private void OnUpdateClientRpc()
     {
         choiceName.text = options[choice].name;
         GameManager.Instance.UpdateGameMode(options[choice]);
