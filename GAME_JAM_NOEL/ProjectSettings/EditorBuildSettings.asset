@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/MainScene1.unity
     guid: 326914513c4f6f74d9299379a42c9d5b
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/ValentinMain.unity
     guid: 764adb418ba89b041abcc0a16349ded0
+  - enabled: 1
+    path: Assets/_Scenes/MainSceneTestLeny.unity
+    guid: d0fdd79ea397bc14ebf870fd1dfd5850
+  - enabled: 0
+    path: Assets/_Scenes/MainScene2.unity
+    guid: 6bae1463a76f5b3479e847842b64fcd4
   m_configObjects: {}

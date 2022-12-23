@@ -33,7 +33,7 @@ public class KonamiCode : MonoBehaviour
     
 
 
-    IEnumerator Start()
+    IEnumerator Test()
     {
         float timer = 0f;
         int index = 0;
@@ -88,6 +88,8 @@ public class KonamiCode : MonoBehaviour
 
     void Update()
     {
+
+        StartCoroutine(Test());
 
 
         if (success == true)
