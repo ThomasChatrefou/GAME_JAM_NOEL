@@ -18,7 +18,14 @@ public class Projectile : NetworkBehaviour
     
     public bool isFromEnemy;
     private Rigidbody2D rgbd;
-    // Start is called before the first frame update
+
+    [HideInInspector] public NetworkBehaviour ParentWeapon;
+    [SerializeField] private GameObject HitEffectPrefab;
+    [SerializeField] private float cameraShakeIntensity;
+    [SerializeField] private float cameraShakeDuration;
+    [SerializeField] private float cameraShakeFrequency;
+    [SerializeField] private Vector3 graphicsOrientation;
+
     void Start()
     {
         rgbd = GetComponent<Rigidbody2D>();
@@ -30,7 +37,7 @@ public class Projectile : NetworkBehaviour
         lifeSpawn -= Time.deltaTime;
         if (lifeSpawn <= 0)
         {
-            DestroyProjectileServerRpc();
+            Destroy(gameObject);
         }
     }
 
@@ -67,9 +74,23 @@ public class Projectile : NetworkBehaviour
             {
                 Debug.Log("HitEnemy");
                 character.TakeDamage(this);
+
+                GameObject particlesGO = Instantiate(HitEffectPrefab, character.transform.position, Quaternion.identity);
+                particlesGO.transform.eulerAngles = transform.eulerAngles + graphicsOrientation;
+                if (ParentWeapon == null) return;
+                if (!ParentWeapon.IsOwner) return;
+                CameraShaker.Instance.ShakeCamera(cameraShakeIntensity, cameraShakeDuration, cameraShakeFrequency);
             }
         }
-    }   
+    }
+
+    [ServerRpc(RequireOwnership = true)]
+    private void SpawnParticlesServerRpc()
+    {
+
+    }
+
+
     public Vector2 DirProjectile
     {
         get => dirProjectile;

@@ -96,6 +96,16 @@ public class Weapon : NetworkBehaviour
         return new Vector3(aimPosition.Value.x, aimPosition.Value.y, 0f);
     }
 
+    public Vector3 GetAimDirection()
+    {
+        return (GetAimPosition() - transform.position).normalized;
+    }
+
+    public Vector2 GetAimDirection2D()
+    {
+        return new Vector2(aimPosition.Value.x - transform.position.x, aimPosition.Value.y - transform.position.y).normalized;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -116,15 +126,18 @@ public class Weapon : NetworkBehaviour
     }
 
     //TODO RPC
-    public void LaunchBaseProjectile(Vector2 mousePosition, bool isFromEnemy = false)
+    public void LaunchBaseProjectile(bool isFromEnemy = false)
     {
         if (!hasShoot)
         {
             GameObject projectileGO = Instantiate(baseProjectilePrefab, firePos.position, firePos.rotation);
             Projectile proj = projectileGO.GetComponent<Projectile>();
-            proj.DirProjectile = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
+
+            proj.DirProjectile = GetAimDirection2D();
             proj.isFromEnemy = isFromEnemy;
-            proj.GetComponent<NetworkObject>().Spawn(true);
+            proj.ParentWeapon = this;
+
+            //proj.GetComponent<NetworkObject>().Spawn(true);
         }
         hasShoot = true;
     }

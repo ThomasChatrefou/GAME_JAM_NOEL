@@ -76,7 +76,7 @@ public class PlayerController : Character
     private void Shoot()
     {
         if(!IsOwner) return;
-        AttackServerRpc(crossPosition,transform.position);
+        OnShootServerRpc();
     }
 
     private void OnEnable()
@@ -89,10 +89,9 @@ public class PlayerController : Character
     }
     
     [ServerRpc(RequireOwnership = false)]
-    public override void AttackServerRpc(Vector2 crossPosition, Vector2 playerPos)
+    public void OnShootServerRpc()
     {
-        Vector2 fireDir = crossPosition - playerPos;
-        playerWeapon.LaunchBaseProjectile(crossPosition);
+        playerWeapon.LaunchBaseProjectile();
     }
 
     private void SkillAttack()
