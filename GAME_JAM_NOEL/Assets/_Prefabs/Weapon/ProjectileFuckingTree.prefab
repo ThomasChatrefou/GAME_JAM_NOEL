@@ -132,10 +132,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   ParentWeapon: {fileID: 0}
-  HitEffectPrefab: {fileID: 0}
-  cameraShakeIntensity: 0
-  cameraShakeDuration: 0
-  cameraShakeFrequency: 0
+  HitEffectPrefab: {fileID: 7126935989005067234, guid: bbd8d85930dbcf3408b57fdcd4325dd9,
+    type: 3}
+  cameraShakeIntensity: 17.5
+  cameraShakeDuration: 0.45
+  cameraShakeFrequency: 5
   graphicsOrientation: {x: 0, y: 0, z: 0}
 --- !u!61 &4437922009747644733
 BoxCollider2D:
