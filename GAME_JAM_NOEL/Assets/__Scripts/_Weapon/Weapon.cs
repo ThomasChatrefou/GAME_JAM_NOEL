@@ -14,6 +14,8 @@ public class Weapon : NetworkBehaviour
     private float timerReloadMax;
     [SerializeField]
     private GameObject baseProjectilePrefab;
+
+
     [SerializeField]
     private GameObject skillProjectilePrefab;
     [SerializeField] 
@@ -33,13 +35,24 @@ public class Weapon : NetworkBehaviour
     private GameObject pressKeyUI;
 
     [Header("Ground")] 
-    public bool onGround;
+    [SerializeField] 
+    private bool onGround;
     [SerializeField]
     private PlayerController nearbyPlayer;
+
+    [Header("Ammo")] 
+    [SerializeField] private bool isBaseWeapon;
+    [SerializeField]private int maxAmmo;
+    [SerializeField]private int actualAmmo;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         pressKeyUI.SetActive(false);
+        actualAmmo = maxAmmo;
+        //Set Ammo to max
     } 
 
     // Update is called once per frame
@@ -61,18 +74,40 @@ public class Weapon : NetworkBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
     
-    public void LaunchBaseProjectile(Vector2 direction, bool isFromEnemy = false)
+    public void LaunchProjectile(Vector2 direction, bool isFromEnemy = false)
     {
-        if (!hasShoot)
+        if (actualAmmo >= 1 || isBaseWeapon)
         {
-            Projectile proj = Instantiate(baseProjectilePrefab,firePos.position,
-                Quaternion.Euler(0,0,Mathf.Atan2(firePos.position.x, firePos.position.y) * Mathf.Rad2Deg))
-                .GetComponent<Projectile>();
-            proj.DirProjectile = direction;
-            proj.isFromEnemy = isFromEnemy;
-            proj.GetComponent<NetworkObject>().Spawn(true);
+            if (!hasShoot) {
+                Projectile proj = Instantiate(baseProjectilePrefab,firePos.position,
+                        Quaternion.Euler(0,0,Mathf.Atan2(firePos.position.x, firePos.position.y) * Mathf.Rad2Deg))
+                    .GetComponent<Projectile>();
+                proj.DirProjectile = direction;
+                proj.isFromEnemy = isFromEnemy;
+                proj.GetComponent<NetworkObject>().Spawn(true); 
+                
+                if (!isBaseWeapon)
+                {
+                    actualAmmo -= 1;    
+                }
+            }
+            hasShoot = true;
         }
-        hasShoot = true;
+        else
+        {
+            LaunchSpecialProjectile(direction,isFromEnemy);
+        }
+       
+    }
+    
+    public void LaunchSpecialProjectile(Vector2 direction, bool isFromEnemy = false)
+    {
+        Projectile proj = Instantiate(skillProjectilePrefab,firePos.position,
+                Quaternion.Euler(0,0,Mathf.Atan2(firePos.position.x, firePos.position.y) * Mathf.Rad2Deg))
+            .GetComponent<Projectile>();
+        proj.DirProjectile = direction;
+        proj.isFromEnemy = isFromEnemy;
+        proj.GetComponent<NetworkObject>().Spawn(true);
     }
 
     //TODO RPC
@@ -102,8 +137,9 @@ public class Weapon : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void MoveToParentServerRpc(ulong idGameObject)
     {
+        NetworkObject playerNetworkObj = NetworkManager.Singleton.ConnectedClients[idGameObject].PlayerObject;
         Debug.Log(GetComponent<NetworkObject>()
-                .TrySetParent(NetworkManager.Singleton.ConnectedClients[idGameObject].PlayerObject.transform));
+            .TrySetParent(playerNetworkObj.transform));
     }
 
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
@@ -112,6 +148,7 @@ public class Weapon : NetworkBehaviour
         transform.SetParent(parentNetworkObject.transform);
         transform.localPosition = Vector3.zero;
         SpawnWeaponGround(false);
+        parentNetworkObject.GetComponent<PlayerController>().PlayerWeapon = this;
     }
     
     public void SpawnWeaponGround(bool value)
@@ -164,4 +201,21 @@ public class Weapon : NetworkBehaviour
             }
         }
     }
+    
+    
+    public GameObject BaseProjectilePrefab
+    {
+        get => baseProjectilePrefab;
+        set => baseProjectilePrefab = value;
+    }
+
+    public GameObject SkillProjectilePrefab
+    {
+        get => skillProjectilePrefab;
+        set => skillProjectilePrefab = value;
+    }
+    
+    public int ActualAmmo => actualAmmo;
+    public bool IsBaseWeapon => isBaseWeapon;
+
 }

@@ -16,6 +16,8 @@ public class PlayerController : Character
     private GameObject shovelWeaponPrefab;
     [SerializeField] 
     private Weapon playerWeapon;
+
+
     [SerializeField] 
     private Vector2 crossPosition;
     private Weapon nearbyWeapon;
@@ -27,6 +29,7 @@ public class PlayerController : Character
         inputs = new PlayerInputs();
 
         inputs.Player.Shoot.performed += shootContext => Shoot();
+        inputs.Player.SpecialShoot.performed += shootContext => SpecialShoot();
         inputs.Player.Movement.performed += moveContext => Move(moveContext.ReadValue<Vector2>());
         inputs.Player.Movement.canceled += moveContext => Move(moveContext.ReadValue<Vector2>());
         inputs.Player.Interact.performed += interactContext => EquipWeapon(nearbyWeapon);
@@ -77,6 +80,12 @@ public class PlayerController : Character
         if(!IsOwner) return;
         AttackServerRpc(crossPosition,transform.position);
     }
+    
+    private void SpecialShoot()
+    {
+        if(!IsOwner) return;
+        SpecialAttackServerRpc(crossPosition,transform.position);
+    }
 
     private void OnEnable()
     {
@@ -91,23 +100,38 @@ public class PlayerController : Character
     public override void AttackServerRpc(Vector2 crossPosition, Vector2 playerPos)
     {
         Vector2 fireDir = crossPosition - playerPos;
-        playerWeapon.LaunchBaseProjectile(fireDir.normalized);
+
+        if (playerWeapon.ActualAmmo >= 1 || playerWeapon.IsBaseWeapon)
+        {
+            playerWeapon.LaunchProjectile(fireDir.normalized);
+        }
+        else
+        {
+            SpecialAttackServerRpc(crossPosition, playerPos);
+        }
+      
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    public void SpecialAttackServerRpc(Vector2 crossPosition, Vector2 playerPos)
+    {
+        if (playerWeapon.SkillProjectilePrefab != null)
+        {
+            Vector2 fireDir = crossPosition - playerPos;
+            playerWeapon.LaunchSpecialProjectile(fireDir.normalized);
+            //Re-equip Shovel Weapon
+            playerWeapon.DespawnWeaponServerRpc();
+            SpawnWeaponFromPlayerServerRpc();
+        }
     }
 
-    private void SkillAttack()
+    public void EquipWeapon(Weapon weapon)
     {
-        Debug.Log("LauchSkillAttack");
-    }
-
-    public void EquipWeapon(Weapon nearbyWeapon)
-    {
-        if (!IsOwner || !nearbyWeapon) return;
-        
-        Debug.Log(playerWeapon.enabled);
+        if (!IsOwner || !weapon) return;
         playerWeapon.DespawnWeaponServerRpc();
         
-        nearbyWeapon.MoveToParentServerRpc(GetComponent<NetworkObject>().OwnerClientId);
-        playerWeapon = nearbyWeapon;
+        weapon.MoveToParentServerRpc(GetComponent<NetworkObject>().OwnerClientId);
+        playerWeapon = weapon;
         //TODO Update UI Sprite
     }
     
@@ -115,6 +139,12 @@ public class PlayerController : Character
     {
         get => nearbyWeapon;
         set => nearbyWeapon = value;
+    }
+
+    public Weapon PlayerWeapon
+    {
+        get => playerWeapon;
+        set => playerWeapon = value;
     }
 
 }

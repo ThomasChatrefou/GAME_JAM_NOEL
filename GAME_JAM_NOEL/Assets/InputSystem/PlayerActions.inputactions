@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialShoot",
+                    "type": "Button",
+                    "id": "9235e57f-614f-41de-8ba5-9f1e30821710",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -229,6 +238,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f2cbcc4-559c-4843-a74d-3cbd88ec8afb",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SpecialShoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

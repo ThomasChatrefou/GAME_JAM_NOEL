@@ -494,9 +494,10 @@ MonoBehaviour:
   weaponSpriteHands: {fileID: 21300000, guid: 05e3b9dc3141a394b9f4c6ef1f26eac1, type: 3}
   colliderPlayerEquip2D: {fileID: 5939452962539936811}
   pressKeyUI: {fileID: 6418285653334924312}
-  textUI: {fileID: 0}
-  onGround: 0
   nearbyPlayer: {fileID: 0}
+  isBaseWeapon: 1
+  maxAmmo: 0
+  actualAmmo: 0
 --- !u!61 &5939452962539936811
 BoxCollider2D:
   m_ObjectHideFlags: 0
