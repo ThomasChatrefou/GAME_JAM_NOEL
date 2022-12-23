@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="623fa893-386a-4115-9343-d0f3a09852cf" name="Changes" comment="" />
+    <list default="true" id="623fa893-386a-4115-9343-d0f3a09852cf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GAME_JAM_NOEL/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/FuckingTreeDrop.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/Weapon/FuckingTreeDrop.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/ValentinMain.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/__Scripts/_Weapon/Projectile.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,11 +17,13 @@
     <setting file="file://$PROJECT_DIR$/Assets/__Scripts/_Characters/Character.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/__Scripts/_Characters/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/__Scripts/_Weapon/Weapon.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.4.4/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.1.0/Components/NetworkTransform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.1.0/Runtime/Core/NetworkBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.1.0/Runtime/Core/NetworkObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.1.0/Runtime/Logging/NetworkLog.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.1.0/Runtime/Messaging/Messages/RpcMessages.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.netcode.gameobjects@1.1.0/Runtime/Spawning/NetworkSpawnManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -92,6 +99,8 @@
       <workItem from="1671527594838" duration="13184000" />
       <workItem from="1671545550110" duration="6883000" />
       <workItem from="1671610122361" duration="10667000" />
+      <workItem from="1671696573906" duration="14226000" />
+      <workItem from="1671737839986" duration="3831000" />
     </task>
     <servers />
   </component>

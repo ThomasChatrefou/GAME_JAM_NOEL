@@ -32,14 +32,15 @@ public abstract class Character : NetworkBehaviour
         {
             lastProjectileTaken = projectile;
             health -= projectile.DamageProjectile;
-            if(health <= 0){
-                Die();
+            if(health <= 0){    
+                DieServerRpc();
             }
         }
       
     }
 
-    protected virtual void Die()
+    [ServerRpc(RequireOwnership = false)]
+    protected virtual void DieServerRpc()
     {
         Debug.Log("Character " + gameObject.name + " Die");
         isDead = true;
