@@ -642,6 +642,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameEnd
       objectReference: {fileID: 0}
+    - target: {fileID: 3239593619360095719, guid: 4e48f451dd0513248b724b53e17acc3e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e48f451dd0513248b724b53e17acc3e, type: 3}
 --- !u!1 &5504742236401797099 stripped
@@ -673,6 +678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GamePartLaunches
+      objectReference: {fileID: 0}
+    - target: {fileID: 2392376811500076691, guid: eab07a2e736a2464f9471664e0fb1226,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2392376811500076692, guid: eab07a2e736a2464f9471664e0fb1226,
         type: 3}

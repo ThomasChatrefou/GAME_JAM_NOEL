@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(NetworkObject))]
 public class GameModeChoice : NetworkBehaviour
 {
     [SerializeField] private GameMode[] options;

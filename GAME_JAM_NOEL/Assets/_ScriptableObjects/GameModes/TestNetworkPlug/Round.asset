@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ce206d34400b845adce11c97e00905, type: 3}
   m_Name: Round
   m_EditorClassIdentifier: 
-  Duration: 10
+  Duration: 2
   Spawn:
   - EnemyPrefab: {fileID: 3005033762924187302, guid: d0bf58b8383845142a1819954cc4f4c4,
       type: 3}
     Zones:
     - {fileID: 11400000, guid: 5e70fc2e058b8c44c88211d482f67359, type: 2}
-    Amount: 10
+    Amount: 2
     Period: 0.1
     ActivationTiming: 0
     StopTiming: 1
@@ -27,7 +27,7 @@ MonoBehaviour:
       type: 3}
     Zones:
     - {fileID: 11400000, guid: 37cd88e6271bc4948a0211027d298ab9, type: 2}
-    Amount: 10
+    Amount: 2
     Period: 0.1
     ActivationTiming: 0
     StopTiming: 1
@@ -36,7 +36,7 @@ MonoBehaviour:
       type: 3}
     Zones:
     - {fileID: 11400000, guid: b2788a07cdf683f478a67c3fb5d8a62d, type: 2}
-    Amount: 10
+    Amount: 2
     Period: 0.1
     ActivationTiming: 0.5
     StopTiming: 1
@@ -45,7 +45,7 @@ MonoBehaviour:
       type: 3}
     Zones:
     - {fileID: 11400000, guid: 84abdd9ee1fd76a42b296e0fc52c0749, type: 2}
-    Amount: 10
+    Amount: 2
     Period: 0.1
     ActivationTiming: 0.5
     StopTiming: 1
