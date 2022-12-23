@@ -62,7 +62,7 @@ public class Weapon : NetworkBehaviour
             }
         }
 
-        if (IsOwner)
+        if (IsOwner && !onGround)
         {
             UpdateAimPosition();
             HandleRotation();

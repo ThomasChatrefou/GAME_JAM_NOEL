@@ -144,9 +144,6 @@ public class RoundManager : NetworkBehaviour
 
     private void Update()
     {
-        if(!IsHost)
-            return;
-
         float time = Time.deltaTime;
         timeSinceRoundStart += time;
 
