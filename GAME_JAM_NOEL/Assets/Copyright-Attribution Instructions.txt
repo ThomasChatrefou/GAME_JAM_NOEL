@@ -1,0 +1,21 @@
+Musique :
+	ArticBeat => Ted Kerr
+	When Snow Become Ashes => https://www.youtube.com/c/AlexandrZhelanovsMusic
+	Winter Snow = > TomPeter
+
+GUI :
+	RPG&Fantasy Mobile GUI => >Bonk! slightly professional
+
+Tileset : 
+	RPG Nature Tileset Snow => Stealthix, source : itch io
+
+Asset :
+	Goblin => Elthen's Pixel Art Shop, itch io
+	Snowman => Azzarc, OpenGameArt
+	Saplin => b_o , OpenGameArt
+	Player => bluecarrot16, OpenGameArt
+	Shovel => AntumDeluge, OpenGameArt
+	Weapons :
+			pixel_icons => OceansDream, OpenGameArt 
+			roguelikeitems => Joe Williamson, OpenGameArt
+			Almost Weapons Icons => Fleurman, OpenGameArt

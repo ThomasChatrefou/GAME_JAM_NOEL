@@ -170,10 +170,7 @@ public class UserInterfaceManager : MonoBehaviour
         LobbyManager.Instance.CreateLobby();
         OnHideLobbyCreation();
 
-        if(PanelKonamiCode != null)
-        {
-            PanelKonamiCode.SetActive(true);
-        }
+        PanelKonamiCode.SetActive(true);
         lobbySelectionCanvas.SetActive(false);
         lobbyMenuCanvas.SetActive(true);
         ClearMemberList();
@@ -229,10 +226,7 @@ public class UserInterfaceManager : MonoBehaviour
     {
         startGameButton.interactable = false;
         lobbyMenuCanvas.SetActive(false);
-        if (PanelKonamiCode != null)
-        {
-            PanelKonamiCode.SetActive(true);
-        }
+        PanelKonamiCode.SetActive(false);
         inGameHUDCanvas.SetActive(true);
 
         LobbyManager.Instance.StartGame();
@@ -244,6 +238,7 @@ public class UserInterfaceManager : MonoBehaviour
         startGameButton.interactable = false;
         lobbyMenuCanvas.SetActive(false);
         lobbySelectionCanvas.SetActive(true);
+        PanelKonamiCode.SetActive(false);
         ClearLobbyList();
         LobbyManager.Instance.LeaveLobby();
     }

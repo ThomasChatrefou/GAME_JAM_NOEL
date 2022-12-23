@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,6 +23,7 @@ public class GameManager : NetworkBehaviour
 
     [Header("Refs")]
     [SerializeField] private PlayerController[] players;
+    public PlayerController[] PlayerList => players;
     [SerializeField] private GameMode gameMode;
     [SerializeField] private RoundManager roundManager;
     public Transform topLeft, bottomRight;
@@ -32,6 +34,16 @@ public class GameManager : NetworkBehaviour
     [Header("Local Test Variables")]
     [SerializeField] private bool isRunning;
 
+    public bool CheckForAlivePlayer()
+    {
+        bool atLeastOnePlayerAlive = false;
+        foreach (PlayerController player in players)
+            if (!player.IsDead)
+                atLeastOnePlayerAlive = true;
+
+        return atLeastOnePlayerAlive;
+    }
+
     public void UpdateGameMode(GameMode _gameMode)
     {
         gameMode = _gameMode;
@@ -39,12 +51,9 @@ public class GameManager : NetworkBehaviour
 
     public bool IsRunning => isRunning;
 
-    [Tooltip("do delete when checked as good")]
-    public bool hasbeenlaunched;
-
     [Header("Client Events")]
     public UnityEvent OnLaunchGame;
-    public UnityEvent OnEndGame;
+    public UnityEvent<bool> OnEndGame;
 
     public override void OnNetworkSpawn()
     {
@@ -52,18 +61,7 @@ public class GameManager : NetworkBehaviour
 
         //isRunning.OnValueChanged += GameOnUpdate;
         isRunningupdate.AddListener(GameOnUpdate);
-        hasbeenlaunched = false;
     }
-
-    /*private void Update()
-    {
-        if (isRunning && !hasbeenlaunched)
-        {
-            roundManager.Init(gameMode, this);
-            roundManager.Launch();
-            hasbeenlaunched = true;
-        }
-    }*/
     
     #region ServerRpc
     //[ServerRpc]
@@ -75,15 +73,16 @@ public class GameManager : NetworkBehaviour
 
         //lacks smth but can't remember what
 
-        //foreach (PlayerController playerController in players)
-        //    playerController.OnPlayerDeath.AddListener(CheckGameState);
-
-        Debug.LogWarning("On passe par LaunchGame de GameManager");
+        players = FindObjectsOfType<PlayerController>();
+        foreach (PlayerController playerController in players)
+            playerController.transform.parent = transform;
 
         /* Actual Launching */
         isRunning = true;
         isRunningupdate.Invoke();
         roundManager.Launch();
+
+        StartCoroutine(WaitForGameEnd());
     }
     
     #endregion
@@ -97,7 +96,7 @@ public class GameManager : NetworkBehaviour
         if (isRunning)
             OnLaunchGame.Invoke();
         else
-            OnEndGame.Invoke();
+            OnEndGame.Invoke(CheckForAlivePlayer());
     }
 
     #endregion
@@ -109,18 +108,42 @@ public class GameManager : NetworkBehaviour
         isRunningupdate.Invoke();
     }
     
-    private void CheckGameState()
+    private IEnumerator WaitForGameEnd()
     {
-        Debug.LogWarning("Need to Check if any Player is still alive !");
+        Debug.Log("launching End Condition Check");
 
-        /*
-        foreach (PlayerController player in players)
+        while (!EndConditionsMet())
         {
-            if(player.IsAlive)
-                return;
-        }*/
+            Debug.Log("going through End Condition Check");
+            yield return new WaitForSeconds(1f);
+        }
 
+        Debug.LogWarning("End Condition was met !");
         EndGame();
+    }
+
+    private bool EndConditionsMet()
+    {
+        if (roundManager.IsSpawning)
+            return false;
+
+        Debug.Log("done preparing and spawning");
+
+        bool playersAlive = CheckForAlivePlayer();
+
+        if (!CheckForAlivePlayer())
+            return true;
+        
+        Debug.Log("not all players are dead");
+
+        if (roundManager.AllEnemiesDead())
+        {
+            Debug.Log("all enemies are dead");
+            return true;
+        }
+
+        Debug.Log("not all enemies are dead");
+        return false;
     }
 
     #endregion

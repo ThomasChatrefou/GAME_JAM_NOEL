@@ -2,25 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RusherRoot", menuName = "ScriptableObjects/BT/Rusher/Node/Root")]
-public class RusherRoot : BT_Root
+[CreateAssetMenu(fileName = "BaseRoot", menuName = "ScriptableObjects/BT/BaseEnemy/Node/Root")]
+public class BaseRoot : BT_Root
 {
-    [SerializeField] private float speed;
-
     public override BT_Node Clone(BT_BlackBoard blackboard)
     {
-        RusherRoot clone = CreateInstance<RusherRoot>();
+        BaseRoot clone = CreateInstance<BaseRoot>();
 
         clone._blackBoard = blackboard;
         clone.child = child.Clone(blackboard);
-
-        clone.speed = speed;
 
         return clone;
     }
 
     public override void Init()
     {
-        _blackBoard.SetFloat("Speed", speed);
+        _blackBoard.SetObject("Players", new List<PlayerController>(GameManager.Instance.PlayerList));
     }
 }

@@ -11,6 +11,7 @@ public class KonamiCode : MonoBehaviour
 
     public GameObject playerCheat;
     
+
     private NetworkManager networkManager;
     private GameObject playerKonamiCode;
 
@@ -28,7 +29,10 @@ public class KonamiCode : MonoBehaviour
         KeyCode.A
     };
 
-    IEnumerator Start()
+    
+
+
+    IEnumerator Code()
     {
         float timer = 0f;
         int index = 0;
@@ -80,8 +84,13 @@ public class KonamiCode : MonoBehaviour
         }
     }
 
+
     void Update()
     {
+
+        StartCoroutine(Code());
+
+
         if (success == true)
         {
             successText.gameObject.SetActive(true);

@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 30
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -3668,10 +3668,10 @@ TextureImporter:
       Download67448_117: -1950582678
       Download67448_11: 61031713
       Download67448_31: -257945256
-      Download67448_0: -1924089531
+      Download67448_131: 1484799669
       Download67448_63: -279497642
       Download67448_162: 1776029444
-      Download67448_131: 1484799669
+      Download67448_67: -767041471
       Download67448_163: -1659520223
       Download67448_79: -2003498775
       Download67448_145: -1660996087
@@ -3696,10 +3696,10 @@ TextureImporter:
       Download67448_10: 226963538
       Download67448_147: -1162856724
       Download67448_160: 1641510961
-      Download67448_105: 1029701888
-      Download67448_62: 1124043802
-      Download67448_51: -442306124
       Download67448_92: -1739600036
+      Download67448_105: 1029701888
+      Download67448_51: -442306124
+      Download67448_62: 1124043802
       Download67448_69: -1353137617
       Download67448_123: 314823230
       Download67448_82: -307105163
@@ -3832,7 +3832,7 @@ TextureImporter:
       Download67448_120: -461342189
       Download67448_125: 118894466
       Download67448_26: 1570737666
-      Download67448_67: -767041471
+      Download67448_0: -1924089531
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
