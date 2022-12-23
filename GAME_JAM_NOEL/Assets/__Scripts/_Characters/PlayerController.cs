@@ -19,7 +19,7 @@ public class PlayerController : Character
     private Vector2 crossPosition;
     [SerializeField] 
     private Weapon nearbyWeapon;
-    
+
     private void Awake()
     {
         mouseDetection = FindObjectOfType<MouseDetection>();
@@ -33,7 +33,18 @@ public class PlayerController : Character
 
     private void Start()
     {
-        playerWeapon = Instantiate(shovelWeaponPrefab, shovelWeaponPrefab.transform.position, Quaternion.identity,transform).GetComponent<Weapon>();
+        if (!IsOwner) return;
+        SpawnMyWeaponServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = true)]
+    private void SpawnMyWeaponServerRpc()
+    {
+        playerWeapon = Instantiate(shovelWeaponPrefab, transform.position, Quaternion.identity, transform).GetComponent<Weapon>();
+        playerWeapon.weaponOwner = this;
+        NetworkObject weaponNO = playerWeapon.GetComponent<NetworkObject>();
+        weaponNO.SpawnWithOwnership(GetComponent<NetworkObject>().OwnerClientId);
+        weaponNO.TrySetParent(gameObject);
     }
 
     private void FixedUpdate()
@@ -43,6 +54,7 @@ public class PlayerController : Character
 
     private void Update()
     {
+        if (!IsOwner) return;
         Tic();
         //TODO Faire viser le personnage où la souris est placée uniquement si c'est le perso du client 
         crossPosition = mouseDetection.MousePos;
@@ -60,7 +72,6 @@ public class PlayerController : Character
             speedDirection = Vector2.zero;
         }
     }
-
 
     private void Shoot()
     {
@@ -81,7 +92,7 @@ public class PlayerController : Character
     public override void AttackServerRpc(Vector2 crossPosition, Vector2 playerPos)
     {
         Vector2 fireDir = crossPosition - playerPos;
-        playerWeapon.LaunchBaseProjectile(fireDir.normalized);
+        playerWeapon.LaunchBaseProjectile(crossPosition);
     }
 
     private void SkillAttack()

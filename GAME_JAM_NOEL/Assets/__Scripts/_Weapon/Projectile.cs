@@ -39,7 +39,7 @@ public class Projectile : NetworkBehaviour
         rgbd.velocity = (dirProjectile * speedProjectile);
         var zAngle = Mathf.Atan2(dirProjectile.x, dirProjectile.y) * Mathf.Rad2Deg;
         // Store the target rotation
-        transform.rotation = Quaternion.Euler(0,0, zAngle);
+        //transform.rotation = Quaternion.Euler(0,0, zAngle);
     }
 
     [ServerRpc(RequireOwnership = false)]

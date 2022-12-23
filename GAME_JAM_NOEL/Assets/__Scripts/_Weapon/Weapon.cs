@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public struct WeaponData : INetworkSerializable
 {
@@ -45,13 +48,15 @@ public class Weapon : NetworkBehaviour
     [Header("Ground")] 
     public bool onGround;
     private PlayerController nearbyPlayer;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    } 
 
-    // Update is called once per frame
+    public PlayerController weaponOwner;
+
+    private NetworkVariable<Vector2> aimPosition = new NetworkVariable<Vector2>(
+        Vector2.zero,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner
+        );
+
     void Update()
     {
         if (hasShoot)
@@ -71,6 +76,37 @@ public class Weapon : NetworkBehaviour
                 //TODO Display Grab Key
             }
         }
+
+        if (IsOwner)
+        {
+            UpdateAimPosition();
+            HandleRotation();
+        }
+
+    }
+
+    private void UpdateAimPosition()
+    {
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        aimPosition.Value = new Vector2(worldPosition.x, worldPosition.y);
+    }
+
+    public Vector3 GetAimPosition()
+    {
+        return new Vector3(aimPosition.Value.x, aimPosition.Value.y, 0f);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, GetAimPosition());
+    }
+
+    private void HandleRotation()
+    {
+        Vector3 aimDirection = (GetAimPosition() - transform.position).normalized;
+        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        transform.eulerAngles = new Vector3(0, 0, angle);
     }
 
     private void OnEnable()
@@ -80,14 +116,13 @@ public class Weapon : NetworkBehaviour
     }
 
     //TODO RPC
-    public void LaunchBaseProjectile(Vector2 direction, bool isFromEnemy = false)
+    public void LaunchBaseProjectile(Vector2 mousePosition, bool isFromEnemy = false)
     {
         if (!hasShoot)
         {
-            Projectile proj = Instantiate(baseProjectilePrefab,firePos.position,
-                Quaternion.Euler(0,0,Mathf.Atan2(firePos.position.x, firePos.position.y) * Mathf.Rad2Deg))
-                .GetComponent<Projectile>();
-            proj.DirProjectile = direction;
+            GameObject projectileGO = Instantiate(baseProjectilePrefab, firePos.position, firePos.rotation);
+            Projectile proj = projectileGO.GetComponent<Projectile>();
+            proj.DirProjectile = (mousePosition - new Vector2(transform.position.x, transform.position.y)).normalized;
             proj.isFromEnemy = isFromEnemy;
             proj.GetComponent<NetworkObject>().Spawn(true);
         }

@@ -156,6 +156,7 @@ MonoBehaviour:
     type: 3}
   playerWeapon: {fileID: 0}
   crossPosition: {x: 0, y: 0}
+  nearbyWeapon: {fileID: 0}
 --- !u!114 &5019378520150716575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +190,7 @@ MonoBehaviour:
   SyncPositionZ: 0
   SyncRotAngleX: 0
   SyncRotAngleY: 0
-  SyncRotAngleZ: 1
+  SyncRotAngleZ: 0
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
