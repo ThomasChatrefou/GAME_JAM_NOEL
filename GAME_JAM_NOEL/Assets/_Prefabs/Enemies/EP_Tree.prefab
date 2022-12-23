@@ -14,9 +14,12 @@ GameObject:
   - component: {fileID: 4159794920957104730}
   - component: {fileID: 4159794920957104731}
   - component: {fileID: 4159794920957104734}
+  - component: {fileID: 4492695962639387028}
+  - component: {fileID: -850570625670137988}
+  - component: {fileID: -2698908603720585342}
   m_Layer: 0
   m_Name: EP_Tree
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,15 +162,75 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  speedValue: 10
+  speedValue: 5
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
   lootedWeapon: {fileID: 8765429010469821169, guid: 3e24109172b48454ca00f36424b7d56b,
     type: 3}
-  willLootWeapon: 0
+  willLootWeapon: 1
+  isInMoveMode: 0
   moveModeSprite: {fileID: -642102867, guid: 2dbab09e0b28b1a41a1b9870b55ae3c3, type: 3}
   invincibleModeSprite: {fileID: -1917382583, guid: 2dbab09e0b28b1a41a1b9870b55ae3c3,
     type: 3}
   moveModeDuration: 3
   invincibleModeDuration: 2
+--- !u!50 &4492695962639387028
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159794920957104724}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-850570625670137988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159794920957104724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 0
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 0
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+--- !u!114 &-2698908603720585342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159794920957104724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -9,6 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3005033762924187296, guid: d0bf58b8383845142a1819954cc4f4c4,
         type: 3}
+      propertyPath: speedValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005033762924187296, guid: d0bf58b8383845142a1819954cc4f4c4,
+        type: 3}
       propertyPath: lootedWeapon
       value: 
       objectReference: {fileID: 0}

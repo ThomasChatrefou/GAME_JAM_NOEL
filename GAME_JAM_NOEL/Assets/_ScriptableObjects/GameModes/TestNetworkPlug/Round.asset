@@ -40,7 +40,7 @@ MonoBehaviour:
     Period: 0.1
     ActivationTiming: 0.5
     StopTiming: 1
-    WeaponRate: 0.1
+    WeaponRate: 1
   - EnemyPrefab: {fileID: 8175706485043350527, guid: 7444ba123fdcb5443bbee4006666dddb,
       type: 3}
     Zones:

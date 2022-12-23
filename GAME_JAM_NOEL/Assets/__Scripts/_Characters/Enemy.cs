@@ -32,6 +32,12 @@ public class Enemy : Character
         aiTree.StartBehaviour();
     }
 
+    protected virtual void Update()
+    {
+        if (health <= 0 && !isDead)
+            DieServerRpc();
+    }
+
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
