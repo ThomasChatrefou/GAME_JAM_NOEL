@@ -2,19 +2,46 @@ using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
 
+[RequireComponent(typeof(BT_Tree))]
 public class Enemy : Character
 {
-    private SpriteRenderer spriteRenderer;
+    [Header("Enemy")]
+    protected SpriteRenderer spriteRenderer;
     [SerializeField] 
     private GameObject lootedWeapon;
     [SerializeField]
     private bool willLootWeapon;
 
+    private BT_Tree aiTree;
+    protected Transform target;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        aiTree = GetComponent<BT_Tree>();
+        aiTree.SetupTree();
+        aiTree.StartBehaviour();
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        if (target != null)
+        {
+            transform.position += Time.fixedDeltaTime * speedValue * (target.position - transform.position).normalized;
+        }
+    }
+
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
+    }
+
     [ServerRpc(RequireOwnership = false)]
     protected override void DieServerRpc()
     {

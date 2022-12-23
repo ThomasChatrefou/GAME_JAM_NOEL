@@ -30,6 +30,7 @@ public class PlayerController : Character
     {
         inputs.Enable();
     }
+
     private void OnDisable()
     {
         inputs.Disable();

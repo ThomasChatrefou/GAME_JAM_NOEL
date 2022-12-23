@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Projectile : NetworkBehaviour
+public class Projectile : MonoBehaviour
 {
     [SerializeField]
     private float speedProjectile;
