@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 2402794893409346868}
   - component: {fileID: 2402794893409346869}
   - component: {fileID: 2402794893409346871}
-  - component: {fileID: 2402794893409346865}
   - component: {fileID: 2402794893409346875}
   - component: {fileID: 4437922009747644733}
   - component: {fileID: 1015453048312059259}
   - component: {fileID: 5593642366606723300}
+  - component: {fileID: 7769010112202840363}
   m_Layer: 0
   m_Name: ProjectileFuckingTree
   m_TagString: Untagged
@@ -111,22 +111,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &2402794893409346865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2402794893409346866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &2402794893409346875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,12 +124,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedProjectile: 0
-  lifeSpawn: 0.5
+  lifeSpan: 0.2
   damageProjectile: 40
-  knockbackProjectile: 0
-  dirProjectile: {x: 0, y: 0}
   isDestroyedOnFirstHit: 0
   isFromEnemy: 0
+  onSpawnEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ParentWeapon: {fileID: 0}
+  HitEffectPrefab: {fileID: 0}
+  cameraShakeIntensity: 0
+  cameraShakeDuration: 0
+  cameraShakeFrequency: 0
+  graphicsOrientation: {x: 0, y: 0, z: 0}
 --- !u!61 &4437922009747644733
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -210,3 +201,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7769010112202840363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402794893409346866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1

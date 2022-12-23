@@ -27,8 +27,8 @@ public class Weapon : NetworkBehaviour
     [Header("Ammo")]
     [SerializeField] private bool isBaseWeapon;
     [SerializeField] private int maxAmmo;
-    
-    private int actualAmmo;
+
+    [SerializeField] private int actualAmmo;
 
     private SpriteRenderer spriteRenderer;
     private PlayerController nearbyPlayer;
@@ -178,13 +178,20 @@ public class Weapon : NetworkBehaviour
     public void MoveToParentServerRpc(ulong idGameObject)
     {
         NetworkObject playerNetworkObj = NetworkManager.Singleton.ConnectedClients[idGameObject].PlayerObject;
-        Debug.Log(GetComponent<NetworkObject>().TrySetParent(playerNetworkObj.transform));
+        NetworkObject networkObject = GetComponent<NetworkObject>();
+        Debug.Log(networkObject.TrySetParent(playerNetworkObj.transform));
+        networkObject.ChangeOwnership(idGameObject);
+        transform.localPosition = Vector3.zero;
+        SpawnWeaponGround(false);
     }
 
     public override void OnNetworkObjectParentChanged(NetworkObject parentNetworkObject)
     {
-        transform.localPosition = Vector3.zero;
-        SpawnWeaponGround(false);
+        if(!IsOwner)
+            return;
+
+        //transform.localPosition = Vector3.zero;
+        //SpawnWeaponGround(false);
     }
 
     public void SpawnWeaponGround(bool value)

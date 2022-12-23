@@ -71,7 +71,8 @@ public class PlayerController : Character
 
     private void Shoot()
     {
-        if(!IsOwner) return;
+        if(!IsOwner || !GameManager.Instance.IsRunning)
+            return;
         OnShootServerRpc();
     }
 

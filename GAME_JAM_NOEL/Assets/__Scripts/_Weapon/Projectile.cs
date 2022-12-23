@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private bool isDestroyedOnFirstHit;
 
-    [HideInInspector] public bool isFromEnemy;
+    public bool isFromEnemy;
 
     public UnityEvent onSpawnEvent;
     private Rigidbody2D rgbd;
@@ -61,23 +61,32 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Character character = other.GetComponent<Character>();
-        character.TakeDamage(this);
-
-        if (!isFromEnemy)
+        if (isFromEnemy)
+        {
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log("HitPlayer");
+                character.TakeDamage(this);
+            }
+        }
+        else
         {
             if (other.CompareTag("Enemy"))
             {
+                Debug.Log("HitEnemy");
+                character.TakeDamage(this);
+
+                if(!HitEffectPrefab)
+                    return;
+
                 GameObject particlesGO = Instantiate(HitEffectPrefab, character.transform.position, Quaternion.identity);
                 particlesGO.transform.eulerAngles = transform.eulerAngles + graphicsOrientation;
-                if (ParentWeapon == null) return;
-                if (!ParentWeapon.IsOwner) return;
+
+                if (ParentWeapon == null || !ParentWeapon.IsOwner)
+                    return;
+
                 CameraShaker.Instance.ShakeCamera(cameraShakeIntensity, cameraShakeDuration, cameraShakeFrequency);
             }
-        }
-
-        if (isDestroyedOnFirstHit)
-        {
-            Destroy(gameObject);
         }
     }
 

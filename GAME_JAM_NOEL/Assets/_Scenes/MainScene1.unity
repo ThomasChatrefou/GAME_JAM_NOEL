@@ -543,12 +543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc043de67e9f9d49bc46cebd3c60c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &623270953 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5504742237729865051, guid: b6a5e93599d654a4fab66049da75e9bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 623270947}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &669401613
 GameObject:
   m_ObjectHideFlags: 0
@@ -7574,64 +7568,86 @@ PrefabInstance:
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.size
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].Prefab
       value: 
-      objectReference: {fileID: 5019378520150716569, guid: 2e43bbb87f34b9d49a9f17925f2815fd,
+      objectReference: {fileID: 5019378520150716569, guid: 21a8f113e76be5e428663d93288038ab,
         type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[1].Prefab
       value: 
-      objectReference: {fileID: 2761044399194319393, guid: 4504ba4212fdfd04f825ef27b6e3cc6d,
+      objectReference: {fileID: 5019378520150716569, guid: 2e43bbb87f34b9d49a9f17925f2815fd,
         type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[2].Prefab
       value: 
-      objectReference: {fileID: 8765429010469821169, guid: 978525fa936920a428a330a978d66de2,
+      objectReference: {fileID: 4159794920957104724, guid: 7b430a56990bbd243b713e2c563cfee6,
         type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[3].Prefab
       value: 
-      objectReference: {fileID: 2402794893409346866, guid: cf9d08890e088f840b182a89c56c0b03,
+      objectReference: {fileID: 2761044399194319393, guid: 4504ba4212fdfd04f825ef27b6e3cc6d,
         type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[4].Prefab
       value: 
-      objectReference: {fileID: 4159794920957104724, guid: 7b430a56990bbd243b713e2c563cfee6,
+      objectReference: {fileID: 8765429010469821169, guid: 978525fa936920a428a330a978d66de2,
         type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[5].Prefab
       value: 
-      objectReference: {fileID: 5019378520150716569, guid: 21a8f113e76be5e428663d93288038ab,
+      objectReference: {fileID: 8765429010469821169, guid: e66878528489a3c4f967f5fa448d1c02,
         type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[6].Prefab
       value: 
-      objectReference: {fileID: 623270953}
+      objectReference: {fileID: 8765429010469821169, guid: 3e24109172b48454ca00f36424b7d56b,
+        type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[7].Prefab
       value: 
-      objectReference: {fileID: 623270953}
+      objectReference: {fileID: 8851459940737141410, guid: 0bab0bb7c9020b64bb76ab77bd6ea9a7,
+        type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[8].Prefab
       value: 
-      objectReference: {fileID: 623270953}
+      objectReference: {fileID: 2402794893409346866, guid: cf9d08890e088f840b182a89c56c0b03,
+        type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[9].Prefab
       value: 
-      objectReference: {fileID: 623270953}
+      objectReference: {fileID: 2402794893409346866, guid: fe0ceeebd0ef874419e527025276a9f8,
+        type: 3}
+    - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
+        type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[10].Prefab
+      value: 
+      objectReference: {fileID: 2402794893409346866, guid: 491e977083af70c4b8effebe14594fee,
+        type: 3}
+    - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
+        type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[11].Prefab
+      value: 
+      objectReference: {fileID: 2402794893409346866, guid: 6979a8c40ef4d4d4ba539841fb1470ed,
+        type: 3}
+    - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
+        type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[12].Prefab
+      value: 
+      objectReference: {fileID: 2402794893409346866, guid: 7c5cf6f94a90d5141a219f7bc8f5b80f,
+        type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].Override
@@ -7640,6 +7656,11 @@ PrefabInstance:
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[0].SourcePrefabToOverride
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
+        type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[1].SourcePrefabToOverride
       value: 
       objectReference: {fileID: 5019378520150716569, guid: 2e43bbb87f34b9d49a9f17925f2815fd,
         type: 3}
@@ -8270,7 +8291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: INSERT TITLE
+  m_text: La survie des Lutins
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
