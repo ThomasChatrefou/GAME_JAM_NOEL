@@ -411,7 +411,6 @@ MonoBehaviour:
   shovelWeaponPrefab: {fileID: 0}
   playerWeapon: {fileID: 0}
   crossPosition: {x: 0, y: 0}
-  nearbyWeapon: {fileID: 0}
 --- !u!114 &289940254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1557,7 +1556,6 @@ GameObject:
   m_Component:
   - component: {fileID: 850294879}
   - component: {fileID: 850294878}
-  - component: {fileID: 850294880}
   m_Layer: 0
   m_Name: KonamiCode
   m_TagString: Untagged
@@ -1596,22 +1594,6 @@ Transform:
   m_Father: {fileID: 1940429235}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &850294880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850294876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3071305773
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1 &867874376
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,7 +3182,7 @@ PrefabInstance:
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
