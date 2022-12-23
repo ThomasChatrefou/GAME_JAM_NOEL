@@ -7520,6 +7520,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3959703930408436093, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
+        type: 3}
+      propertyPath: m_TagString
+      value: NetworkManager
+      objectReference: {fileID: 0}
     - target: {fileID: 3959703930408436094, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
       propertyPath: m_ProtocolType
@@ -7570,7 +7575,7 @@ PrefabInstance:
         type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[5].Prefab
       value: 
-      objectReference: {fileID: 5019378520150716569, guid: 42d082a4147a2554f85778dc7615ee70,
+      objectReference: {fileID: 5019378520150716569, guid: 21a8f113e76be5e428663d93288038ab,
         type: 3}
     - target: {fileID: 3959703930408436095, guid: 9bc2f05b8b72f3146b2da39dee3b5103,
         type: 3}
@@ -7901,6 +7906,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PanelKonamiCode
       objectReference: {fileID: 0}
+    - target: {fileID: 3486060101746998267, guid: fe9ddf966e025fe429bca1c991ef0c23,
+        type: 3}
+      propertyPath: playerCheat
+      value: 
+      objectReference: {fileID: 5019378520150716569, guid: 21a8f113e76be5e428663d93288038ab,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe9ddf966e025fe429bca1c991ef0c23, type: 3}
 --- !u!224 &2118728234 stripped

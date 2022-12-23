@@ -79,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9000
-  m_Sprite: {fileID: 21300000, guid: a71636f38d81d8149ad5dacc5cd50111, type: 3}
-  m_Color: {r: 0.09811318, g: 1, b: 0.92942053, a: 1}
+  m_Sprite: {fileID: -2005650511, guid: f69d9046b4eb69943a0b13deffceea94, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,18 +103,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.000000059604645, y: -0.0027123094}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.85, y: 1.85}
+    oldSize: {x: 0.64444447, y: 1.1777778}
     newSize: {x: 1.85, y: 1.85}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7740544, y: 1.7686297}
+  m_Size: {x: 0.65, y: 1.2}
   m_EdgeRadius: 0
 --- !u!50 &5019378520150716568
 Rigidbody2D:
@@ -149,14 +149,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5859fe48c3bef4684f39efaca06ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  speedValue: 40
+  health: 100
+  speedValue: 20
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   speedDirection: {x: 0, y: 0}
   shovelWeaponPrefab: {fileID: 8765429010469821169, guid: 978525fa936920a428a330a978d66de2,
     type: 3}
-  playerWeapon: {fileID: 0}
-  crossPosition: {x: 0, y: 0}
-  nearbyWeapon: {fileID: 0}
 --- !u!114 &5019378520150716575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   SyncPositionZ: 0
   SyncRotAngleX: 0
   SyncRotAngleY: 0
-  SyncRotAngleZ: 1
+  SyncRotAngleZ: 0
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0

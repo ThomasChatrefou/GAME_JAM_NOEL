@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - PlayerContainer
+  - NetworkManager
   layers:
   - Default
   - TransparentFX
