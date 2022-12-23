@@ -238,7 +238,7 @@ public class UserInterfaceManager : MonoBehaviour
         startGameButton.interactable = false;
         lobbyMenuCanvas.SetActive(false);
         lobbySelectionCanvas.SetActive(true);
-        //PanelKonamiCode.SetActive(false);
+        PanelKonamiCode.SetActive(false);
         ClearLobbyList();
         LobbyManager.Instance.LeaveLobby();
     }

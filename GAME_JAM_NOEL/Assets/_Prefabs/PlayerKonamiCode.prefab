@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 9000
   m_Sprite: {fileID: 21300000, guid: a71636f38d81d8149ad5dacc5cd50111, type: 3}
-  m_Color: {r: 0.09811318, g: 1, b: 0.92942053, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.9217391, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -156,7 +156,6 @@ MonoBehaviour:
     type: 3}
   playerWeapon: {fileID: 0}
   crossPosition: {x: 0, y: 0}
-  nearbyWeapon: {fileID: 0}
 --- !u!114 &5019378520150716575
 MonoBehaviour:
   m_ObjectHideFlags: 0

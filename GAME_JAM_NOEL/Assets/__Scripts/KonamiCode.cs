@@ -1,94 +1,40 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using Unity.Netcode;
 
 public class KonamiCode : MonoBehaviour
 {
-    private const float WaitTime = 1f;
+
+    
     public Text successText;
     public bool success;
-    private bool corou = true;
 
     public GameObject playerCheat;
-    
 
     private NetworkManager networkManager;
     private GameObject playerKonamiCode;
 
-    private KeyCode[] keys = new KeyCode[]
+    private List<string> _keyStrokeHistory;
+
+    void Awake()
     {
-        KeyCode.UpArrow,
-        KeyCode.UpArrow,
-        KeyCode.DownArrow,
-        KeyCode.DownArrow,
-        KeyCode.LeftArrow,
-        KeyCode.RightArrow,
-        KeyCode.LeftArrow,
-        KeyCode.RightArrow,
-        KeyCode.B,
-        KeyCode.A
-    };
-
-    
-
-
-    IEnumerator Start()
-    {
-        float timer = 0f;
-        int index = 0;
-
-        while (true)
-        {
-            if (Input.GetKeyDown(keys[index]))
-            {
-
-                Debug.Log(keys[index]);                
-                index++;
-                
-
-                if (index == keys.Length)
-                {
-                    Debug.Log("Konami code réussi !");
-                    success = true;
-                    timer = 0f;
-                    index = 0;
-                }
-                else
-                {
-                    timer = WaitTime;
-                }
-            }
-            else if (Input.anyKeyDown)
-            {
-                
-                Debug.Log("Mauvaise touche, Konami Code cassé");
-                timer = 0;
-                index = 0;
-            }
-
-            
-            if (timer > 0)
-            {
-                timer -= Time.deltaTime;
-
-                if (timer <= 0)
-                {
-                    Debug.Log("Trop lent pour le konami code :/");
-                    timer = 0;
-                    index = 0;
-                }
-            }
-            
-
-            yield return null;
-        }
+        _keyStrokeHistory = new List<string>();
     }
-
 
     void Update()
     {
-
+        KeyCode keyPressed = DetectKeyPressed();
+        AddKeyStrokeToHistory(keyPressed.ToString());
+        Debug.Log("HISTORY: " + GetKeyStrokeHistory());
+        if (GetKeyStrokeHistory().Equals("UpArrow,UpArrow,DownArrow,DownArrow,LeftArrow,RightArrow,LeftArrow,RightArrow,B,A"))
+        {
+            successText.text = "KONAMI CODE Réussi !!";
+            ClearKeyStrokeHistory();
+            success = true;
+}
 
         if (success == true)
         {
@@ -105,4 +51,41 @@ public class KonamiCode : MonoBehaviour
             success = false;
         }
     }
+
+    private KeyCode DetectKeyPressed()
+    {
+        foreach (KeyCode key in Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKeyDown(key))
+            {
+                return key;
+            }
+        }
+        return KeyCode.None;
+    }
+
+    private void AddKeyStrokeToHistory(string keyStroke)
+    {
+        if (!keyStroke.Equals("None"))
+        {
+            _keyStrokeHistory.Add(keyStroke);
+            if (_keyStrokeHistory.Count > 10)
+            {
+                _keyStrokeHistory.RemoveAt(0);
+            }
+        }
+    }
+
+    private string GetKeyStrokeHistory()
+    {
+        return String.Join(",", _keyStrokeHistory.ToArray());
+    }
+
+    private void ClearKeyStrokeHistory()
+    {
+        _keyStrokeHistory.Clear();
+    }
+
+
+    
 }
