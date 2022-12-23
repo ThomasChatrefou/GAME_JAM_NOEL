@@ -89,7 +89,7 @@ MonoBehaviour:
   speedProjectile: 0
   lifeSpan: 0.2
   damageProjectile: 25
-  isDestroyedOnFirstHit: 1
+  isDestroyedOnFirstHit: 0
   isFromEnemy: 0
   onSpawnEvent:
     m_PersistentCalls:

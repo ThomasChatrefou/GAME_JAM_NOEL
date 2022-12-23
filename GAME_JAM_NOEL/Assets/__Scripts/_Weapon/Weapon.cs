@@ -142,7 +142,7 @@ public class Weapon : NetworkBehaviour
         hasShot = true;
     }
 
-    private void LaunchSpecialProjectile(bool isFromEnemy = false)
+    public void LaunchSpecialProjectile(bool isFromEnemy = false)
     {
         Projectile proj = Instantiate(skillProjectilePrefab, firePos.position,
                 Quaternion.Euler(0, 0, Mathf.Atan2(firePos.position.x, firePos.position.y) * Mathf.Rad2Deg))
