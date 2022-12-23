@@ -64,7 +64,7 @@ public class Enemy : Character
         {
             Weapon weapon = Instantiate(lootedWeapon, transform.position, quaternion.identity).GetComponent<Weapon>();
             weapon.SpawnWeaponGround(true);
-            weapon.GetComponent<NetworkObject>().Spawn(true);
+            weapon.GetComponent<NetworkObject>().SpawnWithOwnership(NetworkObjectId);
         }
 
         DestroyEnemyServerRpc();
