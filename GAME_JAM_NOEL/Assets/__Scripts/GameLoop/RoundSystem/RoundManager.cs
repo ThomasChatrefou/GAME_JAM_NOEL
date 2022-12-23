@@ -12,8 +12,10 @@ public class RoundManager : NetworkBehaviour
     private GameManager gameManager;
     [SerializeField] private GameMode gameMode;
     [SerializeField] private Transform enemiesParentTransform;
+    [SerializeField] private List<Enemy> enemies;
 
     [Header("Round Settings")]
+    [SerializeField] private float timeBeforeGameStart;
     [SerializeField] private GameRound currentRound;
 
     [Header("Round Lifetime Events")]
@@ -21,14 +23,29 @@ public class RoundManager : NetworkBehaviour
     public UnityEvent OnRoundEnd;
 
     //RoundLife needs
+    private bool preparingForRounds;
     private int currentRoundIndex;
     private List<SpawnParams> spawns;
     private List<CompilatedSpawnParams> tests;
     private float timeSinceRoundStart;
     private Vector2 topLeft, bottomRight;
+
+    public bool IsSpawning => preparingForRounds || currentRound != null || tests.Count > 0;
+
+    public bool AllEnemiesDead()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i] != null && !enemies[i].IsDead)
+                return false;
+        }
+
+        return true;
+    }
     
     public void Init(GameMode _gameMode, GameManager _gameManager)
     {
+        preparingForRounds = true;
         gameMode = _gameMode;
         OnRoundEnd.AddListener(NextRound);
         gameManager = _gameManager;
@@ -40,7 +57,14 @@ public class RoundManager : NetworkBehaviour
     public void Launch()
     {
         tests = new List<CompilatedSpawnParams>();
-        StartCoroutine(LaunchRound(gameMode.rounds[0]));
+        enemies = new List<Enemy>();
+        StartCoroutine(WaitAndStart());
+    }
+
+    private IEnumerator WaitAndStart()
+    {
+        yield return new WaitForSeconds(timeBeforeGameStart);
+        yield return LaunchRound(gameMode.rounds[0]);
     }
 
     private IEnumerator LaunchRound(GameRound round)
@@ -48,6 +72,7 @@ public class RoundManager : NetworkBehaviour
         OnRoundStart.Invoke();
         timeSinceRoundStart = 0f;
         currentRound = round;
+        preparingForRounds = false;
         spawns = currentRound.Spawn;
 
         GameObject roundGO = new GameObject()
@@ -55,6 +80,8 @@ public class RoundManager : NetworkBehaviour
             name = round.name,
             transform = { parent = enemiesParentTransform }
         };
+
+        roundGO.AddComponent<NetworkObject>();
 
         foreach (SpawnParams param in spawns)
             StartCoroutine
@@ -75,10 +102,7 @@ public class RoundManager : NetworkBehaviour
         if (currentRoundIndex + 1 < gameMode.rounds.Length)
             StartCoroutine(LaunchRound(gameMode.rounds[++currentRoundIndex]));
         else
-        {
             currentRound = null;
-            GameManager.Instance.EndGame();
-        }
     }
 
     private IEnumerator RoundEnd(float waitTime)
@@ -98,14 +122,18 @@ public class RoundManager : NetworkBehaviour
         
         yield return new WaitForSeconds(_param.ActivationTiming * totalDurationInSec - timeSinceRoundStart);
 
+        GameObject parentGO = new GameObject
+        {
+            name = _param.EnemyPrefab.name,
+            transform = { parent = roundTransform }
+        };
+
+        parentGO.AddComponent<NetworkObject>();
+
         tests.Add(new CompilatedSpawnParams()
             {
                 param = _param,
-                parentTransform = new GameObject
-                {
-                    name = _param.EnemyPrefab.name,
-                    transform = { parent = roundTransform }
-                }.transform,
+                parentTransform = parentGO.transform,
                 AmountOverTime = amountOverTime,
                 AmountToSpawn = 0f,
                 currentTime = 0f,
@@ -171,6 +199,11 @@ public class RoundManager : NetworkBehaviour
             if (enemy)
             {
                 enemy.Spawn(true);
+                Enemy enemyCpnt = enemy.GetComponent<Enemy>();
+                if (enemyCpnt)
+                {
+                    enemies.Add(enemyCpnt);
+                }
             }
 
             if(leftAmount <= totalAmount * param.param.WeaponRate)
