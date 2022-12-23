@@ -91,7 +91,7 @@ public class PlayerController : Character
     [ServerRpc(RequireOwnership = false)]
     public void SpecialShootServerRpc(Vector2 playerPos)
     {
-        playerWeapon.LaunchProjectile();
+        playerWeapon.LaunchSpecialProjectile();
 
         // Re-equip Shovel Weapon
         playerWeapon.DespawnWeaponServerRpc();

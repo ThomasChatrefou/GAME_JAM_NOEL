@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -195,7 +196,7 @@ public class RoundManager : NetworkBehaviour
             NetworkObject enemy = Instantiate(param.prefab, param.param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight), Quaternion.identity, param.parentTransform).GetComponent<NetworkObject>();
             if (enemy)
             {
-                enemy.Spawn(true);
+                enemy.Spawn();
                 Enemy enemyCpnt = enemy.GetComponent<Enemy>();
                 if (enemyCpnt)
                 {
@@ -210,7 +211,17 @@ public class RoundManager : NetworkBehaviour
             yield return null;
         }
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnServerRpc(ulong idEnemy)
+    {
+        NetworkObject enemyNetworkObj = NetworkManager.SpawnManager.SpawnedObjects[idEnemy];
+        Debug.Log(enemyNetworkObj.name);
+        enemyNetworkObj.Spawn(true);
+    }
+
 }
+
 
 [Serializable]
 public struct CompilatedSpawnParams

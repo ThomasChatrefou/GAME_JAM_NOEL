@@ -155,5 +155,51 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1208405029471340463, guid: 978525fa936920a428a330a978d66de2, type: 3}
+    - {fileID: 4411226458731785881, guid: 978525fa936920a428a330a978d66de2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 978525fa936920a428a330a978d66de2, type: 3}
+--- !u!1 &8851459940737141410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8765429010469821169, guid: 978525fa936920a428a330a978d66de2,
+    type: 3}
+  m_PrefabInstance: {fileID: 248750028251320403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7732152419729700164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851459940737141410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b396fd53b1451a54dbf83bd030531675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+--- !u!114 &8343690937001958304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851459940737141410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
