@@ -196,7 +196,7 @@ public class RoundManager : NetworkBehaviour
             NetworkObject enemy = Instantiate(param.prefab, param.param.RandomPosInRectTopLeftToBottomRight(topLeft, bottomRight), Quaternion.identity, param.parentTransform).GetComponent<NetworkObject>();
             if (enemy)
             {
-                SpawnServerRpc(enemy.NetworkObjectId);
+                enemy.Spawn();
                 Enemy enemyCpnt = enemy.GetComponent<Enemy>();
                 if (enemyCpnt)
                 {
