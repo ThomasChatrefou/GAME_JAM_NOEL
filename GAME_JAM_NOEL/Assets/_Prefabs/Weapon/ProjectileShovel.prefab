@@ -146,6 +146,9 @@ MonoBehaviour:
   dirProjectile: {x: 0, y: 0}
   isDestroyedOnFirstHit: 0
   isFromEnemy: 0
+  onSpawnEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &4437922009747644733
 BoxCollider2D:
   m_ObjectHideFlags: 0
