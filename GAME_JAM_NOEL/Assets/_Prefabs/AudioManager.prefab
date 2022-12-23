@@ -148,10 +148,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7478151cf36724a7dada558f746c3633, type: 3}
   - {fileID: 8300000, guid: 79e6baad2fd414b82a6d49ce1568d2e5, type: 3}
   enemyDie:
-  - {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
-  hitEnemy: []
+  - {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  hitEnemy:
+  - {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
   playerDie: []
-  hitPlayer: []
+  hitPlayer:
+  - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
   mixerSound: {fileID: 8169041164645685099, guid: 17380281c0d6c024ab2e10ebd0f2b0ee,
     type: 2}
   audioSource: {fileID: 1621142867246638054}
